@@ -1,0 +1,67 @@
+<div class="container" ng-controller="PlayerController">
+       <div class="row">
+        <div class="col-md-12">
+            <!-- init soundManager2 player -->
+            <sound-manager></sound-manager>
+
+            <p ng-if="playlist.length > 0">
+                Currently Playing: {{ currentPlaying.title }} by {{ currentPlaying.artist }} ({{ currentPostion }} / {{ currentDuration }})
+            </p>
+
+            <div class="seekBase" seek-track>
+                <div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
+            </div>
+            <br />
+
+            <img ng-src="/app/img/skiptostart.png" play-music></ng-src>
+            <img ng-if=!isPlaying ng-src="/app/img/play.png" play-pause-toggle data-play="Play!"></ng-src>
+            <img ng-if=isPlaying ng-src="/app/img/pause.png" play-pause-toggle data-pause="Pause!"></ng-src>
+            <img ng-src="/app/img/stop.png" stop-music></ng-src>
+            <img ng-if=!repeat ng-src="/app/img/repeat.png" repeat-music></ng-src>
+            <img ng-if=repeat ng-src="/app/img/repeating.png" repeat-music></ng-src>
+            Volume: {{volume}}
+            <img ng-src="/app/img/volumeup.png" music-volume data-type="increase"></ng-src>
+            <img ng-src="/app/img/volumedown.png" music-volume data-type="decrease"></ng-src>
+            <img ng-if=!mute ng-src="/app/img/mute.png" mute-music></ng-src>
+            <img ng-if=mute ng-src="/app/img/unmute.png" mute-music></ng-src>
+            <img ng-src="/app/img/previous.png" prev-track></ng-src>
+            <img ng-src="/app/img/next.png" next-track></ng-src>
+            <img ng-src="/app/img/clear.png" clear-playlist></ng-src>
+            <br/>
+            <button ng-click="setvolume(50)">volume</button>
+
+            <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+
+            <h5>Playlist</h5>
+            <ul>
+                <li ng-repeat="song in playlist">
+                    <a play-from-playlist="song">{{ song.title }}</a>
+                    -
+                    <a remove-from-playlist="song" data-index="{{$index}}">
+                        <small>(remove)</small>
+                    </a>
+                    <span ng-if="currentPlaying.id == song.id"> - (current)</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h5>Songs</h5>
+            <ul>
+                <li ng-repeat="song in songs">
+                    <button music-player="play" add-song="song">{{ song.title }}</button>
+                    <button music-player add-song="song">+</button>
+                </li>
+            </ul>
+
+            <button play-all="songs">Play all</button>
+            <button play-all="songs" data-play="false">Add all</button>
+
+        </div>
+    </div>
+
+    <hr />
+</div>
