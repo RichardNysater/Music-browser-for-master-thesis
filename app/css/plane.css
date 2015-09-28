@@ -1,0 +1,67 @@
+#planewrapper {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 600px;
+    height: 600px;
+}
+
+.plane {
+    background-color:lightgray;
+    width:600px;
+    height:600px;
+    padding-top:50px;
+}
+
+.text {
+    display: block;
+}
+
+.cell {
+    /*border: 1px dotted red;*/
+}
+
+.plane-label{
+    font-family: Nevis;
+    font-size: larger;
+    margin:0;
+}
+
+@font-face{
+    font-family: Nevis;
+    src: url(nevis.ttf);
+}
+
+.cell1, .cell6 {
+    float: left;
+}
+
+.cell3, .cell8 {
+    float: right;
+}
+
+.cell1, .cell2, .cell3 {
+    position: relative;
+    top: 100%;
+    transform: translateY(-100%);
+}
+
+.plane-row {
+    clear: both;
+    height: 100px;
+}
+
+.clear {
+    clear: both;
+}
+
+.content {
+    margin: 5px;
+    height: 90%;
+    border: 2px solid #000;
+}
+
+.cell2, .content, .cell7 {
+    width: 90%;
+    margin: 0 auto;
+}

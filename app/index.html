@@ -11,7 +11,8 @@
   <meta name="description" content="">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" type="text/css" href="css/plane.css">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
 
   <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -57,23 +58,21 @@
         <div class="row">
           <div class="col-xs-3">
             <div class="btn-group navbar-btn" aria-label="Left Align">
-              <button type="button" class="btn btn-default" prev-track>
+              <button type="button" class="btn btn-default" prev-track title="Previous track">
                 <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
               </button>
 
-              <button ng-src="" ng-if=!isPlaying type="button" class="btn btn-default" play-pause-toggle >
-                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <button ng-src="" type="button" class="btn btn-default" play-pause-toggle title="Play or pause">
+                <span ng-if=!isPlaying class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
               </button>
 
-              <button ng-src="" ng-if=isPlaying type="button" class="btn btn-default" play-pause-toggle >
-                <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-              </button>
 
-              <button type="button" class="btn btn-default" stop-music>
+              <button type="button" class="btn btn-default" stop-music title="Stop playing">
                 <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
               </button>
 
-              <button type="button" class="btn btn-default" next-track>
+              <button type="button" class="btn btn-default" next-track title="Next track">
                 <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
               </button>
             </div>
@@ -95,18 +94,19 @@
           </div>
           <div class="col-xs-3">
               <div class="btn-group navbar-btn" aria-label="Left Align">
-                <button type="button" class="btn btn-default" clear-playlist>
+                <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
                   <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
                 </button>
 
-                <button type="button" class="btn btn-default" mute-music>
-                  <span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+                <button type="button" class="btn btn-default" mute-music title="Mute music">
+                  <span ng-if=!mute class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+                  <span ng-if=mute class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
                 </button>
 
-                <button type="button" class="btn btn-default" music-volume data-type="increase">
+                <button type="button" class="btn btn-default" music-volume data-type="increase" title="Increase volume">
                   <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-default" music-volume data-type="decrease">
+                <button type="button" class="btn btn-default" music-volume data-type="decrease" title="Decrease volume">
                   <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
                 </button>
               </div>
@@ -114,76 +114,6 @@
       </div>
     </div>
   </footer>
-
-    <!--
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-
-      <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li class="btn-group navbar-btn" role="toolbar" aria-label="Left Align">
-              <button type="button" class="btn btn-default" prev-track>
-                <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-              </button>
-
-              <button ng-src="" ng-if=!isPlaying type="button" class="btn btn-default" play-pause-toggle >
-                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-              </button>
-
-              <button ng-src="" ng-if=isPlaying type="button" class="btn btn-default" play-pause-toggle >
-                <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default" stop-music>
-                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default" next-track>
-                <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-              </button>
-            </li>
-          </ul>
-
-
-        <div class="navbar-center">
-          <p class="nav">
-            Currently playing {{ currentPlaying.title }} by {{ currentPlaying.artist }} ({{ currentPostion }} / {{ currentDuration }})
-          </p>
-          <div class="nav progress">
-            <div class="progess-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( 30 + '%' ) }">
-              <span class="sr-only">50% Complete (warning)</span>
-            </div>
-          </div>
-        </div>
-
-
-        <ul class="nav navbar-nav navbar-right">
-            <li class="btn-group navbar-btn" role="toolbar" aria-label="Left Align">
-              <button type="button" class="btn btn-default" clear-playlist>
-               <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default" mute-music>
-                <span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default" music-volume data-type="increase">
-                <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default" music-volume data-type="decrease">
-                <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-              </button>
-            </li>
-          </ul>
-      </div>
-    </div>
-    -->
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

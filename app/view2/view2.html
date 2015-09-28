@@ -1,5 +1,26 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+
+
+<div id="planewrapper">
+    <div class="plane-row">
+      <div class="cell cell1">
+        <p class="plane-label">TENDER</p>
+      </div>
+      <div class="cell cell2"></div>
+      <div class="cell cell3">
+        <p class="plane-label">HAPPY</p>
+      </div>
+    </div>
+      <div class="plane" ng-click='planeClick($event)'></div>
+    <div class="plane-row">
+      <div class="cell cell6">
+        <p class="plane-label">SAD</p>
+      </div>
+      <div class="cell cell7"></div>
+      <div class="cell cell8">
+        <p class="plane-label">ANGRY</p>
+      </div>
+    </div>
+  <div class="clear"></div>
+</div>
+
+<img ng-if=imgleft id="image" src="img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />

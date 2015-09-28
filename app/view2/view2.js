@@ -9,6 +9,22 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', [function() {
+.controller('View2Ctrl', ['$scope',
+      function ($scope) {
 
-}]);
+        /**
+         * planeClick is called whenever a user clicks on the 2d-plane
+         * @param event Event
+         */
+          $scope.planeClick = function(event) {
+
+            $scope.xc = event.offsetX;
+            $scope.yc = event.offsetY;
+
+            $scope.imgwidth = 10;
+            $scope.imgheight = 10;
+
+            $scope.imgleft = event.pageX-($scope.imgwidth/2);
+            $scope.imgtop = event.pageY-($scope.imgheight/2);
+        }
+      }]);
