@@ -1,17 +1,23 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.plane', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view2', {
-    templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
+  $routeProvider.when('/plane', {
+    templateUrl: 'plane/plane.html',
+    controller: 'PlaneCtrl'
   });
 }])
 
-.controller('View2Ctrl', ['$scope',
-      function ($scope) {
+.controller('PlaneCtrl', ['$scope','Api',
+      function ($scope,Api) {
 
+        $scope.labels = Api.Labels.query();
+        $scope.firstSelect = null;
+        $scope.secondSelect = null;
+        /*$scope.label1b = labels[0].label2;
+        $scope.label2a = labels[1].label1;
+        $scope.label2b = labels[1].label2;*/
         /**
          * planeClick is called whenever a user clicks on the 2d-plane
          * @param event Event
@@ -27,4 +33,6 @@ angular.module('myApp.view2', ['ngRoute'])
             $scope.imgleft = event.pageX-($scope.imgwidth/2);
             $scope.imgtop = event.pageY-($scope.imgheight/2);
         }
+
+
       }]);

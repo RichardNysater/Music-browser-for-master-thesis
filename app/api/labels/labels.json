@@ -1,0 +1,12 @@
+[
+    {
+      "id": "Happy/Sad",
+      "label1": "Happy",
+      "label2": "Sad"
+    },
+    {
+      "id": "Tender/Aggressive",
+      "label1": "Tender",
+      "label2": "Aggressive"
+    }
+]

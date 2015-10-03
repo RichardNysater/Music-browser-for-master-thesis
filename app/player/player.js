@@ -9,8 +9,8 @@ angular.module('myApp.player', ['ngRoute'])
   });
 }])
 
-.controller('PlayerController', ['$scope',
-  function ($scope) {
+.controller('PlayerController', ['$scope','Api',
+  function ($scope, Api) {
     $scope.Math = window.Math;
 
     $scope.setvolume = function(volume){
@@ -34,24 +34,5 @@ angular.module('myApp.player', ['ngRoute'])
     };
 
 
-    $scope.songs = [
-      {
-        id: 'one',
-        title: 'Test1',
-        artist: 'Testartist1',
-        url: '/app/music/test1.mp3'
-      },
-      {
-        id: 'two',
-        title: 'Test2',
-        artist: 'Testartist2',
-        url: '/app/music/test2.wav'
-      },
-      {
-        id: 'three',
-        title: 'Test3',
-        artist: 'Testartist3',
-        url: '/app/music/test4.mp3'
-      }
-    ];
+    $scope.songs = Api.Music.query();
   }]);

@@ -52,6 +52,10 @@
     height: 100px;
 }
 
+#label-select{
+    width: 300px;
+}
+
 .clear {
     clear: both;
 }
