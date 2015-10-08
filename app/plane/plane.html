@@ -2,21 +2,22 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label for="sel1">Label 1</label>
-            <select class="form-control" id="sel1" ng-model="firstSelect">
+            <select class="form-control" id="sel1" ng-model="firstSelect" ng-init= "firstSelect = firstSelect || 0">
                 <option ng-repeat="label in labels" value="{{$index}}">{{label.id}}</option>
             </select>
         </div>
         <div class="form-group col-md-6">
             <label for="sel2">Label 2</label>
-            <select class="form-control" id="sel2" ng-model="secondSelect">
+            <select class="form-control" id="sel2" ng-model="secondSelect" ng-init="secondSelect= secondSelect || 1">
                 <option ng-repeat="label in labels" value="{{$index}}">{{label.id}}</option>
             </select>
         </div>
     </div>
 </form>
 
-value: {{firstSelect}}
+
 <div id="planewrapper">
+    {{labels[firstSelect].label2}}: {{xpercent}}%, {{labels[secondSelect].label2}}:{{ypercent}}%
     <div class="plane-row">
       <div class="cell cell1">
         <p class="plane-label">{{labels[firstSelect].label1}}</p>
