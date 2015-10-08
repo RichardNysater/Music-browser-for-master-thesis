@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'ngResource',
   'myApp.plane',
+  'myApp.sliders',
   'myApp.version',
   'angularSoundManager',
   'myApp.player',

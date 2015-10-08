@@ -1,0 +1,11 @@
+<div id="sliders">
+    value: <span id="slidetext">3</span>
+    <div class="row top-buffer" ng-repeat="feature in features" rangeslider>
+        <div class="col-md-2">
+            {{feature.id}}
+        </div>
+        <div class="col-md-4">
+            <b>0%</b> &nbsp&nbsp <input type="text" class="span2 rangeslider" id="{{feature.id}}" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-tooltip="show" data-slider-value="[0,100]"/>&nbsp&nbsp<b>100%</b>
+        </div>
+    </div>
+</div>
