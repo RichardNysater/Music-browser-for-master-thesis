@@ -3,7 +3,7 @@
 var MusicServices = angular.module('MusicServices', ['ngResource']);
 
 /**
- * Handle the music stored on the server
+ * Handle the resources on the server
  */
 MusicServices.factory('Api', ['$resource',
     function($resource) {
@@ -14,6 +14,10 @@ MusicServices.factory('Api', ['$resource',
 
             Labels: $resource('api/labels/:labelId.json',{},{
                 query: {method:'GET',params:{labelId:'labels'},isArray:true} //Return all labels
+            }),
+
+            Features: $resource('api/features/:featureId.json',{},{
+                query: {method:'GET',params:{featureId:'features'},isArray:true} //Return all features
             })
         };
     }]);
