@@ -5,31 +5,40 @@
   border-bottom: 0.1em solid black;
   margin-bottom: 2em;
   padding: 0 0 0.5em;
+
 }
 
 .menu:before {
   content: "[";
 }
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
   position: relative;
   min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
+  /* Margin bottom by footer height*/
   margin-bottom: 60px;
+
+  overflow-y: scroll;
+
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
+  /*Set the fixed height of the footer here*/
   height: 60px;
   background-color: #f5f5f5;
 }
 
+.playerfooter{
+  background-color: #f5f5f5;
+}
 .menu:after {
   content: "]";
 }
@@ -47,3 +56,15 @@ body {
   content: "";
   padding: 0;
 }
+
+/* Animate */
+
+.fade-in-out {
+  transition: 1s linear all;
+  opacity: 1;
+}
+
+.fade-in-out.ng-hide {
+  opacity: 0;
+}
+
