@@ -1,4 +1,4 @@
-<div id="sliders" class="container">
+<div class="container">
     <div ng-repeat="cur in featurelist" >
         <div class="row">
             <div class="col-md-1"></div>
@@ -8,23 +8,21 @@
             <div class="col-md-1"></div>
         </div>
         <div class="row top-buffer">
-                <div class="row">
-                    <div class="col-md-1 text-buffer min-label">
-                        <p>{{cur.feature.low}}</p>
-                    </div>
-                    <div class="col-md-4">
-
-                        <rzslider
-                                rz-slider-floor="test"
-                                rz-slider-ceil=100
-                                rz-slider-model="cur.minvalue"
-                                rz-slider-translate="translate"
-                                rz-slider-high="cur.maxvalue">
-                        </rzslider>
-                    </div>
-                    <div class="col-md-1 text-buffer max-label">
-                        <p>{{cur.feature.high}}</p>
-                    </div>
+            <div class="row">
+                <div class="col-md-1 text-buffer min-label">
+                    <p>{{cur.feature.low}}</p>
+                </div>
+                <div class="col-md-4">
+                    <rzslider
+                            rz-slider-floor="test"
+                            rz-slider-ceil=100
+                            rz-slider-model="cur.minvalue"
+                            rz-slider-translate="translate"
+                            rz-slider-high="cur.maxvalue">
+                    </rzslider>
+                </div>
+                <div class="col-md-1 text-buffer max-label">
+                    <p>{{cur.feature.high}}</p>
                 </div>
             </div>
         </div>

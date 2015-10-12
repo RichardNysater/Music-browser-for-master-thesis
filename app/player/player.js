@@ -12,7 +12,6 @@ angular.module('myApp.player', ['ngRoute'])
 .controller('PlayerController', ['$scope','Api',
   function ($scope, Api) {
     $scope.songs = Api.Music.query(); //Inject songs into scope
-    $scope.leftPlayerIcons = [{"id":"prev","directive":"prev-track"}];
     /**
      * Sets current volume
      * @param volume The volume (0-100) to play at
@@ -20,6 +19,7 @@ angular.module('myApp.player', ['ngRoute'])
     $scope.setvolume = function(volume){
       $scope.volume = volume;
     };
+
 
 
     /**
