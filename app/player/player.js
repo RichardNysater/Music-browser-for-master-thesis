@@ -11,16 +11,22 @@ angular.module('myApp.player', ['ngRoute'])
 
 .controller('PlayerController', ['$scope','Api',
   function ($scope, Api) {
-    $scope.Math = window.Math;
+    $scope.songs = Api.Music.query(); //Inject songs into scope
 
+    /**
+     * Sets current volume
+     * @param volume The volume (0-100) to play at
+     */
     $scope.setvolume = function(volume){
       $scope.volume = volume;
     };
-    $scope.calc = function(){
-      return $scope._get_html5_duration();
-    };
 
-    $scope.calcPercent = function(){
+
+    /**
+     * Calculate how far into the song the user has gotten
+     * @returns {number} Returns the current position in percent
+     */
+    $scope.songProgressPercent = function(){
       var duration = textToSec($scope.currentDuration);
       var cur = textToSec($scope.currentPostion);
 
@@ -28,11 +34,14 @@ angular.module('myApp.player', ['ngRoute'])
 
     };
 
+    /**
+     * Help method to translate the current duration in text (e.g "1:30") to numbers
+     * @param duration The duration in text to translate
+     * @returns {number} Returns the duration in seconds
+     */
      var textToSec = function (duration) {
       var array = duration.split(":");
       return parseInt(array[0])*60+parseInt(array[1]);
     };
 
-
-    $scope.songs = Api.Music.query();
   }]);

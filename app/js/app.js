@@ -5,11 +5,12 @@ angular.module('myApp', [
   'ngRoute',
   'ngResource',
   'myApp.plane',
+  'myApp.indexController',
   'myApp.sliders',
   'myApp.version',
   'angularSoundManager',
   'myApp.player',
-  'MusicServices'
+  'MusicService'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/player'});
