@@ -1,2 +1,8 @@
-.top-buffer { margin-top:10px; }
+.top-buffer { margin-top:0px; }
 
+.text-buffer { padding-top:20px;}
+
+.feature-id {text-align: center;}
+
+.min-label {text-align: right;}
+.max-label {text-align: left;}
