@@ -13,6 +13,7 @@ angular.module('myApp.plane', ['ngRoute'])
 .controller('PlaneCtrl', ['$scope','Api',
       function ($scope,Api) {
 
+        //Get labels and initialize select boxes
         Api.Labels.query().$promise.then(function(data){
           $scope.labels = data;
           $scope.firstSelect = data[0];

@@ -6,6 +6,7 @@ angular.module('myApp', [
   'ngResource',
   'myApp.plane',
   'myApp.indexController',
+  'rzModule',
   'myApp.sliders',
   'myApp.version',
   'angularSoundManager',

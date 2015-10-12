@@ -11,16 +11,15 @@ angular.module('myApp.sliders', ['ngRoute'])
 
 .controller('SlidersCtrl', ['$scope','Api',
       function ($scope, Api) {
-          $scope.features = Api.Features.query();
+          $scope.featurelist = [];
 
-      }])
+          Api.Features.query().$promise.then(function(data){
 
-.directive('rangeslider', function() {
-        return function(scope, element, attrs) {
+             for(var i = 0; i<data.length; i++){
+                 $scope.featurelist.push({"feature":data[i], "minvalue":0,"maxvalue":100});
+              }
+          }, function(err){
+              throw "No labels were returned by query.";
+          });
 
-
-            if (scope.$last) {
-                $(".rangeslider").slider({tooltip:'always'});
-            }
-        };
-    });
+      }]);
