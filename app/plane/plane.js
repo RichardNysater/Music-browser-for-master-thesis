@@ -1,6 +1,5 @@
 'use strict';
 
-//<option ng-repeat="label in labels" value="{{$index}}">{{label.id}}</option>
 angular.module('myApp.plane', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -19,7 +18,7 @@ angular.module('myApp.plane', ['ngRoute'])
           $scope.firstSelect = data[0];
           $scope.secondSelect = data[1];
         }, function(err){
-          throw "No labels were returned by query.";
+          throw "No labels were returned by query: "+err;
         });
 
         /**
