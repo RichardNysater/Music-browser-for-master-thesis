@@ -1,5 +1,6 @@
 'use strict';
 
+//<option ng-repeat="label in labels" value="{{$index}}">{{label.id}}</option>
 angular.module('myApp.plane', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -12,12 +13,14 @@ angular.module('myApp.plane', ['ngRoute'])
 .controller('PlaneCtrl', ['$scope','Api',
       function ($scope,Api) {
 
-        $scope.labels = Api.Labels.query();
-        $scope.firstSelect = null;
-        $scope.secondSelect = null;
-        /*$scope.label1b = labels[0].label2;
-        $scope.label2a = labels[1].label1;
-        $scope.label2b = labels[1].label2;*/
+        Api.Labels.query().$promise.then(function(data){
+          $scope.labels = data;
+          $scope.firstSelect = data[0];
+          $scope.secondSelect = data[1];
+        }, function(err){
+          throw "No labels were returned by query.";
+        });
+
         /**
          * planeClick is called whenever a user clicks on the 2d-plane
          * @param event Event
