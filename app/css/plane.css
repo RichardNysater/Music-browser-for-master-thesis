@@ -1,30 +1,79 @@
-#planewrapper {
+#plane-wrapper {
     vertical-align: top;
     display: inline-block;
-    text-align: center;
-    width: 650px;
+    width: 900px;
     height: 600px;
 }
 
 .plane {
     background-color:lightgray;
-    width:600px;
-    height:600px;
-    padding-top:50px;
-    margin: 0px 20px;
+    width:100%;
+    height:100%;
+    margin: 0;
 }
 
-.text {
-    display: block;
+.plane-row {
+    height: 500px;
 }
 
-.cell {
-    /*border: 1px dotted red;*/
+#percent-label{
+    text-align: center;
+}
+
+.inner-side-label-left{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.inner-side-label-right{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.side-label{
+    display: inline-block;
+    line-height: 480px;
+}
+
+.outer-side-label-left{
+    position: relative;
+    display: inline-block;
+    width: 8.33%;
+    left: 35px;
+}
+
+.outer-side-label-right{
+    position: relative;
+    display: inline-block;
+    width: 8.33%;
+    left: -35px;
+}
+
+.rotate-text-left{
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform:  translateX(-50%) translateY(-50%) rotate(-90deg);
+}
+
+.rotate-text-right{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform:  translateX(-50%) translateY(-50%) rotate(90deg);
+}
+
+.vertical-label{
+    text-align: center;
 }
 
 .plane-label{
     font-family: Nevis;
-    font-size: larger;
+    font-size: 24px;
     margin:0;
 }
 
@@ -33,40 +82,17 @@
     src: url(nevis.ttf);
 }
 
-.cell1, .cell6 {
-    float: left;
-}
-
-.cell3, .cell8 {
-    float: right;
-}
-
-.cell1, .cell2, .cell3 {
-    position: relative;
-    top: 100%;
-    transform: translateY(-100%);
-}
-
-.plane-row {
-    clear: both;
-    height: 100px;
+#label-wrapper{
+    width:800px;
+    display: inline-block;
 }
 
 #label-select{
     width: 400px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .clear {
     clear: both;
-}
-
-.content {
-    margin: 5px;
-    height: 90%;
-    border: 2px solid #000;
-}
-
-.cell2, .content, .cell7 {
-    width: 90%;
-    margin: 0 auto;
 }
