@@ -9,8 +9,8 @@ angular.module('myApp.player', ['ngRoute'])
   });
 }])
 
-.controller('PlayerController', ['$scope','Api',
-  function ($scope, Api) {
+.controller('PlayerController', ['$scope','Api','angularPlayer',
+  function ($scope, Api,angularPlayer) {
     $scope.songs = Api.Music.query(); //Inject songs into scope
     /**
      * Sets current volume
@@ -34,6 +34,26 @@ angular.module('myApp.player', ['ngRoute'])
 
     };
 
+    $scope.lmao = function (event) {
+      $scope.ayy = "Tjena";
+      var sound = soundManager.getSoundById(angularPlayer.getCurrentTrack());
+
+
+      sound.setPosition((($scope.seekPercent(event)/100)*textToSec($scope.currentDuration))*1000);
+
+    };
+
+    $scope.seekPercent = function(event) {
+      var x = event.offsetX;
+      var percent = Math.round(100*(x/$('.seeking').outerWidth()));
+
+      return percent;
+    };
+
+
+    $scope.ayy = function(){
+
+    };
     /**
      * Help method to translate the current duration in text (e.g "1:30") to numbers
      * @param duration The duration in text to translate
