@@ -15,6 +15,24 @@
     "id": "three",
     "title": "Test3",
     "artist": "Testartist3",
+    "url": "/app/api/music/test3.mp3"
+  },
+  {
+    "id": "four",
+    "title": "Test4",
+    "artist": "Testartist4",
     "url": "/app/api/music/test4.mp3"
+  },
+  {
+    "id": "five",
+    "title": "Test5",
+    "artist": "Testartist5",
+    "url": "/app/api/music/test5.wav"
+  },
+  {
+    "id": "six",
+    "title": "Test6",
+    "artist": "Testartist6",
+    "url": "/app/api/music/test6.mp4"
   }
 ]
