@@ -11,19 +11,20 @@ controllers.controller('indexController',['$scope','$location',
         /**
          * Handle the fixed navbar
          */
-        $scope.sections = [{"id":"Home","link":"#player"},{"id":"Plane","link":"#plane"},{"id":"Sliders","link":"#sliders"}];
+        $scope.sections = [{"id":"Home","link":"#/"},{"id":"Player","link":"#player"},{"id":"Plane","link":"#plane"},{"id":"Sliders","link":"#sliders"}];
+        var selected = null;
 
-        var initPath = $location.path().split("/")[1]||"Home";
-        var selected = $scope.sections[0];
+        $scope.initPath = function() {
+            var initPath = $location.path().split("/")[1] || "Home";
+            selected = $scope.sections[0];
 
-        for(var i = 0; i<$scope.sections.length;i++){ // Highlights the current location on the navbar
-            if($scope.sections[i].link ==='#'+initPath){
-                selected=$scope.sections[i];
-                break;
+            for (var i = 0; i < $scope.sections.length; i++) { // Highlights the current location on the navbar
+                if ($scope.sections[i].link === '#' + initPath) {
+                    selected = $scope.sections[i];
+                    break;
+                }
             }
-        }
-
-
+        };
 
         /**
          * Returns true if section is selected, false otherwise
@@ -42,10 +43,14 @@ controllers.controller('indexController',['$scope','$location',
             selected = section;
         };
 
+        /**
+         * Returns the home section
+         * @returns {*} The home section
+         */
+        $scope.getHome = function(){
+            return $scope.sections[0];
+        }
 
-        /*$(".nav a").on("click", function(){
-         $(".nav").find(".active").removeClass("active");
-         $(this).parent().addClass("active");
-         });*/
 
+        $scope.initPath();
     }]);

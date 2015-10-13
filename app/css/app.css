@@ -22,21 +22,39 @@ html {
 }
 body {
   /* Margin bottom by footer height*/
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 
-  overflow-y: scroll;
+  overflow-y: scroll; /* Always display scrollbar to prevent pushing content */
 
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+
   /*Set the fixed height of the footer here*/
   height: 60px;
   background-color: #f5f5f5;
 }
 
-.playerfooter{
+.center-block{
+  text-align: center;
+}
+
+.left-buttons{
+  padding-top: 5%;
+}
+
+.right-buttons{
+  padding-top: 5%;
+}
+
+.cur-duration{
+  text-align:left;
+  left: -20px;
+}
+
+.player-footer{
   background-color: #f5f5f5;
 }
 .menu:after {
