@@ -5,14 +5,25 @@
  */
 var controllers = angular.module('myApp.indexController',[]);
 
-controllers.controller('indexController',['$scope',
-    function($scope){
+controllers.controller('indexController',['$scope','$location',
+    function($scope,$location){
 
         /**
          * Handle the fixed navbar
          */
         $scope.sections = [{"id":"Home","link":"#player"},{"id":"Plane","link":"#plane"},{"id":"Sliders","link":"#sliders"}];
+
+        var initPath = $location.path().split("/")[1]||"Home";
         var selected = $scope.sections[0];
+
+        for(var i = 0; i<$scope.sections.length;i++){ // Highlights the current location on the navbar
+            if($scope.sections[i].link ==='#'+initPath){
+                selected=$scope.sections[i];
+                break;
+            }
+        }
+
+
 
         /**
          * Returns true if section is selected, false otherwise
