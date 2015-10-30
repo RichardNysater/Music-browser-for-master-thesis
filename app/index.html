@@ -8,13 +8,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <title>Music browser</title>
   <meta name="description" content="">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css">
   <link rel="stylesheet" type="text/css" href="css/plane.css">
+  <link rel="stylesheet" type="text/css" href="css/emotions.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
   <link rel="stylesheet" type="text/css" href="css/sliders.css">
 
@@ -54,7 +55,6 @@
   <div class="container">
     <div ng-view></div>
   </div>
-
   <!-- Player footer -->
   <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
     <div ng-show="playlist.length > 0" class="fade-in-out container" >
@@ -126,7 +126,7 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -139,6 +139,7 @@
   <script src="js/musicService.js"></script>
   <script src="player/player.js"></script>
   <script src="plane/plane.js"></script>
+  <script src="emotions/emotionplane.js"></script>
   <script src="sliders/sliders.js"></script>
   <script src="home/home.js"></script>
 

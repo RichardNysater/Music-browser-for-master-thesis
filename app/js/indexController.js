@@ -11,7 +11,7 @@ controllers.controller('indexController',['$scope','$location',
         /**
          * Handle the fixed navbar
          */
-        $scope.sections = [{"id":"Home","link":"#/"},{"id":"Player","link":"#player"},{"id":"Plane","link":"#plane"},{"id":"Sliders","link":"#sliders"}];
+        $scope.sections = [{"id":"Home","link":"#/"},{"id":"Player","link":"#player"},{"id":"Emotions","link":"#emotions"},{"id":"Plane","link":"#plane"},{"id":"Sliders","link":"#sliders"}];
         var selected = null;
 
         $scope.initPath = function() {

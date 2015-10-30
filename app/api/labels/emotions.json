@@ -1,0 +1,254 @@
+[
+  {
+    "firstEmotion":
+    {
+      "emotion":"Happy",
+      "features":
+      [
+        {
+          "feature":"Articulation",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Brightness",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Dynamics",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Energy",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Harmonic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Modality",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Overall pitch",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic clarity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Speed",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Valence",
+          "minval": "0",
+          "maxval": "100"
+        }
+      ]
+    },
+    "secondEmotion":
+    {
+      "emotion":"Sad",
+      "features":
+      [
+        {
+          "feature":"Articulation",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Brightness",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Dynamics",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Energy",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Harmonic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Modality",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Overall pitch",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic clarity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Speed",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Valence",
+          "minval": "0",
+          "maxval": "100"
+        }
+      ]
+    }
+  },
+  {
+    "firstEmotion":
+    {
+      "emotion":"Tender",
+      "features":
+      [
+        {
+          "feature":"Articulation",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Brightness",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Dynamics",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Energy",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Harmonic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Modality",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Overall pitch",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic clarity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Speed",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Valence",
+          "minval": "0",
+          "maxval": "100"
+        }
+      ]
+    },
+    "secondEmotion":
+    {
+      "emotion":"Aggressive",
+      "features":
+      [
+        {
+          "feature":"Articulation",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Brightness",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Dynamics",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Energy",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Harmonic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Modality",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Overall pitch",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic complexity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Rhytmic clarity",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Speed",
+          "minval": "0",
+          "maxval": "100"
+        },
+        {
+          "feature":"Valence",
+          "minval": "0",
+          "maxval": "100"
+        }
+      ]
+    }
+  }
+]
