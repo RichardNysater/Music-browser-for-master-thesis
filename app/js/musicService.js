@@ -5,7 +5,7 @@ var MusicService = angular.module('MusicService', ['ngResource']);
 /**
  * Handle the resources on the server
  */
-MusicService.factory('Api', ['$resource',
+MusicService.service('Api', ['$resource',
     function($resource) {
         return {
             Music: $resource('api/music/:musicId.json', {}, {
