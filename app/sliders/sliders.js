@@ -9,8 +9,8 @@ angular.module('myApp.sliders', ['ngRoute'])
   });
 }])
 
-.controller('SlidersCtrl', ['$scope','Api',
-      function ($scope, Api) {
+.controller('SlidersCtrl', ['$scope','Api','SongRequestService',
+      function ($scope, Api, SongRequestService) {
           $scope.featurelist = [];
 
           /**

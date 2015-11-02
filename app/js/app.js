@@ -14,7 +14,8 @@ angular.module('myApp', [
   'myApp.sliders',
   'myApp.version',
   'myApp.player',
-  'MusicService'
+  'MusicService',
+  'SongRequestService'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
