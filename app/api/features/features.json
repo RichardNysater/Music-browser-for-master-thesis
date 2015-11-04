@@ -1,27 +1,21 @@
 [
   {
+    "id": "Activity",
+    "low": "Low",
+    "high": "High"
+  },
+  {
     "id": "Articulation",
     "low": "Staccato",
     "high": "Legato"
   },
   {
-    "id": "Brightness",
-    "low": "Dark",
-    "high": "Bright"
-  },
-
-  {
-    "id": "Dynamics",
-    "low": "Soft",
-    "high": "Loud"
+    "id": "Dissonance",
+    "low": "Consonant",
+    "high": "Dissonant"
   },
   {
-    "id": "Energy",
-    "low": "Low",
-    "high": "High"
-  },
-  {
-    "id": "Harmonic complexity",
+    "id": "HarmonicComplexity",
     "low": "Simple",
     "high": "Complex"
   },
@@ -31,17 +25,17 @@
     "high": "Major"
   },
   {
-    "id": "Overall pitch",
+    "id": "Pitch",
     "low": "Low",
     "high": "High"
   },
   {
-    "id": "Rhythmic complexity",
+    "id": "RhythmicComplexity",
     "low": "Simple",
     "high": "Complex"
   },
   {
-    "id": "Rhythmic clarity",
+    "id": "RhythmicClarity",
     "low": "Flowing",
     "high": "Firm"
   },
