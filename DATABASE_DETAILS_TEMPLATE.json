@@ -2,5 +2,6 @@
   "host":"x",
   "user":"y",
   "password":"z",
-  "database":"w"
+  "database":"w",
+  "songtable":"v"
 }
