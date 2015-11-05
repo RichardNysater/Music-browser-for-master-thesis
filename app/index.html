@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <title>Music browser</title>
   <meta name="description" content="">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -82,8 +82,11 @@
           </div>
           <div class="col-xs-6">
             <div class="row center-block">
-              <p>
+              <p ng-if="currentPlaying.title && currentPlaying.artist">
                 {{ currentPlaying.title }} by {{ currentPlaying.artist }}
+              </p>
+              <p ng-if="!(currentPlaying.title && currentPlaying.artist)">
+                {{ currentPlaying.id}}
               </p>
             </div>
             <div class="row">
@@ -126,13 +129,13 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
-  <script src="bower_components/angular-soundmanager2/dist/angular-soundmanager2.min.js"></script>
+  <script src="js/angular-soundmanager2.min.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/app.js"></script>
   <script src="js/indexController.js"></script>
