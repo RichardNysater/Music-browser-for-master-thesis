@@ -56,7 +56,7 @@ var createQueryForSongs = function(con,features,databaseDetails){
         }
     }
     inserts.push(features[features.length-1].feature.id, features[features.length-1].minvalue, features[features.length-1].maxvalue);
-    query += "?? BETWEEN ? AND ?";
+    query += "?? BETWEEN ? AND ? LIMIT 10";
 
     query = mysqlHelper.format(query, inserts);
     return query;
