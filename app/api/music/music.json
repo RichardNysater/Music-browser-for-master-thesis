@@ -34,5 +34,11 @@
     "title": "Test6",
     "artist": "Testartist6",
     "url": "/app/api/music/test6.mp4"
+  },
+  {
+    "id": "seven",
+    "title": "Test7",
+    "artist": "Testartist7",
+    "url": "/app/api/music/0078.ogg"
   }
 ]
