@@ -34,7 +34,6 @@ angular.module('myApp.plane', ['ngRoute'])
 
             $scope.imgwidth = $('.plane').outerWidth()*(FEATURE_VARIANCE/100);
             $scope.imgheight = $('.plane').outerHeight()*(FEATURE_VARIANCE/100);
-            console.log($scope.imgheight);
             $scope.imgleft = event.pageX-($scope.imgwidth/2);
             $scope.imgtop = event.pageY-($scope.imgheight/2);
             $scope.xpercent = Math.round(100*($scope.xc/$('.plane').outerWidth()));
