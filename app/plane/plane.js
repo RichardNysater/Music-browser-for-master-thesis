@@ -12,6 +12,7 @@ angular.module('myApp.plane', ['ngRoute'])
 .controller('PlaneCtrl', ['$scope','Api','SongRequestService',
       function ($scope,Api,SongRequestService) {
 
+        $scope.FEATURE_VARIANCE = 13;
         //Get labels and initialize select boxes
         Api.Features.query().$promise.then(function(data){
           $scope.labels = data;
@@ -26,10 +27,10 @@ angular.module('myApp.plane', ['ngRoute'])
          * @param event Event
          */
           $scope.planeClick = function(event) {
-            var FEATURE_VARIANCE = 10;
 
-            $scope.imgwidth = $('.plane').outerWidth()*(FEATURE_VARIANCE/100);
-            $scope.imgheight = $('.plane').outerHeight()*(FEATURE_VARIANCE/100);
+
+            $scope.imgwidth = $('.plane').outerWidth()*($scope.FEATURE_VARIANCE/100);
+            $scope.imgheight = $('.plane').outerHeight()*($scope.FEATURE_VARIANCE/100);
             $scope.imgleft = event.pageX-($scope.imgwidth/2);
             $scope.imgtop = event.pageY-($scope.imgheight/2);
 
@@ -39,8 +40,8 @@ angular.module('myApp.plane', ['ngRoute'])
             $scope.xpercent = Math.round(100*($scope.xc/$('.plane').outerWidth()));
             $scope.ypercent = 100-Math.round(100*($scope.yc/($('.plane').outerHeight())));
 
-            var xFeature = {feature:{id:$scope.firstSelect.id},minvalue:$scope.xpercent-FEATURE_VARIANCE,maxvalue:$scope.xpercent+FEATURE_VARIANCE};
-            var yFeature = {feature:{id:$scope.secondSelect.id},minvalue:$scope.ypercent-FEATURE_VARIANCE,maxvalue:$scope.ypercent+FEATURE_VARIANCE};
+            var xFeature = {feature:{id:$scope.firstSelect.id},minvalue:$scope.xpercent-$scope.FEATURE_VARIANCE,maxvalue:$scope.xpercent+$scope.FEATURE_VARIANCE};
+            var yFeature = {feature:{id:$scope.secondSelect.id},minvalue:$scope.ypercent-$scope.FEATURE_VARIANCE,maxvalue:$scope.ypercent+$scope.FEATURE_VARIANCE};
             SongRequestService.playMatchingSongs([xFeature,yFeature]);
         }
 
