@@ -28,17 +28,16 @@ angular.module('myApp.plane', ['ngRoute'])
           $scope.planeClick = function(event) {
             var FEATURE_VARIANCE = 10;
 
-            $scope.xc = event.offsetX;
-            $scope.yc = event.offsetY;
-
-
             $scope.imgwidth = $('.plane').outerWidth()*(FEATURE_VARIANCE/100);
             $scope.imgheight = $('.plane').outerHeight()*(FEATURE_VARIANCE/100);
             $scope.imgleft = event.pageX-($scope.imgwidth/2);
             $scope.imgtop = event.pageY-($scope.imgheight/2);
-            $scope.xpercent = Math.round(100*($scope.xc/$('.plane').outerWidth()));
-            $scope.ypercent = Math.round(100*($scope.yc/($('.plane').outerHeight())));
 
+            $scope.xc = event.offsetX;
+            $scope.yc = event.offsetY;
+
+            $scope.xpercent = Math.round(100*($scope.xc/$('.plane').outerWidth()));
+            $scope.ypercent = 100-Math.round(100*($scope.yc/($('.plane').outerHeight())));
 
             var xFeature = {feature:{id:$scope.firstSelect.id},minvalue:$scope.xpercent-FEATURE_VARIANCE,maxvalue:$scope.xpercent+FEATURE_VARIANCE};
             var yFeature = {feature:{id:$scope.secondSelect.id},minvalue:$scope.ypercent-FEATURE_VARIANCE,maxvalue:$scope.ypercent+FEATURE_VARIANCE};
