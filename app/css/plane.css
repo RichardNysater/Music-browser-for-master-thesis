@@ -98,3 +98,8 @@
 .clear {
     clear: both;
 }
+
+#selection-image{
+    position: absolute;
+    pointer-events: none;
+}

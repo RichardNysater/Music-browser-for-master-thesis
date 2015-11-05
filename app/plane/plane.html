@@ -3,13 +3,13 @@
         <form id="label-select" role="form">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="sel1">Label 1</label>
+                    <label for="sel1">X-axis</label>
                     <select class="form-control" id="sel1" ng-model="firstSelect" ng-options="label.id for label in labels">
 
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="sel2">Label 2</label>
+                    <label for="sel2">Y-axis</label>
                     <select class="form-control" id="sel2" ng-model="secondSelect" ng-options="label.id for label in labels">
                     </select>
                 </div>
@@ -18,30 +18,30 @@
     </div>
 
     <div id="plane-wrapper">
-        <p id="percent-label"> {{firstSelect.label1}}: {{100-xpercent}}%, {{secondSelect.label1}}:{{100-ypercent}}% </p>
+        <p id="percent-label"> {{firstSelect.id}}: {{xpercent}}%, {{secondSelect.id}}:{{100-ypercent}}% </p>
 
         <div class="row plane-content">
             <div class="col-md-4"></div>
             <div class="col-md-4 vertical-label">
-                <p class="plane-label">{{secondSelect.label1}}</p>
+                <p class="plane-label">{{secondSelect.high}}</p>
             </div>
             <div class="col-md-4"></div>
         </div>
         <div class="row plane-row">
             <div class="col-xs-1 plane-row side-label outer-side-label-left">
-                <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.label1}}</p>
+                <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.low}}</p>
             </div>
             <div class="col-xs-10 plane-row">
                 <div class="plane" ng-click='planeClick($event)'></div>
             </div>
             <div class="col-xs-1 plane-row side-label outer-side-label-right">
-                <p class="plane-label inner-side-label-right rotate-text-right">{{firstSelect.label2}}</p>
+                <p class="plane-label inner-side-label-right rotate-text-right">{{firstSelect.high}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 vertical-label">
-                <p class="plane-label">{{secondSelect.label2}}</p>
+                <p class="plane-label">{{secondSelect.low}}</p>
             </div>
             <div class="col-md-4"></div>
         </div>
@@ -51,5 +51,5 @@
       <div class="clear"></div>
     </div>
 
-    <img ng-if=imgleft id="image" src="img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
+    <img ng-if=imgleft id="selection-image" src="img/marker.gif"  ng-style="{left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
 </div>
