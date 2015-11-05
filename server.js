@@ -4,7 +4,7 @@ var app = koa();
 var router = require('koa-router')();
 var bodyParser = require('koa-bodyparser');
 var mysql = require('mysql-co');
-var mysqlhelper = require('mysql');
+var mysqlHelper = require('mysql');
 var fs = require('fs');
 var DATABASE_DETAIL_FILEPATH = 'DATABASE_DETAILS.json';
 
@@ -58,7 +58,7 @@ var createQueryForSongs = function(con,features,databaseDetails){
     inserts.push(features[features.length-1].feature.id, features[features.length-1].minvalue, features[features.length-1].maxvalue);
     query += "?? BETWEEN ? AND ?";
 
-    query = mysqlhelper.format(query, inserts);
+    query = mysqlHelper.format(query, inserts);
     return query;
 }
 
@@ -68,7 +68,6 @@ var createQueryForSongs = function(con,features,databaseDetails){
  * @returns {*[]} An array of songs matching the features.
  */
 var findSongs = (function*(features){
-    //TODO: Implement finding songs
     var databaseDetails = getDatabaseDetails();
     var con = yield connectToDatabase(databaseDetails);
     var query = createQueryForSongs(con,features,databaseDetails);
@@ -91,6 +90,7 @@ router.post('/app/api/songrequest', function *(next) {
     }
     this.response.body = res[0];
 });
+
 
 app.use(bodyParser());
 app.use(serve('.'));
