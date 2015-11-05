@@ -6,8 +6,8 @@
   },
   {
     "id": "Articulation",
-    "low": "Staccato",
-    "high": "Legato"
+    "low": "Legato",
+    "high": "Staccato"
   },
   {
     "id": "Dissonance",
