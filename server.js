@@ -14,7 +14,7 @@ var DATABASE_DETAIL_FILEPATH = 'DATABASE_DETAILS.json';
  */
 var getDatabaseDetails = function(){
     return JSON.parse(fs.readFileSync(DATABASE_DETAIL_FILEPATH, 'utf8'));
-}
+};
 
 /**
  * Starts a connection with the database.
@@ -27,13 +27,15 @@ var connectToDatabase = (function*(databaseDetails){
         password: databaseDetails.password,
         database: databaseDetails.database
     });
-
-    con.connect(function(err){
-        if(err){
-            console.log('Error connecting to the database');
-            return;
-        }
-    });
+    try {
+        con.connect(function (err) {
+            if (err) {
+                console.log('Error connecting to the database');
+            }
+        });
+    }catch(err){
+        console.log(err);
+    }
     return con;
 });
 
@@ -60,7 +62,7 @@ var createQueryForSongs = function(con,features,databaseDetails){
 
     query = mysqlHelper.format(query, inserts);
     return query;
-}
+};
 
 /**
  * This function searches the database for songs matching the range of features given to it.
@@ -71,11 +73,11 @@ var findSongs = (function*(features){
     var databaseDetails = getDatabaseDetails();
     try {
         var con = yield connectToDatabase(databaseDetails);
+        var query = createQueryForSongs(con,features,databaseDetails);
     }catch(err){
         console.log(err);
         return null;
     }
-    var query = createQueryForSongs(con,features,databaseDetails);
     return yield con.query(query);
 });
 
