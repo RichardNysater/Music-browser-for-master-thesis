@@ -69,7 +69,12 @@ var createQueryForSongs = function(con,features,databaseDetails){
  */
 var findSongs = (function*(features){
     var databaseDetails = getDatabaseDetails();
-    var con = yield connectToDatabase(databaseDetails);
+    try {
+        var con = yield connectToDatabase(databaseDetails);
+    }catch(err){
+        console.log(err);
+        return null;
+    }
     var query = createQueryForSongs(con,features,databaseDetails);
     return yield con.query(query);
 });
@@ -86,7 +91,8 @@ router.post('/app/api/songrequest', function *(next) {
     }catch(err){
         console.log(err);
         this.response.body = "Request error";
-        return;
+        this.status = err.status || 500;
+        this.body = err.message;
     }
     this.response.body = res[0];
 });
