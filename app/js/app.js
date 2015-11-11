@@ -17,6 +17,7 @@ angular.module('myApp', [
   'myApp.player',
 
   'PlaneService',
+  'SlidersService',
   'MusicService',
   'SongRequestService'
 ]).
