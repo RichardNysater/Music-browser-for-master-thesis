@@ -7,6 +7,7 @@ angular.module('myApp', [
   'rzModule',
   'ngAnimate',
   'angularSoundManager',
+
   'myApp.plane',
   'myApp.indexController',
   'myApp.home',
@@ -14,6 +15,8 @@ angular.module('myApp', [
   'myApp.sliders',
   'myApp.version',
   'myApp.player',
+
+  'PlaneService',
   'MusicService',
   'SongRequestService'
 ]).
