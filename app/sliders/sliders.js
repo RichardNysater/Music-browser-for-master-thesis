@@ -9,31 +9,16 @@ angular.module('myApp.sliders', ['ngRoute'])
   });
 }])
 
-.controller('SlidersCtrl', ['$scope','Api','SongRequestService','angularPlayer',
-      function ($scope, Api, SongRequestService,angularPlayer) {
-          $scope.featurelist = [];
+.controller('SlidersCtrl', ['$scope','Api','SongRequestService','angularPlayer','SlidersService',
+      function ($scope, Api, SongRequestService,angularPlayer,SlidersService) {
 
           /**
-           * Build the featurelist with all features
+           * Sends a request to play songs matching the features selected in the sliders
            */
-          Api.Features.query().$promise.then(function(data){
-             for(var i = 0; i<data.length; i++){
-                 $scope.featurelist.push({"feature":data[i], "minvalue":0,"maxvalue":100});
-              }
-          }, function(err){
-              throw "No features were returned by query: "+err;
-          });
-
           $scope.sendRequest = function(){
-              /*
-              var req = SongRequestService.sendRequest($scope.featurelist);
-              req.then(function successCallback(response) {
-                  console.log(response.body);
-              }, function errorCallback(response) {
-                  console.log("fail");
-              });*/
+              SlidersService.saveSliders($scope.featurelist);
               SongRequestService.playMatchingSongs($scope.featurelist);
-          }
+          };
 
           /**
            * Adds a percentage sign after the number on the slider
@@ -41,4 +26,22 @@ angular.module('myApp.sliders', ['ngRoute'])
           $scope.translate = function(value) {
               return value+'%';
           };
+
+          $scope.featurelist = [];
+
+          /**
+           * Build the featurelist with all features
+           */
+          if(!SlidersService.features) {
+              Api.Features.query().$promise.then(function (data) {
+                  for (var i = 0; i < data.length; i++) {
+                      $scope.featurelist.push({"feature": data[i], "minvalue": 0, "maxvalue": 100});
+                  }
+              }, function (err) {
+                  throw "No features were returned by query: " + err;
+              });
+          }
+          else {
+              $scope.featurelist = SlidersService.features;
+          }
       }]);
