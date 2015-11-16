@@ -13,7 +13,7 @@
 }
 
 .plane-row {
-    height: 500px;
+    height: 590px;
 }
 
 #percent-label{
@@ -41,16 +41,14 @@
 .outer-side-label-left{
     position: relative;
     display: inline-block;
-    width: 8.33%;
-    left: 35px;
+    left: 75px;
 }
 
 .outer-side-label-right{
     position: relative;
     display: inline-block;
-    width: 8.33%;
     z-index: -1000;
-    left: -35px;
+    left: -75px;
 }
 
 .rotate-text-left{
