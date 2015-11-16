@@ -1,8 +1,5 @@
 <div class="container">
     <div id="plane-wrapper">
-        <p class="emotion-label"> {{topleft}}: {{topleftpercent}}%, {{bottomright}}:{{bottomrightpercent}}% </p>
-        <p class="emotion-label"> {{bottomleft}}: {{bottomleftpercent}}%, {{topright}}:{{toprightpercent}}% </p>
-
         <div class="row plane-content">
             <div class="col-md-4 vertical-label">
                 <p class="plane-label">{{topleft}}</p>
@@ -37,5 +34,4 @@
     <div class="clear"></div>
 </div>
 
-<img ng-if=imgleft id="image" src="img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
-</div>
+<img ng-if=imgleft id="image" src="/app/img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
