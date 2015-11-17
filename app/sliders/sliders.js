@@ -17,6 +17,7 @@ angular.module('myApp.sliders', ['ngRoute'])
            */
           $scope.sendRequest = function(){
               SlidersService.saveSliders($scope.featurelist);
+              console.log($scope.featurelist);
               SongRequestService.playMatchingSongs($scope.featurelist);
           };
 
