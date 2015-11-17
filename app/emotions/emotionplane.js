@@ -15,11 +15,13 @@ angular.module('myApp.emotions', ['ngRoute'])
             //Get labels and initialize select boxes
             Api.Labels.emotions().$promise.then(function(data){
                 $scope.emotions = data;
-                $scope.topleft = data[0].firstEmotion.emotion;
-                $scope.bottomright = data[0].secondEmotion.emotion;
 
-                $scope.topright = data[1].firstEmotion.emotion;
-                $scope.bottomleft = data[1].secondEmotion.emotion;
+                $scope.topleft = data[0].emotion;
+                $scope.bottomright = data[1].emotion;
+
+                $scope.topright = data[2].emotion;
+                $scope.bottomleft = data[3].emotion;
+                $scope.emotionnames = [$scope.topleft, $scope.topright, $scope.bottomleft, $scope.bottomright];
 
             }, function(err){
                 throw "No labels were returned by query: "+err;
@@ -32,7 +34,7 @@ angular.module('myApp.emotions', ['ngRoute'])
              * @param ycoord The y-coordinate inside the plane.
              * @param plane_width The total width of the plane
              * @param plane_height The total height of the plane
-             * @returns {{TL: number, TR: number, BL: number, BR: number}} The importance of each of the emotions
+             * @returns {{}} A mapping between the emotions and their importance
              */
             var calcImportance = function(xcoord, ycoord, plane_width, plane_height){
 
@@ -61,7 +63,12 @@ angular.module('myApp.emotions', ['ngRoute'])
                 BL = BL.toFixed(2);
                 BR = BR.toFixed(2);
 
-                return {TL,TR,BL,BR};
+                var map = {};
+                map[$scope.topleft] = TL;
+                map[$scope.topright] = TR;
+                map[$scope.bottomleft] = BL;
+                map[$scope.bottomright] = BR;
+                return map;
             };
 
             /**
@@ -69,7 +76,20 @@ angular.module('myApp.emotions', ['ngRoute'])
              * @param emotion_importance The importance of the four emotions
              */
             var calcFeatures = function(emotion_importance){
-                //TODO: Implement the calculation
+                var feature_list = [];
+
+                for(var i = 0; i < $scope.emotions[0].features.length;i++){
+                    var maxValSum = 0, minValSum = 0;
+
+                    for(var j = 0; j < 4; j++){
+                        maxValSum += $scope.emotions[j].features[i].maxvalue*emotion_importance[$scope.emotions[j].emotion];
+                        minValSum += $scope.emotions[j].features[i].minvalue*emotion_importance[$scope.emotions[j].emotion];
+                    }
+                    var maxVal = maxValSum/4;
+                    var minVal = minValSum/4;
+                    feature_list.push({"feature":{"id":$scope.emotions[0].features[i].feature}, "minvalue":minVal,"maxvalue":maxVal});
+                }
+                return feature_list;
             };
 
             /**
@@ -89,7 +109,7 @@ angular.module('myApp.emotions', ['ngRoute'])
 
                 var emotion_importance = calcImportance(event.offsetX,event.offsetY,plane_width,plane_height);
                 var feature_list = calcFeatures(emotion_importance);
-                //SongRequestService.playMatchingSongs(feature_list);
+                SongRequestService.playMatchingSongs(feature_list);
             }
 
 
