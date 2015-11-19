@@ -32,6 +32,7 @@ angular.module('myApp.plane', ['ngRoute'])
             $scope.xpercent = Math.round(100*($scope.xc/CSS_plane.outerWidth()));
             $scope.ypercent = 100-Math.round(100*($scope.yc/(CSS_plane.outerHeight())));
 
+            // Create the min and max values for the two features based on the variance and where the user clicked
             var xFeature = {feature:{id:$scope.firstSelect.id},minvalue:$scope.xpercent-$scope.FEATURE_VARIANCE,maxvalue:$scope.xpercent+$scope.FEATURE_VARIANCE};
             var yFeature = {feature:{id:$scope.secondSelect.id},minvalue:$scope.ypercent-$scope.FEATURE_VARIANCE,maxvalue:$scope.ypercent+$scope.FEATURE_VARIANCE};
             SongRequestService.playMatchingSongs([xFeature,yFeature]);
@@ -39,9 +40,10 @@ angular.module('myApp.plane', ['ngRoute'])
         };
 
         /**
-         * If user has previously clicked somewhere, load the values for the previous click
+         * If the user has previously clicked somewhere, load the values for the previous click
+         * @param features The features available.
          */
-        var loadValues = function(labels){
+        var loadValues = function(features){
           if(PlaneService.variance){
             $scope.FEATURE_VARIANCE = PlaneService.variance;
           }
@@ -53,13 +55,13 @@ angular.module('myApp.plane', ['ngRoute'])
           $scope.imgleft = PlaneService.imgleft;
           $scope.imgtop = PlaneService.imgtop;
 
-          for(var i = 0; i<labels.length; i++){ // Existing labels should be selected in the select boxes
-            if(PlaneService.firstSelect && labels[i].id == PlaneService.firstSelect.id){
-              $scope.firstSelect = labels[i];
+          for(var i = 0; i<features.length; i++){ // Existing features should be selected in the select boxes
+            if(PlaneService.firstSelect && features[i].id == PlaneService.firstSelect.id){
+              $scope.firstSelect = features[i];
             }
 
-            if(PlaneService.secondSelect && labels[i].id == PlaneService.secondSelect.id){
-              $scope.secondSelect = labels[i];
+            if(PlaneService.secondSelect && features[i].id == PlaneService.secondSelect.id){
+              $scope.secondSelect = features[i];
             }
           }
         };
@@ -67,19 +69,19 @@ angular.module('myApp.plane', ['ngRoute'])
 
         /* Controller body starts here */
 
-        //Get labels and load existing values
+        //Get features and load existing values
         Api.Features.query().$promise.then(function(data){
-          $scope.labels = data;
+          $scope.features = data;
           loadValues(data);
 
           if(!$scope.firstSelect){
-            $scope.firstSelect = $scope.labels[0];
+            $scope.firstSelect = $scope.features[0];
           }
           if(!$scope.secondSelect){
-            $scope.secondSelect = $scope.labels[$scope.labels.length-1];
+            $scope.secondSelect = $scope.features[$scope.features.length-1];
           }
         }, function(err){
-          throw "No labels were returned by query: "+err;
+          throw "No features were returned by query: "+err;
         });
 
 

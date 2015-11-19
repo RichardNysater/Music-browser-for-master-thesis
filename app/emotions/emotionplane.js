@@ -28,7 +28,7 @@ angular.module('myApp.emotions', ['ngRoute'])
                 $scope.bottomleft = data[3].emotion;
                 $scope.emotionnames = [$scope.topleft, $scope.topright, $scope.bottomleft, $scope.bottomright];
             }, function(err){
-                throw "No labels were returned by query: "+err;
+                throw "No emotions were returned by query: "+err;
             });
 
             /**
