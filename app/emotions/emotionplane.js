@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * The Emotion plane controller handles the interactions within the emotion plane.
+ * The emotion plane allows a user to click somewhere in a 2d-plane with four emotions in each corner,
+ * the application will then create a playlist based on the distance to each emotion.
+ */
 angular.module('myApp.emotions', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
@@ -22,11 +27,9 @@ angular.module('myApp.emotions', ['ngRoute'])
                 $scope.topright = data[2].emotion;
                 $scope.bottomleft = data[3].emotion;
                 $scope.emotionnames = [$scope.topleft, $scope.topright, $scope.bottomleft, $scope.bottomright];
-
             }, function(err){
                 throw "No labels were returned by query: "+err;
             });
-
 
             /**
              * Calculate how important each emotion is to a coordinate.
@@ -81,9 +84,11 @@ angular.module('myApp.emotions', ['ngRoute'])
                 for(var i = 0; i < $scope.emotions[0].features.length;i++){
                     var maxValSum = 0, minValSum = 0;
 
+                    /* Each emotion should have a set of features with a min-value and max-value.
+                    *  For each feature we sum the max values and min values from all the emotions weighed by their importance. */
                     for(var j = 0; j < 4; j++){
-                        maxValSum += $scope.emotions[j].features[i].maxvalue*emotion_importance[$scope.emotions[j].emotion];
-                        minValSum += $scope.emotions[j].features[i].minvalue*emotion_importance[$scope.emotions[j].emotion];
+                        maxValSum += $scope.emotions[j].features[i].maxvalue * emotion_importance[$scope.emotions[j].emotion];
+                        minValSum += $scope.emotions[j].features[i].minvalue * emotion_importance[$scope.emotions[j].emotion];
                     }
                     var maxVal = maxValSum/4;
                     var minVal = minValSum/4;
@@ -101,12 +106,14 @@ angular.module('myApp.emotions', ['ngRoute'])
                 var plane_width = CSS_plane.outerWidth();
                 var plane_height = CSS_plane.outerHeight();
 
+                /* Calculate the location of the selection image */
                 $scope.imgwidth = 10;
                 $scope.imgheight = 10;
 
                 $scope.imgleft = event.pageX-($scope.imgwidth/2);
                 $scope.imgtop = event.pageY-($scope.imgheight/2);
 
+                /* Calculate the importance and features required to request for music */
                 var emotion_importance = calcImportance(event.offsetX,event.offsetY,plane_width,plane_height);
                 var feature_list = calcFeatures(emotion_importance);
                 SongRequestService.playMatchingSongs(feature_list);
