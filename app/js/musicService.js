@@ -14,7 +14,7 @@ MusicService.service('Api', ['$resource',
 
             Labels: $resource('api/labels/:labelId.json',{},{
                 query: {method:'GET',params:{labelId:'labels'},isArray:true}, //Return all labels
-                emotions: {method:'GET',params:{labelId:'emotions'},isArray:true} //Return all labels
+                emotions: {method:'GET',params:{labelId:'emotions'},isArray:true} //Return all emotions
             }),
 
             Features: $resource('api/features/:featureId.json',{},{

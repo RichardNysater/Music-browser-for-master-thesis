@@ -11,9 +11,18 @@ controllers.controller('indexController',['$scope','$location',
         /**
          * Handle the fixed navbar
          */
-        $scope.sections = [{"id":"Home","link":"#/"},{"id":"Player","link":"#player"},{"id":"Emotions","link":"#emotions"},{"id":"Plane","link":"#plane"},{"id":"Sliders","link":"#sliders"}];
         var selected = null;
+        $scope.sections = [
+            {"id":"Home", "link":"#/"},
+            {"id":"Player", "link":"#player"},
+            {"id":"Emotions", "link":"#emotions"},
+            {"id":"Plane", "link":"#plane"},
+            {"id":"Sliders", "link":"#sliders"}
+        ];
 
+        /**
+         * Initializes the main menu sections
+         */
         $scope.initPath = function() {
             var initPath = $location.path().split("/")[1] || "Home";
             selected = $scope.sections[0];
@@ -51,6 +60,6 @@ controllers.controller('indexController',['$scope','$location',
             return $scope.sections[0];
         }
 
-
+        /* Initialize the main menu */
         $scope.initPath();
     }]);
