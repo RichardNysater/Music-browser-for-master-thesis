@@ -22,6 +22,11 @@ SongRequestService.service('SongRequestService', ['$resource','$http','angularPl
             return $http(req);
         };
 
+        /**
+         * Adds the given songs to the current playlist.
+         * Also starts playing the songs unless music is already playing.
+         * @param songs The songs to add to the playlist
+         */
         var addSongs = function(songs){
             var key = null;
             for (var i = 0; i < songs.length; i++) {
@@ -38,20 +43,21 @@ SongRequestService.service('SongRequestService', ['$resource','$http','angularPl
             }
             angularPlayer.playTrack(key);
         };
+
         /**
          * Sends a request to the server for all songs matching the input features
          * and adds them to the playlist.
          *
-         * @param featurelist The features to match
+         * @param feature_list The features to match
          */
-        this.playMatchingSongs = function(featurelist){
+        this.playMatchingSongs = function(feature_list){
 
-            var request = this.sendRequest(featurelist);
+            var request = this.sendRequest(feature_list);
 
             request.then(function successCallback(response) {
                 var res = response.data;
                 if(res.length > 0) {
-                    if (angularPlayer.getPlaylist().length > 0) {
+                    if (angularPlayer.getPlaylist().length > 0) { // Clear the playlist if needed
                         angularPlayer.clearPlaylist(function(param){
                             addSongs(res);
                         });
