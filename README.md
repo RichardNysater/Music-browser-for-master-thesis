@@ -14,4 +14,6 @@ To start the application:
 2. Add your database details to a file called DATABASE_DETAILS.json following the DATABASE_DETAILS_TEMPLATE.json format.
 2a. The songtable field is the name of the table with the songs' feature data.
 
-3. Start the application by opening a command window at the root of the application and typing "npm start".
+3. Add your songs to the /app/api/music folder. The 100% supported formats are wav, mp4 and ogg. The mp3 format almost works, but seeking in songs is slightly bugged (seeks to the wrong location).
+
+4. Start the application by opening a command window at the root of the application and typing "npm start".
