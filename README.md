@@ -5,3 +5,13 @@ This project is/will be a music platform based on perceptual features.
 Uses Koa and Node on the backend, Angular and Bootstrap on the frontend.
 
 The music set used for the evaluation of the browser is available at https://shaan.se/i/kpop_music_used_for_perceptual_browser.7z.
+
+To start the application:
+
+1. Set up a MYSQL server with a schema following the rules in the create_song_table.sql file.
+1a. Populate the song table with data for your songs. Each song needs all the features, which should be a number from 0 to 100.
+
+2. Add your database details to a file called DATABASE_DETAILS.json following the DATABASE_DETAILS_TEMPLATE.json format.
+2a. The songtable field is the name of the table with the songs' feature data.
+
+3. Start the application by opening a command window at the root of the application and typing "npm start".
