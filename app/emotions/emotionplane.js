@@ -14,22 +14,8 @@ angular.module('myApp.emotions', ['ngRoute'])
         });
     }])
 
-    .controller('EmotionsCtrl', ['$scope','Api','SongRequestService',
-        function ($scope,Api,SongRequestService) {
-
-            //Get labels and initialize select boxes
-            Api.Labels.emotions().$promise.then(function(data){
-                $scope.emotions = data;
-
-                $scope.topleft = data[0].emotion;
-                $scope.bottomright = data[1].emotion;
-
-                $scope.topright = data[2].emotion;
-                $scope.bottomleft = data[3].emotion;
-                $scope.emotionnames = [$scope.topleft, $scope.topright, $scope.bottomleft, $scope.bottomright];
-            }, function(err){
-                throw "No emotions were returned by query: "+err;
-            });
+    .controller('EmotionsCtrl', ['$scope','Api','SongRequestService','EmotionService',
+        function ($scope,Api,SongRequestService,EmotionService) {
 
             /**
              * Calculate how important each emotion is to a coordinate.
@@ -98,6 +84,16 @@ angular.module('myApp.emotions', ['ngRoute'])
             };
 
             /**
+             * If the user has previously clicked somewhere, load the values for the previous click
+             */
+            var loadValues = function(){
+                $scope.imgwidth = EmotionService.imgwidth;
+                $scope.imgheight = EmotionService.imgheight;
+                $scope.imgleft = EmotionService.imgleft;
+                $scope.imgtop = EmotionService.imgtop;
+            };
+
+            /**
              * planeClick is called whenever a user clicks on the 2d-plane
              * @param event Event
              */
@@ -113,11 +109,31 @@ angular.module('myApp.emotions', ['ngRoute'])
                 $scope.imgleft = event.pageX-($scope.imgwidth/2);
                 $scope.imgtop = event.pageY-($scope.imgheight/2);
 
+                // Save the current variables used for the click
+                EmotionService.saveClick($scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight);
+
                 /* Calculate the importance and features required to request for music */
                 var emotion_importance = calcImportance(event.offsetX,event.offsetY,plane_width,plane_height);
                 var feature_list = calcFeatures(emotion_importance);
                 SongRequestService.playMatchingSongs(feature_list);
-            }
+            };
+
+
+            /* Controller body starts here */
+
+            //Get labels, initialize select boxes and load existing values
+            Api.Labels.emotions().$promise.then(function(data){
+                $scope.emotions = data;
+                loadValues(data);
+                $scope.topleft = data[0].emotion;
+                $scope.bottomright = data[1].emotion;
+
+                $scope.topright = data[2].emotion;
+                $scope.bottomleft = data[3].emotion;
+                $scope.emotionnames = [$scope.topleft, $scope.topright, $scope.bottomleft, $scope.bottomright];
+            }, function(err){
+                throw "No emotions were returned by query: "+err;
+            });
 
 
         }]);
