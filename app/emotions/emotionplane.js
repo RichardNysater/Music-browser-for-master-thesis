@@ -56,10 +56,10 @@ angular.module('myApp.emotions', ['ngRoute'])
 
                 /* Calculate the importance of each corner */
                 var sum = TL+TR+BL+BR;
-                TL = (TL*(1/sum))/0.25;
-                TR = (TR*(1/sum))/0.25;
-                BL = (BL*(1/sum))/0.25;
-                BR = (BR*(1/sum))/0.25;
+                TL = TL*4/sum;
+                TR = TR*4/sum;
+                BL = BL*4/sum;
+                BR = BR*4/sum;
 
                 TL = TL.toFixed(2);
                 TR = TR.toFixed(2);
