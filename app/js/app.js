@@ -19,7 +19,8 @@ angular.module('myApp', [
   'PlaneService',
   'SlidersService',
   'MusicService',
-  'SongRequestService'
+  'SongRequestService',
+  'EmotionService'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
