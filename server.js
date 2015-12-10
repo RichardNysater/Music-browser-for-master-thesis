@@ -6,7 +6,9 @@ var bodyParser = require('koa-bodyparser');
 var mysql = require('mysql-co');
 var mysqlHelper = require('mysql');
 var fs = require('fs');
+
 var DATABASE_DETAIL_FILEPATH = 'DATABASE_DETAILS.json';
+var MAX_SONGS_RETURNED = 10;
 
 /**
  * Reads and parses the database details.
@@ -58,7 +60,7 @@ var createQueryForSongs = function(con,features,databaseDetails){
         }
     }
     inserts.push(features[features.length-1].feature.id, features[features.length-1].minvalue, features[features.length-1].maxvalue);
-    query += "?? BETWEEN ? AND ? LIMIT 10";
+    query += "?? BETWEEN ? AND ? ORDER BY RAND() LIMIT "+MAX_SONGS_RETURNED;
 
     query = mysqlHelper.format(query, inserts);
     return query;
@@ -66,8 +68,8 @@ var createQueryForSongs = function(con,features,databaseDetails){
 
 /**
  * This function searches the database for songs matching the range of features given to it.
- * @param features An array of features to match a song to, syntax: [{ feature: {id:"Feature name"}, minvalue: x, maxvalue: y}, ...]
- * @returns {*[]} An array of songs matching the features.
+ * @param features An array of features to match a song to, syntax: [{feature:{id:"Feature name"}, minvalue: x, maxvalue: y}, ...]
+ * @returns {*[]} A randomly ordered array of length specified by MAX_SONGS_RETURNED constant with the songs matching the features.
  */
 var findSongs = (function*(features){
     var databaseDetails = getDatabaseDetails();
