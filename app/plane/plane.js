@@ -18,13 +18,13 @@ angular.module('myApp.plane', ['ngRoute'])
          */
           $scope.planeClick = function(event) {
             var CSS_plane =  $('.plane');
-            $scope.imgwidth = CSS_plane.outerWidth()*($scope.FEATURE_VARIANCE/100);
-            $scope.imgheight = CSS_plane.outerHeight()*($scope.FEATURE_VARIANCE/100);
+            $scope.imgwidth = CSS_plane.outerWidth()*($scope.feature_variance/100);
+            $scope.imgheight = CSS_plane.outerHeight()*($scope.feature_variance/100);
             $scope.imgleft = event.pageX-($scope.imgwidth/2);
             $scope.imgtop = event.pageY-($scope.imgheight/2);
 
             // Save the current variables used for the click
-            PlaneService.saveClick($scope.FEATURE_VARIANCE, $scope.firstSelect, $scope.secondSelect, $scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight);
+            PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight);
 
             $scope.xc = event.offsetX;
             $scope.yc = event.offsetY;
@@ -33,8 +33,8 @@ angular.module('myApp.plane', ['ngRoute'])
             $scope.ypercent = 100-Math.round(100*($scope.yc/(CSS_plane.outerHeight())));
 
             // Create the min and max values for the two features based on the variance and where the user clicked
-            var xFeature = {feature:{id:$scope.firstSelect.id},minvalue:$scope.xpercent-$scope.FEATURE_VARIANCE,maxvalue:$scope.xpercent+$scope.FEATURE_VARIANCE};
-            var yFeature = {feature:{id:$scope.secondSelect.id},minvalue:$scope.ypercent-$scope.FEATURE_VARIANCE,maxvalue:$scope.ypercent+$scope.FEATURE_VARIANCE};
+            var xFeature = {feature:{id:$scope.firstSelect.id},minvalue:$scope.xpercent-$scope.feature_variance,maxvalue:$scope.xpercent+$scope.feature_variance};
+            var yFeature = {feature:{id:$scope.secondSelect.id},minvalue:$scope.ypercent-$scope.feature_variance,maxvalue:$scope.ypercent+$scope.feature_variance};
             SongRequestService.playMatchingSongs([xFeature,yFeature]);
 
         };
@@ -45,10 +45,10 @@ angular.module('myApp.plane', ['ngRoute'])
          */
         var loadValues = function(features){
           if(PlaneService.variance){
-            $scope.FEATURE_VARIANCE = PlaneService.variance;
+            $scope.feature_variance = PlaneService.variance;
           }
           else{
-            $scope.FEATURE_VARIANCE = 13; // Default variance
+            $scope.feature_variance = 13; // Default variance
           }
           $scope.imgwidth = PlaneService.imgwidth;
           $scope.imgheight = PlaneService.imgheight;
