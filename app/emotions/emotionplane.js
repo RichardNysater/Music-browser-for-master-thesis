@@ -45,11 +45,13 @@ angular.module('myApp.emotions', ['ngRoute'])
                     var bl_min = $scope.bottomleft.features[i].minvalue;
                     var br_min = $scope.bottomright.features[i].minvalue;
 
-                    var max_val = $scope.feature_variance+Math.round((0.25*y*(x*(tr_max - tl_max - br_max + bl_max) + tr_max + tl_max - br_max - bl_max))
+                    var max_val = Math.round((0.25*y*(x*(tr_max - tl_max - br_max + bl_max) + tr_max + tl_max - br_max - bl_max))
                             + (0.25*((x*(tr_max - tl_max + br_max - bl_max)) + tr_max + tl_max + br_max + bl_max)));
+                    max_val = Math.min($scope.feature_variance+max_val,100); // Limit max to 100
 
-                    var min_val = -$scope.feature_variance+Math.round(0.25*y*(x*(tr_min - tl_min - br_min + bl_min)
+                    var min_val = Math.round(0.25*y*(x*(tr_min - tl_min - br_min + bl_min)
                             + tr_min + tl_min - br_min - bl_min) + 0.25*(x*(tr_min - tl_min + br_min - bl_min) + tr_min + tl_min + br_min + bl_min));
+                    min_val = Math.max(min_val-$scope.feature_variance,0); // Limit min to 0
 
                     feature_list.push({"feature":{"id":$scope.emotions[0].features[i].feature}, "minvalue": min_val,"maxvalue": max_val});
                 }
@@ -88,12 +90,13 @@ angular.module('myApp.emotions', ['ngRoute'])
                 /* Calculate the features required to request for music */
                 var feature_list = calcFeatures(event.offsetX,event.offsetY,plane_width,plane_height);
                 SongRequestService.playMatchingSongs(feature_list);
+                $scope.feature_list = feature_list;
             };
-
 
             /* Controller body starts here */
 
             $scope.feature_variance = 5;
+
             //Get labels, initialize select boxes and load existing values
             Api.Labels.emotions().$promise.then(function(data){
                 $scope.emotions = data;
@@ -105,6 +108,5 @@ angular.module('myApp.emotions', ['ngRoute'])
             }, function(err){
                 throw "No emotions were returned by query: "+err;
             });
-
 
         }]);
