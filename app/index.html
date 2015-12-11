@@ -61,7 +61,7 @@
     <div ng-show="playlist.length > 0" class="fade-in-out container" >
         <div class="row">
           <div class="col-xs-2">
-            <div class="btn-group navbar-btn left-buttons" aria-label="Left Align">
+            <div class="btn-group navbar-btn left-buttons" role="group" aria-label="Left Align">
               <button type="button" class="btn btn-default" prev-track title="Previous track">
                 <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
               </button>
@@ -70,7 +70,6 @@
                 <span ng-if=!isPlaying class="glyphicon glyphicon-play" aria-hidden="true"></span>
                 <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
               </button>
-
 
               <button type="button" class="btn btn-default" stop-music title="Stop playing">
                 <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
@@ -107,7 +106,7 @@
             </div>
           </div>
           <div class="col-xs-2">
-              <div class="btn-group navbar-btn right-buttons" aria-label="Left Align">
+              <div class="btn-group navbar-btn right-buttons" role="group" aria-label="Left Align">
                 <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
                   <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
                 </button>
