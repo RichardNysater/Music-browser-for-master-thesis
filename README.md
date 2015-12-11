@@ -1,12 +1,12 @@
 # Music browser
 
-This project is/will be a music platform based on perceptual features.
+This project is/will be a music platform based on perceptual features. This project is under heavy construction and is still in alpha.
 
 Uses Koa and Node on the backend, Angular and Bootstrap on the frontend.
 
 The music set used for the evaluation of the browser is available at https://shaan.se/i/kpop_music_used_for_perceptual_browser.7z.
 
-To start the application:
+To start the application (instructions not yet complete):
 
 1. Set up a MYSQL server with a schema following the rules in the create_song_table.sql file.
 1a. Populate the song table with data for your songs. Each song needs all the features, which should be a number from 0 to 100.
