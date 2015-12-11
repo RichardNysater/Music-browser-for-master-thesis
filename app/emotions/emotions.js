@@ -66,6 +66,7 @@ angular.module('myApp.emotions', ['ngRoute'])
                 $scope.imgheight = EmotionsService.imgheight;
                 $scope.imgleft = EmotionsService.imgleft;
                 $scope.imgtop = EmotionsService.imgtop;
+                $scope.feature_list = EmotionsService.feature_list;
             };
 
             /**
@@ -84,13 +85,13 @@ angular.module('myApp.emotions', ['ngRoute'])
                 $scope.imgleft = event.pageX-($scope.imgwidth/2);
                 $scope.imgtop = event.pageY-($scope.imgheight/2);
 
-                // Save the current variables used for the click
-                EmotionsService.saveClick($scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight);
-
                 /* Calculate the features required to request for music */
                 var feature_list = calcFeatures(event.offsetX,event.offsetY,plane_width,plane_height);
                 SongRequestService.playMatchingSongs(feature_list);
                 $scope.feature_list = feature_list;
+
+                // Save the current variables used for the click
+                EmotionsService.saveClick($scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight,$scope.feature_list);
             };
 
             /* Controller body starts here */
