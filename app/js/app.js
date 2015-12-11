@@ -21,7 +21,7 @@ angular.module('myApp', [
   'SlidersService',
   'MusicService',
   'SongRequestService',
-  'EmotionService'
+  'EmotionsService'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});

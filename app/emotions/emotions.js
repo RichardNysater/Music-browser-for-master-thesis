@@ -14,8 +14,8 @@ angular.module('myApp.emotions', ['ngRoute'])
         });
     }])
 
-    .controller('EmotionsCtrl', ['$scope','Api','SongRequestService','EmotionService',
-        function ($scope,Api,SongRequestService,EmotionService) {
+    .controller('EmotionsCtrl', ['$scope','Api','SongRequestService','EmotionsService',
+        function ($scope,Api,SongRequestService,EmotionsService) {
 
             /**
              * Calculate the min-max values of each feature based on the distance between the click and the corners
@@ -62,10 +62,10 @@ angular.module('myApp.emotions', ['ngRoute'])
              * If the user has previously clicked somewhere, load the values for the previous click
              */
             var loadValues = function(){
-                $scope.imgwidth = EmotionService.imgwidth;
-                $scope.imgheight = EmotionService.imgheight;
-                $scope.imgleft = EmotionService.imgleft;
-                $scope.imgtop = EmotionService.imgtop;
+                $scope.imgwidth = EmotionsService.imgwidth;
+                $scope.imgheight = EmotionsService.imgheight;
+                $scope.imgleft = EmotionsService.imgleft;
+                $scope.imgtop = EmotionsService.imgtop;
             };
 
             /**
@@ -85,7 +85,7 @@ angular.module('myApp.emotions', ['ngRoute'])
                 $scope.imgtop = event.pageY-($scope.imgheight/2);
 
                 // Save the current variables used for the click
-                EmotionService.saveClick($scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight);
+                EmotionsService.saveClick($scope.imgleft,$scope.imgtop,$scope.imgwidth,$scope.imgheight);
 
                 /* Calculate the features required to request for music */
                 var feature_list = calcFeatures(event.offsetX,event.offsetY,plane_width,plane_height);
