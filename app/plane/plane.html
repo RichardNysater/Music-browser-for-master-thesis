@@ -26,7 +26,8 @@
     </div>
 
     <div id="plane-wrapper row">
-        <p id="percent-label"> {{firstSelect.id}}: {{xpercent}}%, {{secondSelect.id}}:{{ypercent}}% </p>
+        <p ng-if="!(xpercent && ypercent)" class="percent-label"> Click anywhere inside the plane below </p>
+        <p ng-if="xpercent && ypercent" class="percent-label"> {{firstSelect.id}}: {{xpercent}}%, {{secondSelect.id}}:{{ypercent}}% </p>
 
         <div class="row plane-content">
             <div class="col-xs-2"></div>
