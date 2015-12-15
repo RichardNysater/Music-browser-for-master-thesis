@@ -1,31 +1,33 @@
 <div class="container">
-    <button ng-click="sendRequest()">Send request</button>
-    <div ng-repeat="cur in featurelist" >
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-4 text-buffer feature-id">
-                <h5><b>{{cur.feature.id}}</b></h5>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-        <div class="row top-buffer">
+    <div class="row">
+        <div ng-repeat="cur in featurelist" class="col-xs-6" >
             <div class="row">
-                <div class="col-md-1 text-buffer min-label">
+                <div class="col-md-2"></div>
+                <div class="col-md-6 text-buffer feature-id">
+                    <h5><b>{{cur.feature.id}}</b></h5>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-xs-2 text-buffer min-label">
                     <p>{{cur.feature.low}}</p>
                 </div>
-                <div class="col-md-4">
-                    <rzslider
-                            rz-slider-floor="test"
-                            rz-slider-ceil=100
-                            rz-slider-model="cur.minvalue"
-                            rz-slider-translate="translate"
-                            rz-slider-high="cur.maxvalue">
-                    </rzslider>
+                <div class="col-xs-6">
+                    <div range-slider attach-handle-values="true" show-values="true" on-handle-up="autoRequest()" min="0" max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
                 </div>
-                <div class="col-md-1 text-buffer max-label">
+                <div class="col-xs-2 text-buffer max-label">
                     <p>{{cur.feature.high}}</p>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+            <button ng-if="autoplay" type="button" class="btn btn-primary active" ng-click="toggleAutoplay()">Autoplay enabled</button>
+            <button ng-if="!autoplay" type="button" class="btn btn-primary" ng-click="toggleAutoplay()">Autoplay disabled</button>
+            <button type="button" class="btn btn-primary" ng-click="sendRequest()">Play</button>
+        </div>
+        <div class="col-xs-4"></div>
     </div>
 </div>

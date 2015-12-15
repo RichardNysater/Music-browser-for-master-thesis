@@ -17,8 +17,23 @@ angular.module('myApp.sliders', ['ngRoute'])
            */
           $scope.sendRequest = function(){
               SlidersService.saveSliders($scope.featurelist);
-              console.log($scope.featurelist);
               SongRequestService.playMatchingSongs($scope.featurelist);
+          };
+
+          /**
+           * Automatically sends a request to start playing if autoplay is enabled
+           */
+          $scope.autoRequest = function(){
+              if($scope.autoplay){
+                  $scope.sendRequest();
+              }
+          };
+
+          /**
+           * Toggles autoplay off or on
+           */
+          $scope.toggleAutoplay = function(){
+              $scope.autoplay = !$scope.autoplay;
           };
 
           /**
@@ -28,7 +43,10 @@ angular.module('myApp.sliders', ['ngRoute'])
               return value+'%';
           };
 
+          /* Begin main body */
+
           $scope.featurelist = [];
+          $scope.autoplay = true;
 
           /**
            * Build the featurelist with all features
