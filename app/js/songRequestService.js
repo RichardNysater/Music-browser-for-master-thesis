@@ -49,8 +49,9 @@ SongRequestService.service('SongRequestService', ['$resource','$http','angularPl
          * and adds them to the playlist.
          *
          * @param feature_list The features to match
+         * @param callback Call the optional callback with the results as parameter
          */
-        this.playMatchingSongs = function(feature_list){
+        this.playMatchingSongs = function(feature_list, callback){
 
             var request = this.sendRequest(feature_list);
 
@@ -64,6 +65,10 @@ SongRequestService.service('SongRequestService', ['$resource','$http','angularPl
                     }
                     else {
                         addSongs(res);
+                    }
+
+                    if (callback) { // Only call the callback if it exists
+                        callback(res);
                     }
                 }
             }, function errorCallback() {
