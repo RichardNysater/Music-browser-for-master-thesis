@@ -45,4 +45,6 @@
     <div class="clear"></div>
 </div>
 
-<img ng-if=imgleft id="image" src="/app/img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
+<img ng-repeat="song in songs" class="image" src="/app/img/songmarker.png" ng-attr-title="{{song.songID}}" ng-style="{position:'absolute', left: song.left, top: song.top, width: imgwidth, height: imgheight}"/>
+
+<img ng-if=imgleft class="image" src="/app/img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
