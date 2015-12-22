@@ -1,9 +1,11 @@
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+.v-center {
+    top: 13px;
 }
 
 .emotion-label{
     text-align: center;
+}
+
+.perceptual-names{
+    font-size: 12px;
 }

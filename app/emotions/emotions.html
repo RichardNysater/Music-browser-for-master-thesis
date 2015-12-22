@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div id="plane-wrapper row">
         <div class="row plane-content">
             <div class="col-xs-4 vertical-label">
@@ -31,15 +31,15 @@
 
     <div class="row">
         <h2 class="text-center" ng-if="feature_list">Perceptual features</h2>
-        <div class="col-md-6" ng-repeat="cur in feature_list">
-        <div class="row">
-            <div class="col-xs-4 text-right vcenter">
-                <p><b>{{cur.feature.id}}:</b></p>
+        <div class="col-xs-6" ng-repeat="cur in feature_list">
+            <div class="row">
+                <div class="col-sm-5 col-xs-6 v-center text-right">
+                    <p class="perceptual-names"><b>{{cur.feature.id}}:</b></p>
+                </div>
+                <div class="col-sm-7 col-xs-6">
+                    <div range-slider attach-handle-values="true" show-values="true" disabled="true" min="0" max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
+                </div>
             </div>
-            <div class="col-xs-6 vcenter">
-                <div range-slider attach-handle-values="true" show-values="true" disabled="true" min="0" max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
-            </div>
-        </div>
         </div>
     </div>
     <div class="clear"></div>

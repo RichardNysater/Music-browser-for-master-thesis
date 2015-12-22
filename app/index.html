@@ -60,8 +60,8 @@
   <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
     <div ng-show="playlist.length > 0" class="fade-in-out container" >
         <div class="row">
-          <div class="col-xs-2">
-            <div class="btn-group navbar-btn left-buttons" role="group" aria-label="Left Align">
+          <div class="fixed-side-column col-xs-1">
+            <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
               <button type="button" class="btn btn-default" prev-track title="Previous track">
                 <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
               </button>
@@ -80,7 +80,7 @@
               </button>
             </div>
           </div>
-          <div class="col-xs-6">
+          <div class="fluid-middle-column col-xs-10">
             <div class="row center-block">
               <p ng-if="currentPlaying.title && currentPlaying.artist">
                 {{ currentPlaying.title }} by {{ currentPlaying.artist }}
@@ -90,23 +90,23 @@
               </p>
             </div>
             <div class="row">
-              <div class="col-xs-1">
+              <div class="col-xs-2 col-lg-1 cur-duration">
                 <p>{{ currentPostion }}</p>
               </div>
-              <div class="col-xs-10">
+              <div class="col-xs-8 col-lg-10">
                 <div class="progress seeking" seek-track style="margin: 0;">
                   <div class="progress-bar" role="progressbar" aria-valuenow="0"
                          aria-valuemin="0" aria-valuemax="100" style="" ng-style="{width: (progress+'%')}">
                   </div>
                 </div>
               </div>
-              <div class="col-xs-1 cur-duration">
+              <div class="col-xs-2 col-lg-1 max-duration">
                 <p>{{ currentDuration }}</p>
               </div>
             </div>
           </div>
-          <div class="col-xs-2">
-              <div class="btn-group navbar-btn right-buttons" role="group" aria-label="Left Align">
+          <div class="fixed-side-column col-xs-1">
+              <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
                 <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
                   <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
                 </button>

@@ -41,22 +41,6 @@ body {
   text-align: center;
 }
 
-.left-buttons{
-  padding-top: 5%;
-}
-
-.right-buttons{
-  padding-top: 5%;
-}
-
-.cur-duration{
-  text-align:left;
-  left: -20px;
-}
-
-.player-footer{
-  background-color: #f5f5f5;
-}
 .menu:after {
   content: "]";
 }
@@ -74,6 +58,40 @@ body {
   content: "";
   padding: 0;
 }
+
+/* Player footer */
+.row > div {
+  float:left; /* Can apply this a bunch of ways */
+}
+.fixed-side-column {
+  width:250px;
+}
+.fluid-middle-column {
+  width:calc(100% - 500px);
+}
+
+.player-footer{
+  background-color: #f5f5f5;
+}
+
+.left-buttons{
+  padding-top: 5%;
+}
+
+.right-buttons{
+  padding-top: 5%;
+}
+
+.cur-duration{
+  text-align:right;
+  left: 2.5%;
+}
+
+.max-duration{
+  text-align:left;
+  left: -20px;
+}
+
 
 /* Animate */
 
