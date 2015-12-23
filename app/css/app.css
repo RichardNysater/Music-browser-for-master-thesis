@@ -1,5 +1,4 @@
 /* app css stylesheet */
-
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -13,9 +12,7 @@
 }
 
 
-/* Sticky footer styles
--------------------------------------------------- */
-
+/* Sticky footer */
 html {
   position: relative;
   min-height: 100%;
@@ -92,9 +89,11 @@ body {
   left: -20px;
 }
 
+/* Playlist on the left */
+.navigation {position:fixed;}
+.clickable { cursor: pointer; }
 
 /* Animate */
-
 .fade-in-out {
   transition: 1s linear all;
   opacity: 1;
