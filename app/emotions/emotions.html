@@ -1,50 +1,50 @@
-<div class="container-fluid">
-    <div id="plane-wrapper row">
-        <div class="row plane-content">
-            <div class="col-xs-4 vertical-label">
-                <p class="plane-label">{{topleft.emotion}}</p>
-            </div>
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4 vertical-label">
-                <p class="plane-label">{{topright.emotion}}</p>
-            </div>
-        </div>
-        <div class="row plane-row">
-            <div class="col-xs-2">
-            </div>
-            <div class="col-xs-8 plane-row">
-                <div class="plane" ng-click='planeClick($event)'></div>
-            </div>
-            <div class="col-xs-2 ">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4 vertical-label">
-                <p class="plane-label">{{bottomleft.emotion}}</p>
-            </div>
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4 vertical-label">
-                <p class="plane-label">{{bottomright.emotion}}</p>
-            </div>
-        </div>
+<div id="plane-wrapper row">
+  <div class="row plane-content">
+    <div class="col-xs-4 vertical-label">
+      <p class="plane-label">{{topleft.emotion}}</p>
     </div>
-
-    <div class="row">
-        <h2 class="text-center" ng-if="feature_list">Perceptual features</h2>
-        <div class="col-xs-6" ng-repeat="cur in feature_list">
-            <div class="row">
-                <div class="col-sm-5 col-xs-6 v-center text-right">
-                    <p class="perceptual-names"><b>{{cur.feature.id}}:</b></p>
-                </div>
-                <div class="col-sm-7 col-xs-6">
-                    <div range-slider attach-handle-values="true" show-values="true" disabled="true" min="0" max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
-                </div>
-            </div>
-        </div>
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4 vertical-label">
+      <p class="plane-label">{{topright.emotion}}</p>
     </div>
-    <div class="clear"></div>
+  </div>
+  <div class="row plane-row">
+    <div class="col-xs-2">
+    </div>
+    <div class="col-xs-8 plane-row">
+      <div class="plane" ng-click='planeClick($event)'></div>
+    </div>
+    <div class="col-xs-2 ">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 vertical-label">
+      <p class="plane-label">{{bottomleft.emotion}}</p>
+    </div>
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4 vertical-label">
+      <p class="plane-label">{{bottomright.emotion}}</p>
+    </div>
+  </div>
 </div>
 
-<img ng-repeat="song in songs" class="image" src="/app/img/songmarker.png" ng-attr-title="{{song.songID}}" ng-style="{position:'absolute', left: song.left, top: song.top, width: imgwidth, height: imgheight}"/>
+<div class="row">
+  <h2 class="text-center" ng-if="feature_list">Perceptual features</h2>
+  <div class="col-xs-6" ng-repeat="cur in feature_list">
+    <div class="row">
+      <div class="col-sm-5 col-xs-6 v-center text-right">
+        <p class="perceptual-names"><b>{{cur.feature.id}}:</b></p>
+      </div>
+      <div class="col-sm-7 col-xs-6">
+        <div range-slider attach-handle-values="true" show-values="true" disabled="true" min="0" max="100"
+             model-min="cur.minvalue" model-max="cur.maxvalue"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<img ng-repeat="song in songs" class="image" src="/app/img/songmarker.png" ng-attr-title="{{song.songID}}"
+     ng-style="{position:'absolute', left: song.left, top: song.top, width: imgwidth, height: imgheight}"/>
 
-<img ng-if=imgleft class="image" src="/app/img/marker.gif"  ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
+<img ng-if=imgleft class="image" src="/app/img/marker.gif"
+     ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}"/>

@@ -1,62 +1,65 @@
 <div class="container">
-    <div id="label-wrapper row">
-        <form id="label-select" role="form">
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="sel1">X-axis</label>
-                    <select class="form-control" id="sel1" ng-model="firstSelect" ng-options="feature.id for feature in features">
+  <div id="label-wrapper row">
+    <form id="label-select" role="form">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="sel1">X-axis</label>
+          <select class="form-control" id="sel1" ng-model="firstSelect" ng-options="feature.id for feature in features">
 
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="sel2">Y-axis</label>
-                    <select class="form-control" id="sel2" ng-model="secondSelect" ng-options="feature.id for feature in features">
-                    </select>
-                </div>
-                <div class="form-group col-md-12">
-                    <label>Variance</label>
-                    <rzslider rz-slider-hide-limit-labels="true"
-                            rz-slider-floor="5"
-                            rz-slider-model="feature_variance"
-                            rz-slider-ceil="20">
-                    </rzslider>
-                </div>
-            </div>
-        </form>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sel2">Y-axis</label>
+          <select class="form-control" id="sel2" ng-model="secondSelect"
+                  ng-options="feature.id for feature in features">
+          </select>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Variance</label>
+          <rzslider rz-slider-hide-limit-labels="true"
+                    rz-slider-floor="5"
+                    rz-slider-model="feature_variance"
+                    rz-slider-ceil="20">
+          </rzslider>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="plane-wrapper row">
+    <p ng-if="!(xpercent && ypercent)" class="percent-label"> Click anywhere inside the plane below </p>
+    <p ng-if="xpercent && ypercent" class="percent-label"> {{firstSelect.id}}: {{xpercent}}%,
+      {{secondSelect.id}}:{{ypercent}}% </p>
+
+    <div class="row plane-content">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-8 vertical-label">
+        <p class="plane-label">{{secondSelect.high}}</p>
+      </div>
+      <div class="col-xs-2"></div>
     </div>
-
-    <div id="plane-wrapper row">
-        <p ng-if="!(xpercent && ypercent)" class="percent-label"> Click anywhere inside the plane below </p>
-        <p ng-if="xpercent && ypercent" class="percent-label"> {{firstSelect.id}}: {{xpercent}}%, {{secondSelect.id}}:{{ypercent}}% </p>
-
-        <div class="row plane-content">
-            <div class="col-xs-2"></div>
-            <div class="col-xs-8 vertical-label">
-                <p class="plane-label">{{secondSelect.high}}</p>
-            </div>
-            <div class="col-xs-2"></div>
-        </div>
-        <div class="row plane-row">
-            <div class="col-xs-2 plane-row side-label outer-side-label-left">
-                <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.low}}</p>
-            </div>
-            <div class="col-xs-8 plane-row">
-                <div class="plane" ng-click='planeClick($event)'></div>
-            </div>
-            <div class="col-xs-2 plane-row side-label outer-side-label-right">
-                <p class="plane-label inner-side-label-right rotate-text-right">{{firstSelect.high}}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-2"></div>
-            <div class="col-xs-8 vertical-label">
-                <p class="plane-label">{{secondSelect.low}}</p>
-            </div>
-            <div class="col-xs-2"></div>
-        </div>
+    <div class="row plane-row">
+      <div class="col-xs-2 plane-row side-label outer-side-label-left">
+        <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.low}}</p>
+      </div>
+      <div class="col-xs-8 plane-row">
+        <div class="plane" ng-click='planeClick($event)'></div>
+      </div>
+      <div class="col-xs-2 plane-row side-label outer-side-label-right">
+        <p class="plane-label inner-side-label-right rotate-text-right">{{firstSelect.high}}</p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-8 vertical-label">
+        <p class="plane-label">{{secondSelect.low}}</p>
+      </div>
+      <div class="col-xs-2"></div>
+    </div>
+  </div>
 
 
-      <div class="clear"></div>
-    <img ng-if=imgleft id="selection-image" src="/app/img/marker.gif"  ng-style="{left: imgleft, top: imgtop, width: imgwidth, height: imgheight}" />
+  <div class="clear"></div>
+  <img ng-if=imgleft id="selection-image" src="/app/img/marker.gif"
+       ng-style="{left: imgleft, top: imgtop, width: imgwidth, height: imgheight}"/>
 </div>
