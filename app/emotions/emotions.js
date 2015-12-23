@@ -16,7 +16,7 @@ angular.module('myApp.emotions', ['ngRoute'])
 
   .controller('EmotionsCtrl', ['$scope', 'Api', 'SongRequestService', 'EmotionsService',
     function ($scope, Api, SongRequestService, EmotionsService) {
-      var DISPLAY_SONGS = true;
+      var DISPLAY_SONGS = false;
 
       /**
        * Calculate the min-max values of each feature based on the distance between the click and the corners
@@ -128,13 +128,15 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       $scope.planeClick = function (event) {
         var CSS_plane = $('.plane');
+
         var plane_width = CSS_plane.outerWidth();
         var plane_height = CSS_plane.outerHeight();
 
         /* Calculate the location of the selection image */
         $scope.imgwidth = 10;
         $scope.imgheight = 10;
-
+        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
+        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
         $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
         $scope.imgtop = event.pageY - ($scope.imgheight / 2);
 
@@ -142,7 +144,6 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.songPosition = calcSongPositions($scope.imgleft, $scope.imgtop, plane_width, plane_height, CSS_plane.offset());
 
         var feature_list = calcFeatures(event.offsetX, event.offsetY, plane_width, plane_height);
-
         if (DISPLAY_SONGS) {
           SongRequestService.playMatchingSongs(feature_list, displaySongs);
         } else {
@@ -155,7 +156,6 @@ angular.module('myApp.emotions', ['ngRoute'])
       };
 
       /* Controller body starts here */
-
       $scope.feature_variance = 5;
 
       //Get labels, initialize select boxes and load existing values
