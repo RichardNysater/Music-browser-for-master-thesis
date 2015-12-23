@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,136 +27,164 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-  <ul class="menu">
-    <sound-manager></sound-manager>
-    <li><a href="#player">text</a></li>
-    <li><a href="#plane">text</a></li>
-  </ul>
+<ul class="menu">
+  <sound-manager></sound-manager>
+  <li><a href="#player">text</a></li>
+  <li><a href="#plane">text</a></li>
+</ul>
 
-  <!-- Fixed navbar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container" ng-controller="indexController">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#/" ng-click="setSelected(getHome())">Music browser</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li ng-repeat="section in sections" ng-class="{active : isSelected(section)}">
-            <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
-          </li>
+<!-- Fixed navbar-->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container" ng-controller="indexController">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/" ng-click="setSelected(getHome())">Music browser</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="section in sections" ng-class="{active : isSelected(section)}">
+          <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
+        </li>
 
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Playlist on the left -->
+
+
+<!-- content -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-1" id="playliz">
+      <div id="list-group navigation">
+        <a ng-repeat="song in playlist" class="list-group-item playlist-item"
+           ng-class="{active: currentPlaying.id == song.id}">
+          <div class="row">
+            <div class="col-xs-7" play-from-playlist="song">
+              {{ song.title }}
+            </div>
+            <div class="col-xs-5">
+              <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song"
+                    data-index="{{$index}}"></span>
+            </div>
+          </div>
+        </a>
         </ul>
       </div>
     </div>
-  </nav>
-
-  <!-- content -->
-  <div class="container">
-    <div ng-view></div>
+    <div class="container">
+      <div class="content" ng-view></div>
+    </div>
   </div>
-  <!-- Player footer -->
-  <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
-    <div ng-show="playlist.length > 0" class="fade-in-out container" >
+</div>
+<!-- Player footer -->
+<footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
+  <div ng-show="playlist.length > 0" class="fade-in-out container">
+    <div class="row">
+      <div class="fixed-side-column col-xs-1">
+        <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
+          <button type="button" class="btn btn-default" prev-track title="Previous track">
+            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+          </button>
+
+          <button ng-src="" type="button" class="btn btn-default" play-pause-toggle title="Play or pause">
+            <span ng-if=!isPlaying class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" stop-music title="Stop playing">
+            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" next-track title="Next track">
+            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="fluid-middle-column col-xs-10">
+        <div class="row center-block">
+          <p ng-if="currentPlaying.title && currentPlaying.artist">
+            {{ currentPlaying.title }} by {{ currentPlaying.artist }}
+          </p>
+          <p ng-if="!(currentPlaying.title && currentPlaying.artist)">
+            {{ currentPlaying.id}}
+          </p>
+        </div>
         <div class="row">
-          <div class="fixed-side-column col-xs-1">
-            <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
-              <button type="button" class="btn btn-default" prev-track title="Previous track">
-                <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-              </button>
-
-              <button ng-src="" type="button" class="btn btn-default" play-pause-toggle title="Play or pause">
-                <span ng-if=!isPlaying class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default" stop-music title="Stop playing">
-                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default" next-track title="Next track">
-                <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-              </button>
-            </div>
+          <div class="col-xs-2 col-lg-1 cur-duration">
+            <p>{{ currentPostion }}</p>
           </div>
-          <div class="fluid-middle-column col-xs-10">
-            <div class="row center-block">
-              <p ng-if="currentPlaying.title && currentPlaying.artist">
-                {{ currentPlaying.title }} by {{ currentPlaying.artist }}
-              </p>
-              <p ng-if="!(currentPlaying.title && currentPlaying.artist)">
-                {{ currentPlaying.id}}
-              </p>
-            </div>
-            <div class="row">
-              <div class="col-xs-2 col-lg-1 cur-duration">
-                <p>{{ currentPostion }}</p>
-              </div>
-              <div class="col-xs-8 col-lg-10">
-                <div class="progress seeking" seek-track style="margin: 0;">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                         aria-valuemin="0" aria-valuemax="100" style="" ng-style="{width: (progress+'%')}">
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-2 col-lg-1 max-duration">
-                <p>{{ currentDuration }}</p>
+          <div class="col-xs-8 col-lg-10">
+            <div class="progress seeking" seek-track style="margin: 0;">
+              <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                   aria-valuemin="0" aria-valuemax="100" style="" ng-style="{width: (progress+'%')}">
               </div>
             </div>
           </div>
-          <div class="fixed-side-column col-xs-1">
-              <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
-                <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
-                  <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-                </button>
-
-                <button type="button" class="btn btn-default" mute-music title="Mute music">
-                  <span ng-if=!mute class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
-                  <span ng-if=mute class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-                </button>
-
-                <button type="button" class="btn btn-default" music-volume data-type="increase" title="Increase volume">
-                  <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default" music-volume data-type="decrease" title="Decrease volume">
-                  <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-                </button>
-              </div>
+          <div class="col-xs-2 col-lg-1 max-duration">
+            <p>{{ currentDuration }}</p>
           </div>
+        </div>
+      </div>
+      <div class="fixed-side-column col-xs-1">
+        <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
+          <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
+            <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" mute-music title="Mute music">
+            <span ng-if=!mute class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+            <span ng-if=mute class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" music-volume data-type="increase"
+                  title="Increase volume">
+            <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default" music-volume data-type="decrease"
+                  title="Decrease volume">
+            <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
-  <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
+<script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
 
-  <script src="js/angular-soundmanager2.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/indexController.js"></script>
-  <script src="js/musicService.js"></script>
-  <script src="js/songRequestService.js"></script>
-  <script src="player/player.js"></script>
-  <script src="plane/plane.js"></script>
-  <script src="plane/plane_service.js"></script>
-  <script src="emotions/emotions.js"></script>
-  <script src="emotions/emotions_service.js"></script>
-  <script src="sliders/sliders.js"></script>
-  <script src="sliders/sliders_service.js"></script>
-  <script src="home/home.js"></script>
+<script src="js/angular-soundmanager2.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/indexController.js"></script>
+<script src="js/musicService.js"></script>
+<script src="js/songRequestService.js"></script>
+<script src="player/player.js"></script>
+<script src="plane/plane.js"></script>
+<script src="plane/plane_service.js"></script>
+<script src="emotions/emotions.js"></script>
+<script src="emotions/emotions_service.js"></script>
+<script src="sliders/sliders.js"></script>
+<script src="sliders/sliders_service.js"></script>
+<script src="home/home.js"></script>
+<script src="playlist/playlist.js"></script>
 
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>
 </body>
 </html>
