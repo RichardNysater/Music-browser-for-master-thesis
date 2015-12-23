@@ -14,31 +14,23 @@ var MAX_SONGS_RETURNED = 10;
  * Reads and parses the database details.
  * @returns A json object with the database details from the external file.
  */
-var getDatabaseDetails = function(){
-    return JSON.parse(fs.readFileSync(DATABASE_DETAIL_FILEPATH, 'utf8'));
+var getDatabaseDetails = function () {
+  return JSON.parse(fs.readFileSync(DATABASE_DETAIL_FILEPATH, 'utf8'));
 };
 
 /**
  * Starts a connection with the database.
  * @param databaseDetails The details for the database
  */
-var connectToDatabase = (function*(databaseDetails){
-    var con = mysql.createConnection({
-        host: databaseDetails.host,
-        user: databaseDetails.user,
-        password: databaseDetails.password,
-        database: databaseDetails.database
-    });
-    try {
-        con.connect(function (err) {
-            if (err) {
-                console.log('Error connecting to the database');
-            }
-        });
-    }catch(err){
-        console.log(err);
-    }
-    return con;
+var connectToDatabase = (function*(databaseDetails) {
+  var con = mysql.createConnection({
+    host: databaseDetails.host,
+    user: databaseDetails.user,
+    password: databaseDetails.password,
+    database: databaseDetails.database
+  });
+
+  return con;
 });
 
 /**
@@ -48,57 +40,48 @@ var connectToDatabase = (function*(databaseDetails){
  * @param databaseDetails The database details
  * @returns {string} The string which should be used to query songs
  */
-var createQueryForSongs = function(con,features,databaseDetails){
+var createQueryForSongs = function (con, features, databaseDetails) {
 
-    var query = "SELECT * FROM ?? WHERE ";
-    var inserts = [databaseDetails.database+"."+databaseDetails.songtable];
+  var query = "SELECT * FROM ?? WHERE ";
+  var inserts = [databaseDetails.database + "." + databaseDetails.songtable];
 
-    if(features.length > 1) {
-        for (var i = 0; i < features.length - 1; i++) {
-            inserts.push(features[i].feature.id, features[i].minvalue, features[i].maxvalue);
-            query += "?? BETWEEN ? AND ? AND "
-        }
+  if (features.length > 1) {
+    for (var i = 0; i < features.length - 1; i++) {
+      inserts.push(features[i].feature.id, features[i].minvalue, features[i].maxvalue);
+      query += "?? BETWEEN ? AND ? AND "
     }
-    inserts.push(features[features.length-1].feature.id, features[features.length-1].minvalue, features[features.length-1].maxvalue);
-    query += "?? BETWEEN ? AND ? ORDER BY RAND() LIMIT "+MAX_SONGS_RETURNED;
+  }
+  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minvalue, features[features.length - 1].maxvalue);
+  query += "?? BETWEEN ? AND ? ORDER BY RAND() LIMIT " + MAX_SONGS_RETURNED;
 
+  try {
     query = mysqlHelper.format(query, inserts);
-    return query;
+  }catch(err){
+    console.log('Error formatting query!');
+  }
+  return query;
 };
-
-/**
- * This function searches the database for songs matching the range of features given to it.
- * @param features An array of features to match a song to, syntax: [{feature:{id:"Feature name"}, minvalue: x, maxvalue: y}, ...]
- * @returns {*[]} A randomly ordered array of length specified by MAX_SONGS_RETURNED constant with the songs matching the features.
- */
-var findSongs = (function*(features){
-    var databaseDetails = getDatabaseDetails();
-    try {
-        var con = yield connectToDatabase(databaseDetails);
-        var query = createQueryForSongs(con,features,databaseDetails);
-    }catch(err){
-        console.log(err);
-        return null;
-    }
-    return yield con.query(query);
-});
 
 /**
  * A post request is sent here when the client wants to find songs matching selected features.
  * The matching songs is sent back in the response body.
  */
 router.post('/app/api/songrequest', function *(next) {
-    var features = this.request.body.features;
-    this.response.status = 200;
-    try {
-        var res = yield findSongs(features);
-    }catch(err){
-        console.log(err);
-        this.response.body = "Request error";
-        this.status = err.status || 500;
-        this.body = err.message;
-    }
-    this.response.body = res[0];
+  var features = this.request.body.features;
+  this.response.status = 200;
+  try {
+    var databaseDetails = getDatabaseDetails();
+    var con = yield connectToDatabase(databaseDetails);
+    var q = createQueryForSongs(con, features, databaseDetails);
+    var res = yield con.query(q);
+    con.end();
+    } catch (err) {
+    console.log(err);
+    this.response.body = "Request error";
+    this.status = err.status || 500;
+    this.body = err.message;
+  }
+  this.response.body = res[0];
 });
 
 
@@ -106,5 +89,5 @@ app.use(bodyParser());
 app.use(serve('.'));
 
 app.use(router.routes())
-    .use(router.allowedMethods());
+  .use(router.allowedMethods());
 app.listen(3000);
