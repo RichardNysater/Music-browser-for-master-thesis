@@ -16,6 +16,7 @@ angular.module('myApp', [
   'myApp.sliders',
   'myApp.version',
   'myApp.player',
+  'myApp.playlist',
 
   'PlaneService',
   'SlidersService',
