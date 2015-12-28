@@ -14,8 +14,8 @@ angular.module('myApp.emotions', ['ngRoute'])
     });
   }])
 
-  .controller('EmotionsCtrl', ['$scope', 'Api', 'SongRequestService', 'EmotionsService',
-    function ($scope, Api, SongRequestService, EmotionsService) {
+  .controller('EmotionsCtrl', ['$scope', 'Api', 'SongRequestService', 'EmotionsService','$timeout',
+    function ($scope, Api, SongRequestService, EmotionsService,$timeout) {
       var DISPLAY_SONGS = false;
 
       /**
@@ -72,8 +72,28 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.imgleft = EmotionsService.imgleft;
         $scope.imgtop = EmotionsService.imgtop;
         $scope.feature_list = EmotionsService.feature_list;
+
+        if(getSelectionPercent() != EmotionsService.selection_percent){
+          updateWindow();
+        }
+
       };
 
+      /**
+       * Returns the inner width of the plane
+       * @returns {*|jQuery}
+       */
+      var getPlaneWidth = function(){
+        return $('.plane').innerWidth();
+      }
+
+      /**
+       * Return where on the plane's x-axis (width) the selection marker is
+       * @returns {number} 0 for the furthest left and 1 for furthest right
+       */
+      var getSelectionPercent = function(){
+        return ($scope.imgleft-$('.plane').offset().left)/getPlaneWidth();
+      }
 
       /**
        * Adds the input songs to the scope for display
@@ -137,8 +157,6 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.imgheight = 10;
         $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
         $scope.imgtop = event.pageY - ($scope.imgheight / 2);
-        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
-        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
 
         /* Calculate the features required to request for music */
         $scope.songPosition = calcSongPositions($scope.imgleft, $scope.imgtop, plane_width, plane_height, CSS_plane.offset());
@@ -152,13 +170,46 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.feature_list = feature_list;
 
         // Save the current variables used for the click
-        EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list);
+        EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionPercent());
       };
+
+      /**
+       * This function is called whenever the window is resized
+       */
+      var updateWindow = function (){
+        $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*EmotionsService.selection_percent;
+        EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionPercent());
+      };
+
+      /**
+       * Initializes the handling of window resizing
+       */
+      var initWindowHandling = function(){
+        var oldWidth = getPlaneWidth();
+
+        $(window).on('resize.doResize', function () {
+          var newWidth = getPlaneWidth();
+          var updateStuffTimer;
+
+          if (newWidth !== oldWidth) {
+            $timeout.cancel(updateStuffTimer);
+          }
+
+          updateStuffTimer = $timeout(function() {
+            updateWindow();
+            oldWidth = newWidth;
+          }, 500);
+        });
+
+        $scope.$on('$destroy',function (){
+          $(window).off('resize.doResize'); // remove the handler added earlier
+        });
+      }
 
       /* Controller body starts here */
       $scope.feature_variance = 5;
 
-      //Get labels, initialize select boxes and load existing values
+      // Get labels, initialize select boxes and load existing values
       Api.Labels.emotions().$promise.then(function (data) {
         $scope.emotions = data;
         loadValues(data);
@@ -169,5 +220,8 @@ angular.module('myApp.emotions', ['ngRoute'])
       }, function (err) {
         throw "No emotions were returned by query: " + err;
       });
+
+      // Handle window resizing
+      initWindowHandling();
 
     }]);
