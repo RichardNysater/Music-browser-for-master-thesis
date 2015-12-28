@@ -45,12 +45,12 @@ angular.module('myApp.plane', ['ngRoute'])
 
         $scope.y_min_value = Math.max($scope.ypercent - $scope.feature_variance,0);
         $scope.y_max_value = Math.min($scope.ypercent + $scope.feature_variance,100);
-      }
+      };
+
       /**
        * Fetches and plays songs based on where the user clicked and what the variance is set to
        */
       var playSongs = function(){
-        // Create the min and max values for the two features based on the variance and where the user clicked
         setFeatureRanges();
         var xFeature = {
           feature: {id: $scope.firstSelect.id},
@@ -68,6 +68,7 @@ angular.module('myApp.plane', ['ngRoute'])
 
       /**
        * planeClick is called whenever a user clicks on the 2d-plane
+       * Sets the selection image and plays music based on where the user clicked
        * @param event Event
        */
       $scope.planeClick = function (event) {
@@ -102,7 +103,7 @@ angular.module('myApp.plane', ['ngRoute'])
         $scope.imgleft = PlaneService.imgleft;
         $scope.imgtop = PlaneService.imgtop;
 
-        if(getSelectionPercent() != PlaneService.selection_percent){
+        if(getSelectionPercent() != PlaneService.selection_percent){ // Update the window if required
           updateWindow();
         }
 
@@ -128,7 +129,7 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       var getPlaneWidth = function(){
         return $('.plane').innerWidth();
-      }
+      };
 
       /**
        * Return where on the plane's x-axis (width) the selection marker is
@@ -136,7 +137,7 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       var getSelectionPercent = function(){
         return ($scope.imgleft-$('.plane').offset().left)/getPlaneWidth();
-      }
+      };
 
       /**
        * This function is called whenever the window is resized
