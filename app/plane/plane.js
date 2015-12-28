@@ -31,21 +31,27 @@ angular.module('myApp.plane', ['ngRoute'])
 
         $scope.imgleft = prevPageX - ($scope.imgwidth / 2);
         $scope.imgtop = prevPageY - ($scope.imgheight / 2);
-        PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, getSelectionPercent());
+        PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight,
+          getSelectionPercent(), $scope.xpercent, $scope.ypercent);
         playSongs();
       };
 
       /**
-       * Fetches and plays songs based on where the user clicked and what the variance is set to
+       * Sets the min and max values for the selected perceptual features based on variance.
        */
-      var playSongs = function(){
-        // Create the min and max values for the two features based on the variance and where the user clicked
+      var setFeatureRanges = function(){
         $scope.x_min_value = Math.max($scope.xpercent - $scope.feature_variance,0);
         $scope.x_max_value = Math.min($scope.xpercent + $scope.feature_variance,100);
 
         $scope.y_min_value = Math.max($scope.ypercent - $scope.feature_variance,0);
         $scope.y_max_value = Math.min($scope.ypercent + $scope.feature_variance,100);
-
+      }
+      /**
+       * Fetches and plays songs based on where the user clicked and what the variance is set to
+       */
+      var playSongs = function(){
+        // Create the min and max values for the two features based on the variance and where the user clicked
+        setFeatureRanges();
         var xFeature = {
           feature: {id: $scope.firstSelect.id},
           minvalue: $scope.x_min_value,
@@ -70,15 +76,12 @@ angular.module('myApp.plane', ['ngRoute'])
         $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
         $scope.imgtop = event.pageY - ($scope.imgheight / 2);
 
+        $scope.xpercent = Math.round(100 * (event.offsetX / CSS_plane.outerWidth()));
+        $scope.ypercent = 100 - Math.round(100 * (event.offsetY / (CSS_plane.outerHeight())));
+
         // Save the current variables used for the click
-        PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, getSelectionPercent());
-
-
-        $scope.xc = event.offsetX;
-        $scope.yc = event.offsetY;
-
-        $scope.xpercent = Math.round(100 * ($scope.xc / CSS_plane.outerWidth()));
-        $scope.ypercent = 100 - Math.round(100 * ($scope.yc / (CSS_plane.outerHeight())));
+        PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight,
+          getSelectionPercent(), $scope.xpercent, $scope.ypercent);
 
         playSongs();
       };
@@ -99,9 +102,12 @@ angular.module('myApp.plane', ['ngRoute'])
         $scope.imgleft = PlaneService.imgleft;
         $scope.imgtop = PlaneService.imgtop;
 
-        if(getSelectionPercent() != EmotionsService.selection_percent){
+        if(getSelectionPercent() != PlaneService.selection_percent){
           updateWindow();
         }
+
+        $scope.xpercent = PlaneService.xpercent;
+        $scope.ypercent = PlaneService.ypercent;
 
         for (var i = 0; i < features.length; i++) { // Existing features should be selected in the select boxes
           if (PlaneService.firstSelect && features[i].id == PlaneService.firstSelect.id) {
@@ -112,6 +118,8 @@ angular.module('myApp.plane', ['ngRoute'])
             $scope.secondSelect = features[i];
           }
         }
+
+        setFeatureRanges();
       };
 
       /**

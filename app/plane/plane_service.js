@@ -17,7 +17,7 @@ PlaneService.factory('PlaneService', function () {
    * @param height The height of the image
    * @param selection_percent The x-position of the selection marker in percent
    */
-  planeService.saveClick = function (variance, firstSelect, secondSelect, left, top, width, height, selection_percent) {
+  planeService.saveClick = function (variance, firstSelect, secondSelect, left, top, width, height, selection_percent, xpercent, ypercent) {
     planeService.variance = variance;
     planeService.firstSelect = firstSelect;
     planeService.secondSelect = secondSelect;
@@ -26,6 +26,8 @@ PlaneService.factory('PlaneService', function () {
     planeService.imgwidth = width;
     planeService.imgheight = height;
     planeService.selection_percent = selection_percent;
+    planeService.xpercent = xpercent;
+    planeService.ypercent = ypercent;
   };
 
   /**
