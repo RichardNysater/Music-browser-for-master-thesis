@@ -13,13 +13,15 @@ EmotionsService.factory('EmotionsService', function () {
    * @param width The width of the image
    * @param height The height of the image
    * @param feature_list The list of features to save
+   * @param selection_percent The x-position of the selection marker in percent
    */
-  emotionsService.saveClick = function (left, top, width, height, feature_list) {
+  emotionsService.saveClick = function (left, top, width, height, feature_list, selection_percent) {
     emotionsService.imgleft = left;
     emotionsService.imgtop = top;
     emotionsService.imgwidth = width;
     emotionsService.imgheight = height;
     emotionsService.feature_list = feature_list;
+    emotionsService.selection_percent = selection_percent;
   };
 
   return emotionsService;
