@@ -57,18 +57,15 @@
   </div>
 </nav>
 
-<!-- Playlist on the left -->
-
-
-<!-- content -->
 <div class="container-fluid">
   <div class="row">
+    <!-- Playlist on the left -->
     <div class="col-xs-1" id="playliz">
       <div id="list-group navigation">
         <a ng-repeat="song in playlist" class="list-group-item playlist-item"
            ng-class="{active: currentPlaying.id == song.id}">
           <div class="row">
-            <div class="col-xs-7" play-from-playlist="song">
+            <div class="col-xs-7 clickable" play-from-playlist="song">
               {{ song.title }}
             </div>
             <div class="col-xs-5">
@@ -80,11 +77,13 @@
         </ul>
       </div>
     </div>
+    <!-- content -->
     <div class="container">
       <div class="content" ng-view></div>
     </div>
   </div>
 </div>
+
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
   <div ng-show="playlist.length > 0" class="fade-in-out container">
