@@ -1,12 +1,9 @@
-
 <div id="label-wrapper row">
   <form id="label-select" role="form">
     <div class="row">
       <div class="form-group col-xs-6">
         <label for="sel1">X-axis</label>
-        <select class="form-control" id="sel1" ng-model="firstSelect" ng-options="feature.id for feature in features">
-
-        </select>
+        <select class="form-control" id="sel1" ng-model="firstSelect" ng-options="feature.id for feature in features"></select>
       </div>
       <div class="form-group col-xs-6">
         <label for="sel2">Y-axis</label>
@@ -28,7 +25,7 @@
 </div>
 
 <div id="plane-wrapper row">
-  <p ng-if="!imgleft" class="percent-label"> Click anywhere inside the plane below </p>
+  <p ng-if="!imgleft" class="percent-label"> Click anywhere inside the plane below </p> <!--Hide this after user clicks-->
   <p ng-if="imgleft" class="percent-label"> {{firstSelect.id}}: {{x_min_value}}-{{x_max_value}}%,
     {{secondSelect.id}}:{{y_min_value}}-{{y_max_value}}% </p>
 
@@ -58,8 +55,5 @@
     <div class="col-xs-2"></div>
   </div>
 </div>
-
-
-<div class="clear"></div>
 <img ng-if=imgleft id="selection-image" src="/app/img/marker.png"
      ng-style="{left: imgleft, top: imgtop, width: imgwidth, height: imgheight}"/>
