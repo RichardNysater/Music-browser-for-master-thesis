@@ -79,16 +79,16 @@
     </div>
   </div>
   <!-- content -->
-    <div class="container">
-      <div class="content" ng-view></div>
-    </div>
+  <div class="container">
+    <div class="content" ng-view></div>
+  </div>
 </div>
 
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
   <div ng-show="playlist.length > 0" class="fade-in-out container">
     <div class="row">
-      <div class="fixed-side-column col-xs-1">
+      <div class="fixed-side-column col-xs-1 col-sm-1">
         <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
           <button type="button" class="btn btn-default" prev-track title="Previous track">
             <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
@@ -108,7 +108,7 @@
           </button>
         </div>
       </div>
-      <div class="fluid-middle-column col-xs-10">
+      <div class="fluid-middle-column col-xs-11 col-sm-10">
         <div class="row center-block">
           <p ng-if="currentPlaying.title && currentPlaying.artist">
             {{ currentPlaying.title }} by {{ currentPlaying.artist }}
@@ -133,25 +133,27 @@
           </div>
         </div>
       </div>
-      <div class="fixed-side-column col-xs-1">
-        <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
-          <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
-            <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-          </button>
+      <div class="hidden-xs">
+        <div class="fixed-side-column col-sm-1">
+          <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
+            <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
+              <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+            </button>
 
-          <button type="button" class="btn btn-default" mute-music title="Mute music">
-            <span ng-if=!mute class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
-            <span ng-if=mute class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-          </button>
+            <button type="button" class="btn btn-default" mute-music title="Mute music">
+              <span ng-if=!mute class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+              <span ng-if=mute class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+            </button>
 
-          <button type="button" class="btn btn-default" music-volume data-type="increase"
-                  title="Increase volume">
-            <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-          </button>
-          <button type="button" class="btn btn-default" music-volume data-type="decrease"
-                  title="Decrease volume">
-            <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-          </button>
+            <button type="button" class="btn btn-default" music-volume data-type="increase"
+                    title="Increase volume">
+              <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default" music-volume data-type="decrease"
+                    title="Decrease volume">
+              <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
