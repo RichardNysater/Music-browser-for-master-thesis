@@ -13,7 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <title>Music browser</title>
+  <title>Music Browser</title>
+
   <meta name="description" content="">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
@@ -28,7 +29,7 @@
 </head>
 <body>
 <ul class="menu">
-  <sound-manager></sound-manager>
+  <sound-manager></sound-manager> <!-- Init sound-manager -->
 </ul>
 
 <!-- Fixed navbar-->
@@ -49,7 +50,6 @@
         <li ng-repeat="section in sections" ng-class="{active : isSelected(section)}">
           <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
         </li>
-
       </ul>
     </div>
   </div>
@@ -83,8 +83,9 @@
 
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
-  <div ng-show="playlist.length > 0" class="fade-in-out container">
+  <div ng-show="playlist.length > 0" class="fade-in-out container"> <!-- Only show when songs in playlist -->
     <div class="row">
+      <!-- Left player buttons -->
       <div class="fixed-side-column col-xs-1 col-sm-1">
         <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
           <button type="button" class="btn btn-default" prev-track title="Previous track">
@@ -105,6 +106,7 @@
           </button>
         </div>
       </div>
+      <!-- Song track bar -->
       <div class="fluid-middle-column col-xs-11 col-sm-10">
         <div class="row center-block">
           <p ng-if="currentPlaying.title && currentPlaying.artist">
@@ -130,7 +132,8 @@
           </div>
         </div>
       </div>
-      <div class="hidden-xs">
+      <div class="hidden-xs"> <!-- Hide for small viewports -->
+        <!-- Right player buttons -->
         <div class="fixed-side-column col-sm-1">
           <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
             <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
