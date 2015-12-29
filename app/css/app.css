@@ -92,7 +92,7 @@ body {
 /* Playlist on the left */
 .clickable { cursor: pointer; }
 #playlist {
-  width:90px;
+  width:110px;
   position: absolute;
 }
 
