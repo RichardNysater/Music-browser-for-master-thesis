@@ -20,32 +20,20 @@
 .inner-side-label-left{
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 100%;
+
 }
 
 .inner-side-label-right{
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 0%;
     z-index: -1000;
 }
 
 .side-label{
     display: inline-block;
     line-height: 480px;
-}
-
-.outer-side-label-left{
-    position: relative;
-    display: inline-block;
-    left: 75px;
-}
-
-.outer-side-label-right{
-    position: relative;
-    display: inline-block;
-    z-index: -1000;
-    left: -75px;
 }
 
 .rotate-text-left{
