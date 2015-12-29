@@ -14,7 +14,6 @@ controllers.controller('indexController', ['$scope', '$location',
     var selected = null;
     $scope.sections = [
       {"id": "Home", "link": "#/"},
-      {"id": "Player", "link": "#player"},
       {"id": "Emotions", "link": "#emotions"},
       {"id": "Plane", "link": "#plane"},
       {"id": "Sliders", "link": "#sliders"}
@@ -58,7 +57,7 @@ controllers.controller('indexController', ['$scope', '$location',
      */
     $scope.getHome = function () {
       return $scope.sections[0];
-    }
+    };
 
     /* Initialize the main menu */
     $scope.initPath();

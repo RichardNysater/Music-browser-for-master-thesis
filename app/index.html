@@ -29,8 +29,6 @@
 <body>
 <ul class="menu">
   <sound-manager></sound-manager>
-  <li><a href="#player">text</a></li>
-  <li><a href="#plane">text</a></li>
 </ul>
 
 <!-- Fixed navbar-->
@@ -65,16 +63,15 @@
         <a ng-repeat="song in playlist" class="list-group-item playlist-item"
            ng-class="{active: currentPlaying.id == song.id}">
           <div class="row">
-            <div class="col-xs-7 clickable" play-from-playlist="song">
+            <div class="col-xs-8 clickable" play-from-playlist="song">
               {{ song.title }}
             </div>
-            <div class="col-xs-5">
+            <div class="col-xs-4">
               <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song"
                     data-index="{{$index}}"></span>
             </div>
           </div>
         </a>
-        </ul>
       </div>
     </div>
   </div>

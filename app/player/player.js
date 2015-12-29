@@ -12,5 +12,4 @@ angular.module('myApp.player', ['ngRoute'])
   .controller('PlayerController', ['$scope', 'Api', 'angularPlayer',
     function ($scope, Api, angularPlayer) {
 
-      $scope.songs = Api.Music.query(); //Inject songs into scope
     }]);
