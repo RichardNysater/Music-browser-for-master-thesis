@@ -60,8 +60,8 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Playlist on the left -->
-    <div class="col-xs-1" id="playliz">
-      <div id="list-group navigation">
+    <div id="playlist" class="hidden-xs">
+      <div id="list-group">
         <a ng-repeat="song in playlist" class="list-group-item playlist-item"
            ng-class="{active: currentPlaying.id == song.id}">
           <div class="row">
@@ -77,11 +77,11 @@
         </ul>
       </div>
     </div>
-    <!-- content -->
+  </div>
+  <!-- content -->
     <div class="container">
       <div class="content" ng-view></div>
     </div>
-  </div>
 </div>
 
 <!-- Player footer -->
