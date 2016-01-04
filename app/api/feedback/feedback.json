@@ -1,0 +1,61 @@
+[
+  {
+    "eval_header": "Feedback for the emotions page",
+    "questions": [
+      {
+        "text": "How easy was it to understand how to generate playlists using the emotions?"
+      },
+      {
+        "text": "How well did the playlist generation work for the emotions?"
+      }
+    ]
+  },
+
+  {
+    "eval_header": "Feedback for the plane page",
+    "questions": [
+      {
+        "text": "How easy was it to understand how to generate playlists when selecting two perceptual features?"
+      },
+      {
+        "text": "How well did the playlist generation work?"
+      }
+    ]
+  },
+
+  {
+    "eval_header": "Feedback for the sliders page",
+    "questions": [
+      {
+        "text": "How easy was it to understand how to generate playlists using the sliders?"
+      },
+      {
+        "text": "How well did the playlist generation work?"
+      }
+    ]
+  },
+
+  {
+    "eval_header": "General information",
+    "questions": [
+      {
+        "text": "How important is music to you?"
+      },
+      {
+        "text": "How often do you listen to music? 1 = never, 5 = once every month, 9 = several times every day"
+      }
+    ]
+  },
+
+  {
+    "eval_header": "Feedback for the website",
+    "questions": [
+      {
+        "text": "How easy was it to understand how to use the website?"
+      },
+      {
+        "text": "How well did the actual website work for you? (Everything except the music generation)"
+      }
+    ]
+  }
+]
