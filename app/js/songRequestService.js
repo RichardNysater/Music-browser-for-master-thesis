@@ -31,15 +31,25 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
       var key = null;
       for (var i = 0; i < songs.length; i++) {
         var id = songs[i].songID;
+
+        var url = "/app/api/music/";
+
+        if(soundManager.canPlayMIME("audio/ogg")){ // Try to play the ogg-format if it's supported, otherwise default to mp3
+          url += id + ".ogg";
+        }
+        else{
+          url += id + ".mp3";
+        }
+
         var tmp = angularPlayer.addTrack({
           "title": id,
           "id": id,
-          "url": "/app/api/music/" + id + ".ogg"
+          "url": url
         });
+
         if (key === null) {
           key = tmp;
         }
-
       }
       angularPlayer.playTrack(key);
     };
