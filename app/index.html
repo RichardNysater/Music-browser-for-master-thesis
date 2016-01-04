@@ -57,17 +57,18 @@
 
 <div class="container-fluid">
   <div class="row">
+
     <!-- Playlist on the left -->
     <div id="playlist" class="hidden-xs">
       <div id="list-group">
         <a ng-repeat="song in playlist" class="list-group-item playlist-item"
            ng-class="{active: currentPlaying.id == song.id}">
           <div class="row">
-            <div class="col-xs-8 clickable" play-from-playlist="song">
+            <div class="col-xs-8 clickable" play-from-playlist="song" title="Play song">
               {{ song.title }}
             </div>
             <div class="col-xs-4">
-              <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song"
+              <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song" title="Remove from playlist"
                     data-index="{{$index}}"></span>
             </div>
           </div>
@@ -75,16 +76,19 @@
       </div>
     </div>
   </div>
+
   <!-- content -->
   <div class="container">
     <div class="content" ng-view></div>
   </div>
 </div>
 
+
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
   <div ng-show="playlist.length > 0" class="fade-in-out container"> <!-- Only show when songs in playlist -->
     <div class="row">
+
       <!-- Left player buttons -->
       <div class="fixed-side-column col-xs-1 col-sm-1">
         <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
@@ -106,6 +110,7 @@
           </button>
         </div>
       </div>
+
       <!-- Song track bar -->
       <div class="fluid-middle-column col-xs-11 col-sm-10">
         <div class="row center-block">
@@ -121,7 +126,7 @@
             <p>{{ currentPostion }}</p>
           </div>
           <div class="col-xs-8 col-lg-9">
-            <div class="progress seeking" seek-track style="margin: 0;">
+            <div class="progress seeking clickable" title="Skip to here" seek-track style="margin: 0;">
               <div class="progress-bar" role="progressbar" aria-valuenow="0"
                    aria-valuemin="0" aria-valuemax="100" style="" ng-style="{width: (progress+'%')}">
               </div>
@@ -132,6 +137,7 @@
           </div>
         </div>
       </div>
+
       <div class="hidden-xs"> <!-- Hide for small viewports -->
         <!-- Right player buttons -->
         <div class="fixed-side-column col-sm-1">
@@ -182,6 +188,7 @@
 <script src="sliders/sliders.js"></script>
 <script src="sliders/sliders_service.js"></script>
 <script src="home/home.js"></script>
+<script src="feedback/feedback.js"></script>
 <script src="playlist/playlist.js"></script>
 
 <script src="components/version/version.js"></script>
