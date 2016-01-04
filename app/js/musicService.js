@@ -19,6 +19,10 @@ MusicService.service('Api', ['$resource',
 
       Features: $resource('api/features/:featureId.json', {}, {
         query: {method: 'GET', params: {featureId: 'features'}, isArray: true} //Return all features
+      }),
+
+      Feedback: $resource('api/feedback/:feedbackId.json',{}, {
+        query: {method: 'GET', params: {feedbackId: 'feedback'},isArray:true} //Return all feedback questions
       })
     };
   }]);
