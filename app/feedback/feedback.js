@@ -1,3 +1,7 @@
+/**
+ * The feedback page allows users to leave feedback on a number of questions regarding
+ * the application's different pages as well as general user information.
+ */
 angular.module('myApp.feedback', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
@@ -10,8 +14,20 @@ angular.module('myApp.feedback', ['ngRoute'])
   .controller('FeedbackController', ['$scope', 'Api',
     function ($scope, Api) {
 
-      $scope.buttons = [{val: 1}, {val: 2}, {val: 3}, {val: 4}, {val: 5}, {val: 6}, {val: 7}, {val: 8}, {val: 9}, {val: 10}];
+      /**
+       * Whenever a user answers a question by clicking a button with a rating
+       * send the rating to the server to be added to the database
+       * @param question_id The id of the question being answered
+       * @param rating The rating chosen
+       */
+      $scope.buttonClick = function(question_id, rating){
+        //TODO: Send data to server
+      };
 
+      // Initialize values of buttons
+      $scope.buttons = [{val: 1}, {val: 2}, {val: 3}, {val: 4}, {val: 5}, {val: 6}, {val: 7}, {val: 8}, {val: 9}];
+
+      // Fetch and initialize the evaluation sections
       Api.Feedback.query().$promise.then(function (data) {
         $scope.evaluations = data;
       }, function (err) {
