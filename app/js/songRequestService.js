@@ -85,6 +85,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
         console.log("Failed to query for songs.");
       });
     }
+
   }
 ]);
 
