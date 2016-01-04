@@ -6,3 +6,4 @@ tmp
 .DS_Store
 .idea
 DATABASE_DETAILS.json
+app/api/music/*
