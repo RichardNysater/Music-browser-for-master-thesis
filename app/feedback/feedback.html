@@ -1,16 +1,23 @@
-<div class="feedback">
-  <p>When you are done using the application, please answer the questions below. Thank you!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-1 hidden-xs"></div>
+    <div class="col-sm-11 col-xs-12">
 
-  <div class="evaluation_wrapper" ng-repeat="evaluation in evaluations">
-    <h4>{{evaluation.eval_header}}</h4>
-    <div class="row" ng-repeat="question in evaluation.questions">
-      <div class="text col-xs-12"> {{question.text}} </div>
-      <div class="btn-group col-xs-12" data-toggle="buttons">
-        <label class="btn btn-primary" ng-repeat="button in buttons">
-          <input type="radio" name="rating"> {{button.val}}
-        </label>
+      <p>When you are done using the application, please answer the questions below. Thank you!</p>
+
+      <div class="evaluation_wrapper" ng-repeat="evaluation in evaluations">
+        <h3>{{evaluation.eval_header}}</h3>
+        <div class="row" ng-repeat="question in evaluation.questions">
+          <div class="text col-xs-12"> {{question.text}}</div>
+          <div class="btn-group col-xs-12" data-toggle="buttons">
+            <label class="btn btn-primary" ng-repeat="button in buttons"
+                   ng-click="buttonClick(question.id, button.val)">
+              <input type="radio" name="{{question.id}}"> {{button.val}}
+            </label>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
-
 </div>
