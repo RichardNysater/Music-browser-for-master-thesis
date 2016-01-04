@@ -12,6 +12,7 @@ angular.module('myApp', [
   'myApp.plane',
   'myApp.indexController',
   'myApp.home',
+  'myApp.feedback',
   'myApp.emotions',
   'myApp.sliders',
   'myApp.version',

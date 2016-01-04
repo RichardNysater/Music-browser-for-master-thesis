@@ -16,7 +16,8 @@ controllers.controller('indexController', ['$scope', '$location',
       {"id": "Home", "link": "#/"},
       {"id": "Emotions", "link": "#emotions"},
       {"id": "Plane", "link": "#plane"},
-      {"id": "Sliders", "link": "#sliders"}
+      {"id": "Sliders", "link": "#sliders"},
+      {"id": "Feedback", "link": "#feedback"}
     ];
 
     /**
