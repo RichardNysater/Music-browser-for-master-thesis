@@ -3,5 +3,6 @@
   "user":"y",
   "password":"z",
   "database":"w",
-  "songtable":"v"
+  "songtable":"v",
+  "feedbacktable":"t"
 }
