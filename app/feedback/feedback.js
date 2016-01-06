@@ -11,17 +11,19 @@ angular.module('myApp.feedback', ['ngRoute'])
     });
   }])
 
-  .controller('FeedbackController', ['$scope', 'Api','FeedbackSubmitService',
-    function ($scope, Api,FeedbackSubmitService) {
+  .controller('FeedbackController', ['$scope', 'Api', 'FeedbackSubmitService', 'FeedbackService',
+    function ($scope, Api, FeedbackSubmitService, FeedbackService) {
 
       /**
        * Whenever a user answers a question by clicking a button with a rating
        * send the rating to the server to be added to the database
-       * @param question_id The id of the question being answered
+       * @param question The question being answered
        * @param rating The rating chosen
        */
-      $scope.buttonClick = function(question_id, rating){
-        var feedback = {userID: "test_user", questionID: question_id, rating: rating, comment: null};
+      $scope.buttonClick = function (question, rating) {
+        question.selected = rating;
+        var feedback = {questionID: question.id, rating: rating};
+        FeedbackService.saveFeedback(question.id, rating);
         FeedbackSubmitService.submitFeedback(feedback);
       };
 
@@ -30,6 +32,15 @@ angular.module('myApp.feedback', ['ngRoute'])
 
       // Fetch and initialize the evaluation sections
       Api.Feedback.query().$promise.then(function (data) {
+        // Load previously selected ratings for the questions
+        for (var i = 0; i < data.length; i++) {
+          for (var j = 0; j < data[i].questions.length; j++) {
+            var cur = FeedbackService.feedback[data[i].questions[j].id]; //Exists if user previously answered question
+            if (cur) {
+              data[i].questions[j].selected = cur.rating;
+            }
+          }
+        }
         $scope.evaluations = data;
       }, function (err) {
         throw "No feedback was returned by query: " + err;
