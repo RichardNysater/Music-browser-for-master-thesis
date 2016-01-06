@@ -38,7 +38,7 @@ var connectToDatabase = (function*(databaseDetails) {
  * @param con The database connection
  * @param features The list of min-max values of features
  * @param databaseDetails The database details
- * @returns {string} The string which should be used to query songs
+ * @returns {string} A string which can be used to query for input songs
  */
 var createQueryForSongs = function (con, features, databaseDetails) {
 
@@ -56,8 +56,47 @@ var createQueryForSongs = function (con, features, databaseDetails) {
 
   try {
     query = mysqlHelper.format(query, inserts);
-  }catch(err){
-    console.log('Error formatting query!');
+  } catch (err) {
+    console.log('Error formatting songrequest query!');
+  }
+  return query;
+};
+
+/**
+ * Creates a timestamp of the current time
+ * @returns {string} A MySQL-formatted timestamp containing the current time in UTC+1 (Stockholm)
+ */
+var getTimestamp = function () {
+  var date = new Date();
+  date.setUTCHours(date.getUTCHours()+1); // Stockholm is UTC +1.
+  var time = date.toISOString().slice(0, 19).replace('T', ' '); // Gets a MySQL-formatted timestamp from current time
+  return time;
+};
+
+/**
+ * Create a query-string for submitting feedback
+ * @param con The database connection
+ * @param feedback User feedback containing userID, questionID and rating or comment
+ * @param databaseDetails The database details
+ * @returns {string} A string which can be used to submit the given feedback
+ */
+var createSubmitFeedbackQuery = function (con, feedback, databaseDetails) {
+  var query = "INSERT INTO ?? (userID,timestamp,questionID,rating,comment) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+    "timestamp = VALUES(timestamp)," +
+    "rating = VALUES(rating)," +
+    "comment = VALUES(comment)";
+  var inserts = [databaseDetails.database + "." + databaseDetails.feedbacktable];
+
+  inserts.push(feedback.userID);
+  inserts.push(getTimestamp());
+  inserts.push(feedback.questionID);
+  inserts.push(feedback.rating);
+  inserts.push(feedback.comment);
+
+  try {
+    query = mysqlHelper.format(query, inserts);
+  } catch (err) {
+    console.log('Error formatting feedback query!');
   }
   return query;
 };
@@ -75,13 +114,42 @@ router.post('/app/api/songrequest', function *(next) {
     var q = createQueryForSongs(con, features, databaseDetails);
     var res = yield con.query(q);
     con.end();
-    } catch (err) {
+  } catch (err) {
     console.log(err);
     this.response.body = "Request error";
     this.status = err.status || 500;
     this.body = err.message;
   }
   this.response.body = res[0];
+});
+
+
+/**
+ * A post request is sent here when a client sends feedback.
+ * The feedback is inserted into the database
+ */
+router.post('/app/api/feedbacksubmit', function *(next) {
+  var feedback = this.request.body.feedback;
+  if (feedback.userID && feedback.questionID && (feedback.rating || feedback.comment)) {
+    this.response.status = 200;
+    try {
+      var databaseDetails = getDatabaseDetails();
+      var con = yield connectToDatabase(databaseDetails);
+      var q = createSubmitFeedbackQuery(con, feedback, databaseDetails);
+      var res = yield con.query(q);
+      con.end();
+      this.response.body = "Successfully submitted feedback, thank you!";
+    } catch (err) {
+      console.log(err);
+      this.response.body = "Request error";
+      this.status = err.status || 500;
+      this.body = err.message;
+    }
+  }
+  else {
+    this.response.status = 400;
+    this.response.body = "Error, missing feedback parameters";
+  }
 });
 
 
