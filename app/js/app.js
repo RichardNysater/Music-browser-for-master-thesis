@@ -1,11 +1,13 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var myApp = angular.module('myApp', [
   'ngRoute',
   'ngResource',
-  'rzModule',
+  'ngCookies',
   'ngAnimate',
+
+  'rzModule',
   'angularSoundManager',
   'ui-rangeSlider',
 
@@ -23,6 +25,8 @@ angular.module('myApp', [
   'SlidersService',
   'MusicService',
   'SongRequestService',
+  'SessionService',
+  'FeedbackSubmitService',
   'EmotionsService'
 ]).
 config(['$routeProvider', function($routeProvider) {
