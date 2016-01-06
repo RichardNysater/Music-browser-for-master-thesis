@@ -10,8 +10,9 @@
         <div class="row" ng-repeat="question in evaluation.questions">
           <div class="text col-xs-12"> {{question.text}}</div>
           <div class="btn-group col-xs-12" data-toggle="buttons">
-            <label class="btn btn-primary" ng-repeat="button in buttons"
-                   ng-click="buttonClick(question.id, button.val)">
+            <label class="btn btn-primary" ng-class="{active: button.val === question.selected}"
+                   ng-repeat="button in buttons"
+                   ng-click="buttonClick(question, button.val)">
               <input type="radio" name="{{question.id}}"> {{button.val}}
             </label>
           </div>
