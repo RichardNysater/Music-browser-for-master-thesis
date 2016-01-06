@@ -11,8 +11,8 @@ angular.module('myApp.feedback', ['ngRoute'])
     });
   }])
 
-  .controller('FeedbackController', ['$scope', 'Api',
-    function ($scope, Api) {
+  .controller('FeedbackController', ['$scope', 'Api','FeedbackSubmitService',
+    function ($scope, Api,FeedbackSubmitService) {
 
       /**
        * Whenever a user answers a question by clicking a button with a rating
@@ -21,7 +21,8 @@ angular.module('myApp.feedback', ['ngRoute'])
        * @param rating The rating chosen
        */
       $scope.buttonClick = function(question_id, rating){
-        //TODO: Send data to server
+        var feedback = {userID: "test_user", questionID: question_id, rating: rating, comment: null};
+        FeedbackSubmitService.submitFeedback(feedback);
       };
 
       // Initialize values of buttons
