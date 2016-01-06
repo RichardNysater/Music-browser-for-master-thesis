@@ -27,6 +27,7 @@ var myApp = angular.module('myApp', [
   'SongRequestService',
   'SessionService',
   'FeedbackSubmitService',
+  'FeedbackService',
   'EmotionsService'
 ]).
 config(['$routeProvider', function($routeProvider) {
