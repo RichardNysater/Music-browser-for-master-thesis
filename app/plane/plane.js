@@ -171,7 +171,7 @@ angular.module('myApp.plane', ['ngRoute'])
           updateStuffTimer = $timeout(function() {
             updateWindow();
             oldWidth = newWidth;
-          }, 500);
+          }, 100);
         });
 
         $scope.$on('$destroy',function (){
