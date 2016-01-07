@@ -9,7 +9,7 @@ angular.module('myApp.player', ['ngRoute'])
     });
   }])
 
-  .controller('PlayerController', ['$scope', 'Api', 'angularPlayer',
-    function ($scope, Api, angularPlayer) {
+  .controller('PlayerController', ['$scope', 'ResourcesService', 'angularPlayer',
+    function ($scope, ResourcesService, angularPlayer) {
 
     }]);

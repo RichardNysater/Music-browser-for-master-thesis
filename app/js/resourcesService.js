@@ -1,11 +1,11 @@
 'use strict';
 
-var MusicService = angular.module('MusicService', ['ngResource']);
+var ResourcesService = angular.module('ResourcesService', ['ngResource']);
 
 /**
  * Handle the resources on the server
  */
-MusicService.service('Api', ['$resource',
+ResourcesService.service('ResourcesService', ['$resource',
   function ($resource) {
     return {
       Music: $resource('api/music/:musicId.json', {}, {

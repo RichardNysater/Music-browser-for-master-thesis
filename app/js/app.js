@@ -23,7 +23,7 @@ var myApp = angular.module('myApp', [
 
   'PlaneService',
   'SlidersService',
-  'MusicService',
+  'ResourcesService',
   'SongRequestService',
   'SessionService',
   'FeedbackSubmitService',

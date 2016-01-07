@@ -14,8 +14,8 @@ angular.module('myApp.emotions', ['ngRoute'])
     });
   }])
 
-  .controller('EmotionsCtrl', ['$scope', 'Api', 'SongRequestService', 'EmotionsService','$timeout',
-    function ($scope, Api, SongRequestService, EmotionsService,$timeout) {
+  .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService','$timeout',
+    function ($scope, ResourcesService, SongRequestService, EmotionsService,$timeout) {
       var DISPLAY_SONGS = false;
 
       /**
@@ -210,7 +210,7 @@ angular.module('myApp.emotions', ['ngRoute'])
       $scope.feature_variance = 5;
 
       // Get labels, initialize select boxes and load existing values
-      Api.Labels.emotions().$promise.then(function (data) {
+      ResourcesService.Labels.emotions().$promise.then(function (data) {
         $scope.emotions = data;
         loadValues(data);
         $scope.topleft = data[0];

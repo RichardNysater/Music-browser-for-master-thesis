@@ -11,8 +11,8 @@ angular.module('myApp.feedback', ['ngRoute'])
     });
   }])
 
-  .controller('FeedbackController', ['$scope', 'Api', 'FeedbackSubmitService', 'FeedbackService',
-    function ($scope, Api, FeedbackSubmitService, FeedbackService) {
+  .controller('FeedbackController', ['$scope', 'ResourcesService', 'FeedbackSubmitService', 'FeedbackService',
+    function ($scope, ResourcesService, FeedbackSubmitService, FeedbackService) {
 
       /**
        * Whenever a user answers a question by clicking a button with a rating
@@ -31,7 +31,7 @@ angular.module('myApp.feedback', ['ngRoute'])
       $scope.buttons = [{val: 1}, {val: 2}, {val: 3}, {val: 4}, {val: 5}, {val: 6}, {val: 7}, {val: 8}, {val: 9}];
 
       // Fetch and initialize the evaluation sections
-      Api.Feedback.query().$promise.then(function (data) {
+      ResourcesService.Feedback.query().$promise.then(function (data) {
         // Load previously selected ratings for the questions
         for (var i = 0; i < data.length; i++) {
           for (var j = 0; j < data[i].questions.length; j++) {

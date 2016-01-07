@@ -9,8 +9,8 @@ angular.module('myApp.sliders', ['ngRoute'])
     });
   }])
 
-  .controller('SlidersCtrl', ['$scope', 'Api', 'SongRequestService', 'angularPlayer', 'SlidersService',
-    function ($scope, Api, SongRequestService, angularPlayer, SlidersService) {
+  .controller('SlidersCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'angularPlayer', 'SlidersService',
+    function ($scope, ResourcesService, SongRequestService, angularPlayer, SlidersService) {
 
       /**
        * Sends a request to play songs matching the features selected in the sliders
@@ -61,7 +61,7 @@ angular.module('myApp.sliders', ['ngRoute'])
        */
       if (!SlidersService.features) {
         $scope.autoplay = true;
-        Api.Features.query().$promise.then(function (data) {
+        ResourcesService.Features.query().$promise.then(function (data) {
           for (var i = 0; i < data.length; i++) {
             $scope.featurelist.push({"feature": data[i], "minvalue": 0, "maxvalue": 100});
           }

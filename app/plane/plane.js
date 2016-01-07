@@ -9,8 +9,8 @@ angular.module('myApp.plane', ['ngRoute'])
     });
   }])
 
-  .controller('PlaneCtrl', ['$scope', 'Api', 'SongRequestService', 'PlaneService','$timeout',
-    function ($scope, Api, SongRequestService, PlaneService,$timeout) {
+  .controller('PlaneCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService','$timeout',
+    function ($scope, ResourcesService, SongRequestService, PlaneService, $timeout) {
 
       /**
        * Set the size of the selection image
@@ -177,7 +177,7 @@ angular.module('myApp.plane', ['ngRoute'])
       /* Controller body starts here */
 
       //Get features and load existing values
-      Api.Features.query().$promise.then(function (data) {
+      ResourcesService.Features.query().$promise.then(function (data) {
         $scope.features = data;
         loadValues(data);
 
