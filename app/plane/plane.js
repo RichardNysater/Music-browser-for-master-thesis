@@ -37,7 +37,7 @@ angular.module('myApp.plane', ['ngRoute'])
         $scope.imgleft = prevPageX - ($scope.imgwidth / 2);
         $scope.imgtop = prevPageY - ($scope.imgheight / 2);
         PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight,
-          getSelectionPercent(), $scope.xpercent, $scope.ypercent);
+          getSelectionXPercent(), getSelectionYPercent(), $scope.xpercent, $scope.ypercent);
         playSongs();
       };
 
@@ -87,9 +87,67 @@ angular.module('myApp.plane', ['ngRoute'])
 
         // Save the current variables used for the click
         PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight,
-          getSelectionPercent(), $scope.xpercent, $scope.ypercent);
+          getSelectionXPercent(), getSelectionYPercent(), $scope.xpercent, $scope.ypercent);
 
         playSongs();
+      };
+
+      /**
+       * Returns the inner width of the plane
+       * @returns {*|jQuery}
+       */
+      var getPlaneWidth = function(){
+        return $('.plane').innerWidth();
+      };
+
+      /**
+       * Returns the inner height of the plane
+       * @returns {*|jQuery}
+       */
+      var getPlaneHeight = function(){
+        return $('.plane').innerHeight();
+      };
+
+      /**
+       * Return where on the plane's x-axis (width) the selection marker is
+       * @returns {number} 0 for the furthest left and 1 for furthest right
+       */
+      var getSelectionXPercent = function(){
+        return ($scope.imgleft-$('.plane').offset().left)/getPlaneWidth();
+      };
+
+      /**
+       * Return where on the plane's y-axis (height) the selection marker is
+       * @returns {number} 0 for the furthest top and 1 for furthest bottom
+       */
+      var getSelectionYPercent = function(){
+        return ($scope.imgtop-$('.plane').offset().top)/getPlaneHeight();
+      };
+
+      /**
+       * Updates the image position and size and saves it.
+       */
+      var updateWindow = function (){
+        setImageSize();
+        var CSS_plane = $('.plane');
+        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_img_x_percent;
+        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight()*PlaneService.getSavedValues().selection_img_y_percent;
+        PlaneService.saveUpdatedWindow($scope.imgleft, $scope.imgwidth, $scope.imgheight, getSelectionXPercent(), getSelectionYPercent());
+      };
+
+      /**
+       * Initialize the image position and size.
+       */
+      var initWindow = function (){
+        setImageSize();
+        var CSS_plane = $('.plane');
+        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_img_x_percent;
+
+        /*
+          For some arcane reason the top offset is 33.28 pixels smaller when the page is first loaded compared to after a click,
+          so we'll apply this ugly workaround for now. TODO: Fix this strange behaviour
+         */
+        $scope.imgtop = 33.28+CSS_plane.offset().top + getPlaneHeight()*PlaneService.getSavedValues().selection_img_y_percent;
       };
 
       /**
@@ -109,8 +167,8 @@ angular.module('myApp.plane', ['ngRoute'])
         $scope.imgleft = prevValues.imgleft;
         $scope.imgtop = prevValues.imgtop;
 
-        if(getSelectionPercent() != prevValues.selection_percent){ // Update the window if required
-          updateWindow();
+        if(getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent){ // Update the window if required
+          initWindow();
         }
 
         $scope.xpercent = prevValues.xpercent;
@@ -127,31 +185,6 @@ angular.module('myApp.plane', ['ngRoute'])
         }
 
         setFeatureRanges();
-      };
-
-      /**
-       * Returns the inner width of the plane
-       * @returns {*|jQuery}
-       */
-      var getPlaneWidth = function(){
-        return $('.plane').innerWidth();
-      };
-
-      /**
-       * Return where on the plane's x-axis (width) the selection marker is
-       * @returns {number} 0 for the furthest left and 1 for furthest right
-       */
-      var getSelectionPercent = function(){
-        return ($scope.imgleft-$('.plane').offset().left)/getPlaneWidth();
-      };
-
-      /**
-       * This function is called whenever the window is resized
-       */
-      var updateWindow = function (){
-        setImageSize();
-        $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_percent;
-        PlaneService.saveUpdatedWindow($scope.imgleft, $scope.imgwidth, $scope.imgheight, getSelectionPercent());
       };
 
       /**
