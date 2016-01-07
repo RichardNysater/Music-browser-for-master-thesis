@@ -57,16 +57,6 @@ body {
 }
 
 /* Player footer */
-.row > div {
-  float:left; /* Can apply this a bunch of ways */
-}
-.fixed-side-column {
-  width:187px;
-}
-.fluid-middle-column {
-  width:50%;
-}
-
 .player-footer{
   background-color: #f5f5f5;
 }
