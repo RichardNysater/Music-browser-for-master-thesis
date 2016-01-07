@@ -13,15 +13,17 @@ EmotionsService.service('EmotionsService', function () {
    * @param width The width of the image
    * @param height The height of the image
    * @param feature_list The list of features to save
-   * @param selection_percent The x-position of the selection marker in percent
+   * @param selection_img_x_percent The x-position of the selection marker in percent
+   * @param selection_img_y_percent The y-position of the selection marker in percent
    */
-  this.saveClick = function (left, top, width, height, feature_list, selection_percent) {
+  this.saveClick = function (left, top, width, height, feature_list, selection_img_x_percent, selection_img_y_percent) {
     savedValues.imgleft = left;
     savedValues.imgtop = top;
     savedValues.imgwidth = width;
     savedValues.imgheight = height;
     savedValues.feature_list = feature_list;
-    savedValues.selection_percent = selection_percent;
+    savedValues.selection_img_x_percent = selection_img_x_percent;
+    savedValues.selection_img_y_percent = selection_img_y_percent;
   };
 
   /**
