@@ -47,5 +47,5 @@
 <img ng-repeat="song in songs" class="image" src="/app/img/songmarker.png" ng-attr-title="{{song.songID}}"
      ng-style="{position:'absolute', left: song.left, top: song.top, width: imgwidth, height: imgheight}"/>
 
-<img ng-if=imgleft class="image" src="/app/img/marker.png"
+<img ng-if=imgleft id="selection-image" src="/app/img/marker.png"
      ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}"/>
