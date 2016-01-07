@@ -92,30 +92,31 @@ angular.module('myApp.plane', ['ngRoute'])
        * @param features The features available.
        */
       var loadValues = function (features) {
-        if (PlaneService.variance) {
-          $scope.feature_variance = PlaneService.variance;
+        var prevValues = PlaneService.getSavedValues();
+        if (prevValues.variance) {
+          $scope.feature_variance = prevValues.variance;
         }
         else {
           $scope.feature_variance = 13; // Default variance
         }
-        $scope.imgwidth = PlaneService.imgwidth;
-        $scope.imgheight = PlaneService.imgheight;
-        $scope.imgleft = PlaneService.imgleft;
-        $scope.imgtop = PlaneService.imgtop;
+        $scope.imgwidth = prevValues.imgwidth;
+        $scope.imgheight = prevValues.imgheight;
+        $scope.imgleft = prevValues.imgleft;
+        $scope.imgtop = prevValues.imgtop;
 
-        if(getSelectionPercent() != PlaneService.selection_percent){ // Update the window if required
+        if(getSelectionPercent() != prevValues.selection_percent){ // Update the window if required
           updateWindow();
         }
 
-        $scope.xpercent = PlaneService.xpercent;
-        $scope.ypercent = PlaneService.ypercent;
+        $scope.xpercent = prevValues.xpercent;
+        $scope.ypercent = prevValues.ypercent;
 
         for (var i = 0; i < features.length; i++) { // Existing features should be selected in the select boxes
-          if (PlaneService.firstSelect && features[i].id == PlaneService.firstSelect.id) {
+          if (prevValues.firstSelect && features[i].id == prevValues.firstSelect.id) {
             $scope.firstSelect = features[i];
           }
 
-          if (PlaneService.secondSelect && features[i].id == PlaneService.secondSelect.id) {
+          if (prevValues.secondSelect && features[i].id == prevValues.secondSelect.id) {
             $scope.secondSelect = features[i];
           }
         }
@@ -144,7 +145,7 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       var updateWindow = function (){
         setImageSize();
-        $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*PlaneService.selection_percent;
+        $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_percent;
         PlaneService.saveUpdatedWindow($scope.imgleft, getSelectionPercent());
       };
 
