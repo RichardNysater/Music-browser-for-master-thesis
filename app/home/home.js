@@ -7,6 +7,9 @@ angular.module('myApp.home', ['ngRoute'])
     });
   }])
 
+  /**
+   * The home controller handles the /home page.
+   */
   .controller('HomeController', ['$scope',
     function ($scope) {
 

@@ -9,6 +9,11 @@ angular.module('myApp.plane', ['ngRoute'])
     });
   }])
 
+  /**
+   * The Plane controller handles the interactions within the plane.
+   * The plane allows a user to click somewhere in a 2d-plane with perceptual features as x-axis and y-axis,
+   * the application will then create a playlist based on where the user clicked.
+   */
   .controller('PlaneCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService','$timeout',
     function ($scope, ResourcesService, SongRequestService, PlaneService, $timeout) {
 

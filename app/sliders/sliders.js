@@ -9,6 +9,10 @@ angular.module('myApp.sliders', ['ngRoute'])
     });
   }])
 
+  /**
+   * The sliders controller handles the sliders for the /sliders page and allows users full control over the ranges
+   * of the perceptual features.
+   */
   .controller('SlidersCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'angularPlayer', 'SlidersService',
     function ($scope, ResourcesService, SongRequestService, angularPlayer, SlidersService) {
 

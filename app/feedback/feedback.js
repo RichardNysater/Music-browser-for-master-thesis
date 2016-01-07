@@ -1,7 +1,3 @@
-/**
- * The feedback page allows users to leave feedback on a number of questions regarding
- * the application's different pages as well as general user information.
- */
 angular.module('myApp.feedback', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
@@ -11,6 +7,10 @@ angular.module('myApp.feedback', ['ngRoute'])
     });
   }])
 
+  /**
+   * The feedback page allows users to leave feedback on a number of questions regarding
+   * the application's different pages as well as general user information.
+   */
   .controller('FeedbackController', ['$scope', 'ResourcesService', 'FeedbackSubmitService', 'FeedbackService',
     function ($scope, ResourcesService, FeedbackSubmitService, FeedbackService) {
 

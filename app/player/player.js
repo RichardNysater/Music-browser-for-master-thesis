@@ -9,6 +9,9 @@ angular.module('myApp.player', ['ngRoute'])
     });
   }])
 
+  /**
+   * The PlayerController handles the music player at the bottom of the website.
+   */
   .controller('PlayerController', ['$scope', 'ResourcesService', 'angularPlayer',
     function ($scope, ResourcesService, angularPlayer) {
 

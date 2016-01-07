@@ -3,7 +3,7 @@
 var ResourcesService = angular.module('ResourcesService', ['ngResource']);
 
 /**
- * Handle the resources on the server
+ * Handles the resources on the server
  */
 ResourcesService.service('ResourcesService', ['$resource',
   function ($resource) {

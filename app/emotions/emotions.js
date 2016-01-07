@@ -1,10 +1,5 @@
 'use strict';
 
-/**
- * The Emotion plane controller handles the interactions within the emotion plane.
- * The emotion plane allows a user to click somewhere in a 2d-plane with four emotions in each corner,
- * the application will then create a playlist based on the distance to each emotion.
- */
 angular.module('myApp.emotions', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
@@ -14,6 +9,11 @@ angular.module('myApp.emotions', ['ngRoute'])
     });
   }])
 
+  /**
+   * The Emotion plane controller handles the interactions within the emotion plane.
+   * The emotion plane allows a user to click somewhere in a 2d-plane with four emotions in each corner,
+   * the application will then create a playlist based on the distance to each emotion.
+   */
   .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService','$timeout',
     function ($scope, ResourcesService, SongRequestService, EmotionsService,$timeout) {
       var DISPLAY_SONGS = false;

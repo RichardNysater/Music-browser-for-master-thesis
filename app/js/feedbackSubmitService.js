@@ -1,7 +1,7 @@
 var FeedbackSubmitService = angular.module('FeedbackSubmitService', ['ngResource','ngCookies']);
 
 /**
- * Handle the sending of requests for songs to the server
+ * Handle the sending of feedback to the server.
  */
 FeedbackSubmitService.service('FeedbackSubmitService', ['$resource', '$http', 'SessionService',
   function ($resource, $http, SessionService) {

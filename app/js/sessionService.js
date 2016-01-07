@@ -1,9 +1,8 @@
+var SessionService = angular.module('SessionService', ['ngCookies']);
+
 /**
  * The session service handles the user session
  */
-
-var SessionService = angular.module('SessionService', ['ngCookies']);
-
 SessionService.service('SessionService', ['$cookies',
   function ($cookies) {
 
