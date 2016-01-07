@@ -3,17 +3,24 @@ var SlidersService = angular.module('SlidersService', []);
 /**
  * Serves as storage for values selected from the sliders.
  */
-SlidersService.factory('SlidersService', function () {
-  var SlidersService = {};
+SlidersService.service('SlidersService', function () {
+  var savedValues = {};
 
   /**
    * Should be called to save values selected in the sliders
    * @param features The features to save
    */
-  SlidersService.saveSliders = function (features, autoplay) {
-    SlidersService.features = features;
-    SlidersService.autoplay = autoplay;
+  this.saveSliders = function (features, autoplay) {
+    savedValues.features = features;
+    savedValues.autoplay = autoplay;
   };
 
-  return SlidersService;
+  /**
+   * Returns the saved values in this service
+   * @returns {{}} An object with the saved values
+   */
+  this.getSavedValues = function(){
+    return savedValues;
+  };
+
 });

@@ -48,8 +48,8 @@ angular.module('myApp.sliders', ['ngRoute'])
        * Loads existing values
        */
       var loadValues = function () {
-        $scope.autoplay = SlidersService.autoplay;
-        $scope.featurelist = SlidersService.features;
+        $scope.autoplay = SlidersService.getSavedValues().autoplay;
+        $scope.featurelist = SlidersService.getSavedValues().features;
       }
 
       /* Controller body starts here */
@@ -59,7 +59,7 @@ angular.module('myApp.sliders', ['ngRoute'])
       /**
        * Load the featurelist if possible, otherwise build it
        */
-      if (!SlidersService.features) {
+      if (!SlidersService.getSavedValues().features) {
         $scope.autoplay = true;
         ResourcesService.Features.query().$promise.then(function (data) {
           for (var i = 0; i < data.length; i++) {
