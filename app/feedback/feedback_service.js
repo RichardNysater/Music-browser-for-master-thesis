@@ -3,9 +3,12 @@ var FeedbackService = angular.module('FeedbackService', ['ngCookies']);
 /**
  * Stores user feedback both in current session and persistently (in cookies)
  */
-FeedbackService.factory('FeedbackService', ['$cookies', function ($cookies) {
-  var feedbackService = {};
-  feedbackService.feedback = JSON.parse($cookies.get('feedback'));
+FeedbackService.service('FeedbackService', ['$cookies', function ($cookies) {
+  var feedback = {};
+
+  if($cookies.get('feedback')) {
+    feedback = JSON.parse($cookies.get('feedback'));
+  }
 
   /**
    * Saves feedback for a question
@@ -13,17 +16,24 @@ FeedbackService.factory('FeedbackService', ['$cookies', function ($cookies) {
    * @param rating The rating selected (if applicable)
    * @param comment The comment submitted (if applicable)
    */
-  feedbackService.saveFeedback = function (questionID, rating, comment) {
+  this.saveFeedback = function (questionID, rating, comment) {
     if ($cookies.get('feedback')) {
-      feedbackService.feedback = JSON.parse($cookies.get('feedback'));
+      feedback = JSON.parse($cookies.get('feedback'));
     }
 
-    feedbackService.feedback[questionID] = {
+    feedback[questionID] = {
       rating: rating,
       comment: comment
     };
-    $cookies.put('feedback', JSON.stringify(feedbackService.feedback));
+
+    $cookies.put('feedback', JSON.stringify(feedback));
   };
 
-  return feedbackService;
+  /**
+   * Returns the saved feedback
+   */
+  this.getFeedback = function(){
+    return feedback;
+  };
+
 }]);

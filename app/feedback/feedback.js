@@ -35,7 +35,7 @@ angular.module('myApp.feedback', ['ngRoute'])
         // Load previously selected ratings for the questions
         for (var i = 0; i < data.length; i++) {
           for (var j = 0; j < data[i].questions.length; j++) {
-            var cur = FeedbackService.feedback[data[i].questions[j].id]; //Exists if user previously answered question
+            var cur = FeedbackService.getFeedback()[data[i].questions[j].id]; //Exists if user previously answered question
             if (cur) {
               data[i].questions[j].selected = cur.rating;
             }
