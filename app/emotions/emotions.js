@@ -67,13 +67,14 @@ angular.module('myApp.emotions', ['ngRoute'])
        * If the user has previously clicked somewhere, load the values for the previous click
        */
       var loadValues = function () {
-        $scope.imgwidth = EmotionsService.imgwidth;
-        $scope.imgheight = EmotionsService.imgheight;
-        $scope.imgleft = EmotionsService.imgleft;
-        $scope.imgtop = EmotionsService.imgtop;
-        $scope.feature_list = EmotionsService.feature_list;
+        var prevValues = EmotionsService.getSavedValues();
+        $scope.imgwidth = prevValues.imgwidth;
+        $scope.imgheight = prevValues.imgheight;
+        $scope.imgleft = prevValues.imgleft;
+        $scope.imgtop = prevValues.imgtop;
+        $scope.feature_list = prevValues.feature_list;
 
-        if(getSelectionPercent() != EmotionsService.selection_percent){
+        if(getSelectionPercent() != prevValues.selection_percent){
           updateWindow();
         }
 
@@ -177,7 +178,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        * This function is called whenever the window is resized
        */
       var updateWindow = function (){
-        $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*EmotionsService.selection_percent;
+        $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*EmotionsService.getSavedValues().selection_percent;
         EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionPercent());
       };
 
