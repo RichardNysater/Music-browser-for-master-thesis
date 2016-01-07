@@ -151,7 +151,7 @@ angular.module('myApp.plane', ['ngRoute'])
       var updateWindow = function (){
         setImageSize();
         $scope.imgleft = $('.plane').offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_percent;
-        PlaneService.saveUpdatedWindow($scope.imgleft, getSelectionPercent());
+        PlaneService.saveUpdatedWindow($scope.imgleft, $scope.imgwidth, $scope.imgheight, getSelectionPercent());
       };
 
       /**

@@ -33,11 +33,15 @@ PlaneService.service('PlaneService', function () {
   /**
    * Should be called whenever window size is changed.
    * @param left The css-value for where the image should be displayed
+   * @param width The width of the selection image
+   * @param height The height of the selection image
    * @param selection_percent The x-position of the selection marker in percent
    */
-  this.saveUpdatedWindow = function(left, selection_percent){
+  this.saveUpdatedWindow = function(left, width, height, selection_percent){
     savedValues.imgleft = left;
     savedValues.selection_percent = selection_percent;
+    savedValues.imgwidth = width;
+    savedValues.imgheight = height;
   };
 
   /**
