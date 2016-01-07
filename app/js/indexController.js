@@ -1,11 +1,11 @@
 'use strict';
 
-/**
- * indexController controls the index-template.
- */
-var controllers = angular.module('myApp.indexController', []);
+var IndexController = angular.module('myApp.IndexController', []);
 
-controllers.controller('indexController', ['$scope', '$location',
+/**
+ * IndexController controls the index-template.
+ */
+IndexController.controller('IndexController', ['$scope', '$location',
   function ($scope, $location) {
 
     /**

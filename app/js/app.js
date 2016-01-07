@@ -11,8 +11,8 @@ var myApp = angular.module('myApp', [
   'angularSoundManager',
   'ui-rangeSlider',
 
+  'myApp.IndexController',
   'myApp.plane',
-  'myApp.indexController',
   'myApp.home',
   'myApp.feedback',
   'myApp.emotions',
