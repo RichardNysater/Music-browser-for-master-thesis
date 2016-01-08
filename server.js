@@ -1,3 +1,4 @@
+var serveFolder = require('koa-static-folder');
 var serve = require('koa-static');
 var koa = require('koa');
 var app = koa();
@@ -7,8 +8,8 @@ var mysql = require('mysql-co');
 var mysqlHelper = require('mysql');
 var fs = require('fs');
 
-var DATABASE_DETAIL_FILEPATH = 'DATABASE_DETAILS.json';
-var MAX_SONGS_RETURNED = 10;
+const DATABASE_DETAIL_FILEPATH = 'DATABASE_DETAILS.json';
+const MAX_SONGS_RETURNED = 10;
 
 /**
  * Reads and parses the database details.
@@ -154,7 +155,8 @@ router.post('/app/api/feedbacksubmit', function *(next) {
 
 
 app.use(bodyParser());
-app.use(serve('.'));
+app.use(serveFolder('./node_modules/bootstrap/dist')); //Serve the bootstrap dist folder
+app.use(serve('app/')); //Serve the application folder
 
 app.use(router.routes())
   .use(router.allowedMethods());
