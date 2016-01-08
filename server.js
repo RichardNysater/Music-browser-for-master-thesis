@@ -24,14 +24,12 @@ var getDatabaseDetails = function () {
  * @param databaseDetails The details for the database
  */
 var connectToDatabase = (function*(databaseDetails) {
-  var con = mysql.createConnection({
+  return mysql.createConnection({
     host: databaseDetails.host,
     user: databaseDetails.user,
     password: databaseDetails.password,
     database: databaseDetails.database
   });
-
-  return con;
 });
 
 /**
@@ -70,8 +68,7 @@ var createQueryForSongs = function (con, features, databaseDetails) {
 var getTimestamp = function () {
   var date = new Date();
   date.setUTCHours(date.getUTCHours()+1); // Stockholm is UTC +1.
-  var time = date.toISOString().slice(0, 19).replace('T', ' '); // Gets a MySQL-formatted timestamp from current time
-  return time;
+  return date.toISOString().slice(0, 19).replace('T', ' '); // Gets a MySQL-formatted timestamp from current time;
 };
 
 /**
@@ -106,7 +103,7 @@ var createSubmitFeedbackQuery = function (con, feedback, databaseDetails) {
  * A post request is sent here when the client wants to find songs matching selected features.
  * The matching songs is sent back in the response body.
  */
-router.post('/app/api/songrequest', function *(next) {
+router.post('/api/songrequest', function *(next) {
   var features = this.request.body.features;
   this.response.status = 200;
   try {
@@ -129,7 +126,7 @@ router.post('/app/api/songrequest', function *(next) {
  * A post request is sent here when a client sends feedback.
  * The feedback is inserted into the database
  */
-router.post('/app/api/feedbacksubmit', function *(next) {
+router.post('/api/feedbacksubmit', function *(next) {
   var feedback = this.request.body.feedback;
   if (feedback.userID && feedback.questionID && (feedback.rating || feedback.comment)) {
     this.response.status = 200;
@@ -137,7 +134,7 @@ router.post('/app/api/feedbacksubmit', function *(next) {
       var databaseDetails = getDatabaseDetails();
       var con = yield connectToDatabase(databaseDetails);
       var q = createSubmitFeedbackQuery(con, feedback, databaseDetails);
-      var res = yield con.query(q);
+      yield con.query(q);
       con.end();
       this.response.body = "Successfully submitted feedback, thank you!";
     } catch (err) {

@@ -15,7 +15,7 @@ FeedbackSubmitService.service('FeedbackSubmitService', ['$resource', '$http', 'S
       feedback.userID = SessionService.getUserID();
       var req = {
         method: 'POST',
-        url: '/app/api/feedbackSubmit',
+        url: '/api/feedbackSubmit',
         data: {
           feedback: feedback
         }

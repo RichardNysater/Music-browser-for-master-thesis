@@ -14,7 +14,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
     this.sendRequest = function (featurelist) {
       var req = {
         method: 'POST',
-        url: '/app/api/songrequest',
+        url: '/api/songrequest',
         data: {
           features: featurelist
         }
@@ -32,7 +32,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
       for (var i = 0; i < songs.length; i++) {
         var id = songs[i].songID;
 
-        var url = "/app/api/music/";
+        var url = "/api/music/";
 
         if(soundManager.canPlayMIME("audio/ogg")){ // Try to play the ogg-format if it's supported, otherwise default to mp3
           url += id + ".ogg";
