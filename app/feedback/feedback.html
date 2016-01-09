@@ -5,17 +5,28 @@
 
       <p>When you are done using the application, please answer the questions below. Thank you!</p>
 
-      <div class="evaluation_wrapper" ng-repeat="evaluation in evaluations">
+      <div class="evaluation-wrapper" ng-repeat="evaluation in evaluations">
         <h3>{{evaluation.eval_header}}</h3>
         <div class="row" ng-repeat="question in evaluation.questions">
           <div class="text col-xs-12"> {{question.text}}</div>
-          <div class="btn-group col-xs-12" data-toggle="buttons">
+
+          <div ng-if="question.type === 'buttons'" class="btn-group col-xs-12" data-toggle="buttons"> <!-- If question is rate from 1-9 -->
             <label class="btn btn-primary" ng-class="{active: button.val === question.selected}"
                    ng-repeat="button in buttons"
                    ng-click="buttonClick(question, button.val)">
               <input type="radio" name="{{question.id}}"> {{button.val}}
             </label>
           </div>
+
+          <div ng-if="question.type === 'selectlist'" class="form-group col-xs-12 select-list"> <!-- If question is select from a list -->
+            <select class="form-control clickable" id="{{question.id}}" data-ng-model="question.selected"
+                    ng-options="option.text for option in question.options track by option.text"
+                    data-ng-change="selectedOption(question,question.selected)">
+            </select>
+          </div>
+
+          <div class="col-xs-12"><br></div> <!-- Blank space between questions -->
+
         </div>
       </div>
 
