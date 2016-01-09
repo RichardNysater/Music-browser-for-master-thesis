@@ -1,74 +1,102 @@
 [
   {
-    "eval_name":"emotions",
+    "eval_name": "general",
+    "eval_header": "General information",
+    "questions": [
+      {
+        "id": "musicImportance",
+        "type": "buttons",
+        "text": "How important is music to you?"
+      },
+      {
+        "id": "musicFrequency",
+        "type": "buttons",
+        "text": "How often do you listen to music? 1 = never, 5 = once every month, 9 = several times every day"
+      },
+      {
+        "id": "musicInstrument",
+        "type": "selectlist",
+        "options": [
+          {
+            "text": "I have not played an instrument"
+          },
+          {
+            "text": "<1 year"
+          },
+          {
+            "text": "1-2 years"
+          },
+          {
+            "text": "3-4 years"
+          },
+          {
+            "text": "5+ years"
+          }
+        ],
+        "text": "Have you played an instrument, and if so, for how long?"
+      }
+    ]
+  },
+  {
+    "eval_name": "emotions",
     "eval_header": "Feedback for the emotions page",
     "questions": [
       {
-        "id":"emotionsSimplicity",
+        "id": "emotionsSimplicity",
+        "type": "buttons",
         "text": "How easy was it to understand how to generate playlists using the emotions?"
       },
       {
-        "id":"emotionsPerformance",
+        "id": "emotionsPerformance",
+        "type": "buttons",
         "text": "How well did the playlist generation work for the emotions?"
       }
     ]
   },
-
   {
-    "eval_name":"plane",
+    "eval_name": "plane",
     "eval_header": "Feedback for the plane page",
     "questions": [
       {
-        "id":"planeSimplicity",
+        "id": "planeSimplicity",
+        "type": "buttons",
         "text": "How easy was it to understand how to generate playlists when selecting two perceptual features?"
       },
       {
-        "id":"planePerformance",
+        "id": "planePerformance",
+        "type": "buttons",
         "text": "How well did the playlist generation work?"
       }
     ]
   },
-
   {
-    "eval_name":"sliders",
+    "eval_name": "sliders",
     "eval_header": "Feedback for the sliders page",
     "questions": [
       {
-        "id":"slidersSimplicity",
+        "id": "slidersSimplicity",
+        "type": "buttons",
         "text": "How easy was it to understand how to generate playlists using the sliders?"
       },
       {
-        "id":"slidersPerformance",
+        "id": "slidersPerformance",
+        "type": "buttons",
         "text": "How well did the playlist generation work?"
       }
     ]
   },
-
   {
-    "eval_name":"general",
-    "eval_header": "General information",
-    "questions": [
-      {
-        "id":"musicImportance",
-        "text": "How important is music to you?"
-      },
-      {
-        "id":"musicFrequency",
-        "text": "How often do you listen to music? 1 = never, 5 = once every month, 9 = several times every day"
-      }
-    ]
-  },
-
-  {
-    "eval_name":"website",
+    "eval_name": "website",
     "eval_header": "Feedback for the website",
     "questions": [
       {
-        "id":"websiteSimplicity",
+        "id": "websiteSimplicity",
+        "type": "buttons",
         "text": "How easy was it to understand how to use the website?"
       },
       {
-        "id":"websitePerformance",
+        "id": "websitePerformance",
+        "type": "buttons",
         "text": "How well did the actual website work for you? (Everything except the music generation)"
       }
     ]
