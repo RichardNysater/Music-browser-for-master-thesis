@@ -56,11 +56,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#/home" ng-click="setSelected(getHome())">Music browser</a>
+      <a class="navbar-brand" href="#/home" ng-click="setSelected('#home')">Music browser</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li ng-repeat="section in sections" ng-class="{active : isSelected(section)}">
+          <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-repeat="section in helpsections" ng-class="{active : isSelected(section)}">
           <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
         </li>
       </ul>
@@ -168,6 +173,7 @@
                     title="Increase volume">
               <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
             </button>
+
             <button type="button" class="btn btn-default" music-volume data-type="decrease"
                     title="Decrease volume">
               <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
@@ -197,6 +203,7 @@
 <script src="js/sessionService.js"></script>
 <script src="js/feedbackSubmitService.js"></script>
 <script src="player/player.js"></script>
+<script src="info/info.js"></script>
 <script src="plane/plane.js"></script>
 <script src="plane/plane_service.js"></script>
 <script src="emotions/emotions.js"></script>
