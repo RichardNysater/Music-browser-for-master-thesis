@@ -14,6 +14,7 @@ var myApp = angular.module('myApp', [
   'myApp.IndexController',
   'myApp.plane',
   'myApp.home',
+  'myApp.info',
   'myApp.feedback',
   'myApp.emotions',
   'myApp.sliders',
