@@ -75,7 +75,6 @@
 
 <div class="container-fluid">
   <div class="row">
-
     <!-- Playlist on the left -->
     <div id="playlist" class="hidden-xs">
       <div id="list-group">
@@ -86,7 +85,8 @@
               {{ song.title }}
             </div>
             <div class="col-xs-4">
-              <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song" title="Remove from playlist"
+              <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song"
+                    title="Remove from playlist"
                     data-index="{{$index}}"></span>
             </div>
           </div>
@@ -94,11 +94,10 @@
       </div>
     </div>
   </div>
-
-  <!-- content -->
-  <div class="container">
-    <div class="content" ng-view></div>
-  </div>
+</div>
+<!-- content -->
+<div class="container">
+  <div class="content" ng-view></div>
 </div>
 
 
