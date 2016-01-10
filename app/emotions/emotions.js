@@ -23,8 +23,8 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var setImageSize = function(){
         var CSS_plane = $('.plane');
-        $scope.imgwidth = CSS_plane.outerWidth() * 1/(100/($scope.feature_variance*2));
-        $scope.imgheight = CSS_plane.outerHeight() * 1/(100/($scope.feature_variance*2));
+        $scope.imgwidth = CSS_plane.outerWidth() * 1/(100/($scope.feature_variance));
+        $scope.imgheight = CSS_plane.outerHeight() * 1/(100/($scope.feature_variance));
       };
 
       /**
@@ -220,7 +220,6 @@ angular.module('myApp.emotions', ['ngRoute'])
         if(getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent){
           initWindow();
         }
-
       };
 
       /**
