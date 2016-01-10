@@ -14,6 +14,31 @@
         "text": "How often do you listen to music? 1 = never, 5 = once every month, 9 = several times every day"
       },
       {
+        "id": "musicAge",
+        "type": "selectlist",
+        "options": [
+          {
+            "text": "Younger than 18 years"
+          },
+          {
+            "text": "18-25 years"
+          },
+          {
+            "text": "26-35 years"
+          },
+          {
+            "text": "36-45 years"
+          },
+          {
+            "text": "46-55 years"
+          },
+          {
+            "text": "Older than 56 years"
+          }
+        ],
+        "text": "How old are you?"
+      },
+      {
         "id": "musicInstrument",
         "type": "selectlist",
         "options": [
@@ -21,7 +46,7 @@
             "text": "I have not played an instrument"
           },
           {
-            "text": "<1 year"
+            "text": "Less than 1 year"
           },
           {
             "text": "1-2 years"
@@ -30,21 +55,37 @@
             "text": "3-4 years"
           },
           {
-            "text": "5+ years"
+            "text": "More than 5 years"
           }
         ],
         "text": "Have you played an instrument, and if so, for how long?"
+      },
+      {
+        "id": "musicEducation",
+        "type": "selectlist",
+        "options": [
+          {
+            "text": "No, I have not studied music"
+          },
+          {
+            "text": "No, but I have taken music courses"
+          },
+          {
+            "text": "Yes, I have a degree related to music"
+          }
+        ],
+        "text": "Do you have a formal education in music?"
       }
     ]
   },
   {
     "eval_name": "emotions",
-    "eval_header": "Feedback for the emotions page",
+    "eval_header": "Emotions",
     "questions": [
       {
         "id": "emotionsSimplicity",
         "type": "buttons",
-        "text": "How easy was it to understand how to generate playlists using the emotions?"
+        "text": "How easy was it to understand how to generate playlists using the \"emotions\" page?"
       },
       {
         "id": "emotionsPerformance",
@@ -55,7 +96,7 @@
   },
   {
     "eval_name": "plane",
-    "eval_header": "Feedback for the plane page",
+    "eval_header": "Plane",
     "questions": [
       {
         "id": "planeSimplicity",
@@ -71,7 +112,7 @@
   },
   {
     "eval_name": "sliders",
-    "eval_header": "Feedback for the sliders page",
+    "eval_header": "Sliders",
     "questions": [
       {
         "id": "slidersSimplicity",
@@ -87,7 +128,7 @@
   },
   {
     "eval_name": "website",
-    "eval_header": "Feedback for the website",
+    "eval_header": "Website",
     "questions": [
       {
         "id": "websiteSimplicity",
@@ -98,6 +139,27 @@
         "id": "websitePerformance",
         "type": "buttons",
         "text": "How well did the actual website work for you? (Everything except the music generation)"
+      },
+      {
+        "id": "websiteBeforefeatures",
+        "type": "buttons",
+        "text": "How well did you understand the perceptual feature terms before using the website?"
+      },
+      {
+        "id": "websiteAfterfeatures",
+        "type": "selectlist",
+        "options": [
+          {
+            "text": "Not at all"
+          },
+          {
+            "text": "A little"
+          },
+          {
+            "text": "A lot"
+          }
+        ],
+        "text": "After using the website, do you feel like you have increased your understanding of perceptual features?"
       }
     ]
   }
