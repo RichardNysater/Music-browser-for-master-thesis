@@ -3,76 +3,94 @@
 }
 
 .plane {
-    background-color:lightgray;
-    width:100%;
-    /*height: 590px;*/
+    background-color: lightgray;
+    width: 100%;
     height: 0;
     padding-bottom: 75%;
     margin: 0;
 }
 
-.plane-row{
+.plane-row {
     height: 0;
     padding-bottom: 38%;
 }
 
-.percent-label{
+.percent-label {
     text-align: center;
 }
 
-.inner-side-label-left{
+.hint-large {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    width: 40%;
+    pointer-events: none;
+}
+
+.hint-small {
+    text-align: center;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    pointer-events: none;
+}
+
+.inner-side-label-left {
     position: absolute;
     top: 62%;
     left: 100%;
 }
 
-.inner-side-label-right{
+.inner-side-label-right {
     position: absolute;
     top: 62%;
     left: 0%;
-    z-index: -1000;
+    z-index: -1000; /* Bring to background */
 }
 
-.side-label{
+.side-label {
 }
 
-.rotate-text-left{
+.rotate-text-left {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
-    transform:  translateX(-50%) translateY(-50%) rotate(-90deg);
+    transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+
 }
 
-.rotate-text-right{
+.rotate-text-right {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
-    transform:  translateX(-50%) translateY(-50%) rotate(90deg);
+    transform: translateX(-50%) translateY(-50%) rotate(90deg);
 }
 
-.vertical-label{
+.vertical-label {
     text-align: center;
 }
 
-.plane-label{
+.plane-label {
     font-family: Nevis;
     font-size: 24px;
-    margin:0;
+    margin: 0;
 }
 
-@font-face{
+@font-face {
     font-family: Nevis;
     src: url(nevis.ttf);
 }
 
-#label-wrapper{
-    width:100%;
+#label-wrapper {
+    width: 100%;
     display: inline-block;
 }
 
-#label-select{
+#label-select {
     max-width: 400px;
     width: 100%;
     text-align: center;
@@ -83,7 +101,7 @@
     clear: both;
 }
 
-#selection-image{
+#selection-image {
     position: absolute;
     pointer-events: none;
 }
