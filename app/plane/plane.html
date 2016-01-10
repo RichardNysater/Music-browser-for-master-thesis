@@ -11,8 +11,9 @@
       <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.low}}</p>
     </div>
     <div class="col-xs-8">
+      <div ng-if="!imgleft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div> <!--Hide this after user clicks-->
+      <div ng-if="!imgleft" class="hint-small visible-xs "> Click inside the plane</div> <!--Hide this after user clicks-->
       <div class="plane" ng-click='planeClick($event)'></div>
-      <p ng-if="!imgleft" class="hint" style="position:absolute; top:150px; left:150px; pointer-events: none;"> Click anywhere inside the plane to begin</p> <!--Hide this after user clicks-->
     </div>
     <div class="col-xs-2 side-label plane-row">
       <p class="plane-label inner-side-label-right rotate-text-right">{{firstSelect.high}}</p>
