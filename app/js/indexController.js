@@ -13,23 +13,32 @@ IndexController.controller('IndexController', ['$scope', '$location',
      */
     var selected = null;
     $scope.sections = [
-      {"id": "Home", "link": "#/"},
       {"id": "Emotions", "link": "#emotions"},
       {"id": "Plane", "link": "#plane"},
-      {"id": "Sliders", "link": "#sliders"},
-      {"id": "Feedback", "link": "#feedback"}
+      {"id": "Sliders", "link": "#sliders"}
     ];
+
+    $scope.helpsections = [
+      {"id": "Feedback", "link": "#feedback"},
+      {"id": "Info", "link": "#info"}
+    ]
 
     /**
      * Initializes the main menu sections
      */
     $scope.initPath = function () {
-      var initPath = $location.path().split("/")[1] || "Home";
-      selected = $scope.sections[0];
+      var initPath = $location.path().split("/")[1];
 
       for (var i = 0; i < $scope.sections.length; i++) { // Highlights the current location on the navbar
         if ($scope.sections[i].link === '#' + initPath) {
           selected = $scope.sections[i];
+          break;
+        }
+      }
+
+      for (var i = 0; i < $scope.helpsections.length; i++) { // Highlights the current location on the navbar
+        if ($scope.helpsections[i].link === '#' + initPath) {
+          selected = $scope.helpsections[i];
           break;
         }
       }
@@ -50,14 +59,6 @@ IndexController.controller('IndexController', ['$scope', '$location',
      */
     $scope.setSelected = function (section) {
       selected = section;
-    };
-
-    /**
-     * Returns the home section
-     * @returns {*} The home section
-     */
-    $scope.getHome = function () {
-      return $scope.sections[0];
     };
 
     /* Initialize the main menu */
