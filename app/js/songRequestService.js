@@ -5,6 +5,24 @@ var SongRequestService = angular.module('SongRequestService', ['ngResource']);
  */
 SongRequestService.service('SongRequestService', ['$resource', '$http', 'angularPlayer',
   function ($resource, $http, angularPlayer) {
+    var autoPlay = false;
+    var volume = 100;
+
+    /**
+     * Sets whether or not tracks added should be autoplayed
+     * @param bool true if tracks should be autoplayed
+     */
+    this.setAutoPlay = function(bool){
+      autoPlay = bool;
+    };
+
+    /**
+     * Returns whether tracks should be autoplayed or not
+     * @returns {*} true if tracks should be autoplayed
+     */
+    this.getAutoPlay = function(){
+      return autoPlay;
+    };
 
     /**
      * Sends a request to the server for songs matching the input features
@@ -23,6 +41,25 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
     };
 
     /**
+     * Sets the current volume
+     * @param vol The volume to play music at (0-100)
+     */
+    this.setVolume = function(vol){
+      volume = vol;
+      applyVolume();
+    };
+
+    /**
+     * Because volume is individually set per song, this function sets the current chosen volume to all songs in playlist
+     */
+    var applyVolume = function(){
+      for(var i = 0; i < window.soundManager.soundIDs.length; i++) {
+        var mySound = window.soundManager.getSoundById(window.soundManager.soundIDs[i]);
+        mySound.setVolume(volume);
+      }
+    };
+
+    /**
      * Adds the given songs to the current playlist.
      * Also starts playing the songs unless music is already playing.
      * @param songs The songs to add to the playlist
@@ -34,10 +71,10 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
 
         var url = "/api/music/";
 
-        if(soundManager.canPlayMIME("audio/ogg")){ // Try to play the ogg-format if it's supported, otherwise default to mp3
+        if (window.soundManager.canPlayMIME("audio/ogg")) { // Try to play the ogg-format if it's supported, otherwise default to mp3
           url += id + ".ogg";
         }
-        else{
+        else {
           url += id + ".mp3";
         }
 
@@ -51,7 +88,11 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
           key = tmp;
         }
       }
+      applyVolume();
       angularPlayer.playTrack(key);
+      if(!autoPlay) {
+        angularPlayer.pause();
+      }
     };
 
     /**
@@ -59,9 +100,10 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
      * and adds them to the playlist.
      *
      * @param feature_list The features to match
+     * @param autoplay If true, start playing songs immediately
      * @param callback Call the optional callback with the results as parameter
      */
-    this.playMatchingSongs = function (feature_list, callback) {
+    this.playMatchingSongs = function (feature_list, autoplay, callback) {
 
       var request = this.sendRequest(feature_list);
 
@@ -70,11 +112,11 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
         if (res.length > 0) {
           if (angularPlayer.getPlaylist().length > 0) { // Clear the playlist if needed
             angularPlayer.clearPlaylist(function (param) {
-              addSongs(res);
+              addSongs(res, autoplay);
             });
           }
           else {
-            addSongs(res);
+            addSongs(res, autoplay);
           }
 
           if (callback) { // Only call the callback if it exists
