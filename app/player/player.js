@@ -14,15 +14,15 @@ angular.module('myApp.player', ['ngRoute'])
    */
   .controller('PlayerController', ['$scope','SongRequestService',
     function ($scope,SongRequestService) {
-
-      // Identify if user is using chrome.
-      $scope.is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+      $scope.is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; // Identify if user is using chrome.
+      $scope.autoplay = SongRequestService.getAutoPlay();
 
       /**
        * Toggles whether songs should be autoplayed or not
        */
       $scope.toggleAutoPlay = function(){
-        SongRequestService.setAutoPlay(!SongRequestService.getAutoPlay());
+        $scope.autoplay = !$scope.autoplay;
+        SongRequestService.setAutoPlay($scope.autoplay);
       };
 
       /**
