@@ -144,9 +144,14 @@
             <p>{{ currentPostion }}</p>
           </div>
           <div class="col-xs-7 col-lg-10">
-            <div class="progress seeking clickable" title="Skip to here" seek-track style="margin: 0;">
+            <div ng-if="is_chrome" class="progress seeking clickable" title="Skip to here" seek-track style="margin: 0;">
               <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                   aria-valuemin="0" aria-valuemax="100" style="" ng-style="{width: (progress+'%')}">
+                   aria-valuemin="0" aria-valuemax="100" ng-style="{width: (progress+'%')}">
+              </div>
+            </div>
+            <div ng-if="!is_chrome" class="progress" style="margin: 0;"> <!-- Chrome does not support seeking for some reason -->
+              <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                   aria-valuemin="0" aria-valuemax="100" ng-style="{width: (progress+'%')}">
               </div>
             </div>
           </div>

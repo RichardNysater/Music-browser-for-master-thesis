@@ -15,6 +15,9 @@ angular.module('myApp.player', ['ngRoute'])
   .controller('PlayerController', ['$scope','SongRequestService',
     function ($scope,SongRequestService) {
 
+      // Identify if user is using chrome.
+      $scope.is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
       /**
        * Toggles whether songs should be autoplayed or not
        */
