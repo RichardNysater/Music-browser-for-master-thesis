@@ -57,7 +57,7 @@ body {
     background-color: #f5f5f5;
 }
 
-.artist-title-text .title-text {
+.artist-title-text, .title-text {
     text-align: center;
 }
 
