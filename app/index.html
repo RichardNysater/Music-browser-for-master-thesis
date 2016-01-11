@@ -106,7 +106,7 @@
 
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
-  <div ng-show="playlist.length > 0" class="fade-in-out container"> <!-- Only show when songs in playlist -->
+  <div class="fade-in-out container">
     <div class="row">
 
       <!-- Left player buttons -->
@@ -134,6 +134,7 @@
       <!-- Song track bar -->
       <div class="col-xs-5 col-sm-6 col-lg-8">
         <div class="row">
+          <p class="text-center" ng-show="playlist.length === 0" >No tracks in playlist</p>
           <p class="artist-title-text hidden-xs" ng-if="currentPlaying.title && currentPlaying.artist">
             {{ currentPlaying.title }} by {{ currentPlaying.artist }}
           </p>
