@@ -12,5 +12,5 @@ angular.module('myApp.home', ['ngRoute'])
    */
   .controller('HomeController', ['$scope',
     function ($scope) {
-
+      
     }]);
