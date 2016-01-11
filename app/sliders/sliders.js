@@ -32,6 +32,16 @@ angular.module('myApp.sliders', ['ngRoute'])
       };
 
       /**
+       * Resets all the sliders to the original settings
+       */
+      $scope.resetSliders = function(){
+        for(var i = 0; i < $scope.featurelist.length; i++){
+          $scope.featurelist[i].minvalue = 0;
+          $scope.featurelist[i].maxvalue = 100;
+        }
+      };
+
+      /**
        * Loads existing values
        */
       var loadValues = function () {
