@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css">
   <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css">
+  <link rel="stylesheet" href="bower_components/seiyria-bootstrap-slider/css/bootstrap-slider.css">
   <link rel="stylesheet" type="text/css" href="css/plane.css">
   <link rel="stylesheet" type="text/css" href="css/emotions.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
@@ -157,32 +158,23 @@
 
       <div class="hidden-xs"> <!-- Hide for small viewports -->
         <!-- Right player buttons -->
-        <div class="col-sm-3 col-lg-2">
-          <div class="btn-group navbar-btn right-buttons navbar-left" role="group" aria-label="Left Align">
-            <button type="button" class="btn btn-default" clear-playlist title="Clear playlist">
-              <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-            </button>
-
-            <button type="button" class="btn btn-default" mute-music title="Mute music">
-              <span ng-if=!mute class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
-              <span ng-if=mute class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-            </button>
-
-            <button type="button" class="btn btn-default" music-volume data-type="increase"
-                    title="Increase volume">
-              <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-            </button>
-
-            <button type="button" class="btn btn-default" music-volume data-type="decrease"
-                    title="Decrease volume">
-              <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-            </button>
-          </div>
+        <div class="col-sm-2 col-lg-2">
+            <div class="volume-bar">
+              <span class="glyphicon glyphicon-volume-down vol-down-icon"></span>
+            </div>
+            <div class="volume-bar">
+              <input id="volumeSlider" class="volume-bar" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
+                     data-slider-value="100" style="width:80px;">
+            </div>
+            <div class="volume-bar">
+              <span class="glyphicon glyphicon-volume-up vol-up-icon"></span>
+            </div>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -193,6 +185,8 @@
 <script src="bower_components/angularjs-slider/dist/rzslider.min.js"></script>
 <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-bootstrap-slider/slider.js"></script>
+<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
 
 <script src="js/angular-soundmanager2.min.js"></script>
 <script src="js/app.js"></script>
