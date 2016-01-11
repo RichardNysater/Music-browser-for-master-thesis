@@ -79,6 +79,30 @@ body {
     left: -20px;
 }
 
+.vol-down-icon{
+    top: 23px;
+    left: -20px;
+}
+
+.vol-up-icon{
+    top: -18px;
+    left: 92px;
+}
+
+.volume-bar{
+    top:10px;
+    position:relative;
+}
+
+.slider-selection {
+    background: #9d9d9d;
+}
+
+.slider-track-high {
+    background: #e1e1e1;
+}
+
+
 /* Playlist on the left */
 .clickable {
     cursor: pointer;
