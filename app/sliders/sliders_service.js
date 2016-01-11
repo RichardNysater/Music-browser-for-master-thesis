@@ -10,9 +10,8 @@ SlidersService.service('SlidersService', function () {
    * Should be called to save values selected in the sliders
    * @param features The features to save
    */
-  this.saveSliders = function (features, autoplay) {
+  this.saveSliders = function (features) {
     savedValues.features = features;
-    savedValues.autoplay = autoplay;
   };
 
   /**

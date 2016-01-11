@@ -15,7 +15,7 @@
             <p>{{cur.feature.low}}</p>
           </div>
           <div class="col-xs-6">
-            <div range-slider attach-handle-values="true" show-values="true" on-handle-up="autoRequest()" min="0"
+            <div range-slider attach-handle-values="true" show-values="true" on-handle-up="sendRequest()" min="0"
                  max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
           </div>
           <div class="col-xs-3 text-buffer max-label">
@@ -27,11 +27,6 @@
     <div class="row">
       <div class="col-xs-4"></div>
       <div class="col-xs-4">
-        <button ng-if="autoplay" type="button" class="btn btn-primary active" ng-click="toggleAutoplay()">Autoplay
-          enabled
-        </button>
-        <button ng-if="!autoplay" type="button" class="btn btn-primary" ng-click="toggleAutoplay()">Autoplay disabled
-        </button>
         <button type="button" class="btn btn-primary" ng-click="sendRequest()">Play</button>
       </div>
       <div class="col-xs-4"></div>

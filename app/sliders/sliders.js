@@ -20,25 +20,8 @@ angular.module('myApp.sliders', ['ngRoute'])
        * Sends a request to play songs matching the features selected in the sliders
        */
       $scope.sendRequest = function () {
-        SlidersService.saveSliders($scope.featurelist, $scope.autoplay);
+        SlidersService.saveSliders($scope.featurelist);
         SongRequestService.playMatchingSongs($scope.featurelist);
-      };
-
-      /**
-       * Automatically sends a request to start playing if autoplay is enabled
-       */
-      $scope.autoRequest = function () {
-        if ($scope.autoplay) {
-          $scope.sendRequest();
-        }
-      };
-
-      /**
-       * Toggles autoplay off or on
-       */
-      $scope.toggleAutoplay = function () {
-        $scope.autoplay = !$scope.autoplay;
-        SlidersService.saveSliders($scope.featurelist, $scope.autoplay);
       };
 
       /**
@@ -52,9 +35,8 @@ angular.module('myApp.sliders', ['ngRoute'])
        * Loads existing values
        */
       var loadValues = function () {
-        $scope.autoplay = SlidersService.getSavedValues().autoplay;
         $scope.featurelist = SlidersService.getSavedValues().features;
-      }
+      };
 
       /* Controller body starts here */
 
@@ -64,7 +46,6 @@ angular.module('myApp.sliders', ['ngRoute'])
        * Load the featurelist if possible, otherwise build it
        */
       if (!SlidersService.getSavedValues().features) {
-        $scope.autoplay = true;
         ResourcesService.Features.query().$promise.then(function (data) {
           for (var i = 0; i < data.length; i++) {
             $scope.featurelist.push({"feature": data[i], "minvalue": 0, "maxvalue": 100});
