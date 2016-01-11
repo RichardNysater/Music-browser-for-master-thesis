@@ -14,7 +14,7 @@
 	"angular-animate": null,
     "html5-boilerplate": "~5.2.0",
 	"angularjs-slider": null,
-	"angular-soundmanager2": null
+	"angular-bootstrap-slider": "~0.1.21"
   },
   "resolutions":{
     "angular"  : "1.5.3"
