@@ -80,8 +80,9 @@
     <div id="playlist" class="hidden-xs">
       <div id="list-group">
         <div class="list-group-item playlist-item"><b>Playlist</b></div>
+        <div ng-if="playlist.length === 0" class="list-group-item playlist-item">Empty</div>
         <a ng-repeat="song in playlist" class="list-group-item playlist-item"
-           ng-class="{active: currentPlaying.id == song.id}">
+           ng-class="{active: currentPlaying.id == song.id}" ng-animate="{enter: 'playlist-fade-enter'}">
           <div class="row">
             <div class="col-xs-8 clickable" play-from-playlist="song" title="Play song">
               {{ song.title }}
