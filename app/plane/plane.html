@@ -1,3 +1,5 @@
+<div id="background"></div>
+
 <div id="plane-wrapper row">
   <div class="row">
     <div class="col-xs-2"></div>
@@ -11,9 +13,17 @@
       <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.low}}</p>
     </div>
     <div class="col-xs-8">
-      <div ng-if="!imgleft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div> <!--Hide this after user clicks-->
-      <div ng-if="!imgleft" class="hint-small visible-xs "> Click inside the plane</div> <!--Hide this after user clicks-->
-      <div class="plane" ng-click='planeClick($event)'></div>
+      <div ng-if="!imgleft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
+      <!--Hide this after user clicks-->
+      <div ng-if="!imgleft" class="hint-small visible-xs "> Click inside the plane</div>
+      <!--Hide this after user clicks-->
+      <div class="plane" ng-click='planeClick($event)'>
+        <div class="plane-vertical-line"></div>
+        <div class="plane-horizontal-line"></div>
+        <div ng-if="imgleft" class="selection-image-div" ng-style="{left: imgleft, top: imgtop}">
+          <img class="selection-image" src="/img/marker.png" ng-style="{width: imgwidth, height: imgheight}"/>
+        </div>
+      </div>
     </div>
     <div class="col-xs-2 side-label plane-row">
       <p class="plane-label inner-side-label-right rotate-text-right">{{firstSelect.high}}</p>
@@ -33,7 +43,8 @@
     <div class="row">
       <div class="form-group col-xs-6">
         <label for="sel1">X-axis</label>
-        <select class="form-control" id="sel1" ng-model="firstSelect" ng-options="feature.id for feature in features"></select>
+        <select class="form-control" id="sel1" ng-model="firstSelect"
+                ng-options="feature.id for feature in features"></select>
       </div>
       <div class="form-group col-xs-6">
         <label for="sel2">Y-axis</label>
@@ -56,6 +67,3 @@
 
 <p ng-if="imgleft" class="percent-label"> {{firstSelect.id}}: {{x_min_value}}-{{x_max_value}}%,
   {{secondSelect.id}}:{{y_min_value}}-{{y_max_value}}% </p>
-
-<img ng-if=imgleft id="selection-image" src="/img/marker.png"
-     ng-style="{left: imgleft, top: imgtop, width: imgwidth, height: imgheight}"/>

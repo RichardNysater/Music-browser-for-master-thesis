@@ -3,10 +3,31 @@
 }
 
 .plane {
+    position: relative;
     background-color: lightgray;
     width: 100%;
     height: 0;
     padding-bottom: 75%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.plane-vertical-line {
+    position: absolute;
+    background-color: black;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    pointer-events: none;
+}
+
+.plane-horizontal-line {
+    position: absolute;
+    background-color: black;
+    pointer-events: none;
+    top: 50%;
+    width: 100%;
+    height: 2px;
     margin: 0;
 }
 
@@ -46,7 +67,7 @@
 .inner-side-label-right {
     position: absolute;
     top: 62%;
-    left: 0%;
+    left: 0;
     z-index: -1000; /* Bring to background */
 }
 
@@ -101,7 +122,12 @@
     clear: both;
 }
 
-#selection-image {
-    position: absolute;
+.selection-image-div {
+    position:absolute;
+    pointer-events: none;
+}
+
+.selection-image {
+    position:absolute;
     pointer-events: none;
 }

@@ -14,17 +14,17 @@ angular.module('myApp.emotions', ['ngRoute'])
    * The emotion plane allows a user to click somewhere in a 2d-plane with four emotions in each corner,
    * the application will then create a playlist based on the distance to each emotion.
    */
-  .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService','$timeout',
-    function ($scope, ResourcesService, SongRequestService, EmotionsService,$timeout) {
+  .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', '$timeout',
+    function ($scope, ResourcesService, SongRequestService, EmotionsService, $timeout) {
       var DISPLAY_SONGS = false;
 
       /**
        * Set the size of the selection image
        */
-      var setImageSize = function(){
+      var setImageSize = function () {
         var CSS_plane = $('.plane');
-        $scope.imgwidth = CSS_plane.outerWidth() * 1/(100/($scope.feature_variance));
-        $scope.imgheight = CSS_plane.outerHeight() * 1/(100/($scope.feature_variance));
+        $scope.imgwidth = CSS_plane.outerWidth() * 1 / (100 / ($scope.feature_variance));
+        $scope.imgheight = CSS_plane.outerHeight() * 1 / (100 / ($scope.feature_variance));
       };
 
       /**
@@ -76,7 +76,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        * Returns the inner width of the plane
        * @returns {*|jQuery}
        */
-      var getPlaneWidth = function(){
+      var getPlaneWidth = function () {
         return $('.plane').innerWidth();
       };
 
@@ -84,7 +84,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        * Returns the inner height of the plane
        * @returns {*|jQuery}
        */
-      var getPlaneHeight = function(){
+      var getPlaneHeight = function () {
         return $('.plane').innerHeight();
       };
 
@@ -92,16 +92,16 @@ angular.module('myApp.emotions', ['ngRoute'])
        * Return where on the plane's x-axis (width) the selection marker is
        * @returns {number} 0 for the furthest left and 1 for furthest right
        */
-      var getSelectionXPercent = function(){
-        return ($scope.imgleft-$('.plane').offset().left)/getPlaneWidth();
+      var getSelectionXPercent = function () {
+        return ($scope.imgleft - $('.plane').offset().left) / getPlaneWidth();
       };
 
       /**
        * Return where on the plane's y-axis (height) the selection marker is
        * @returns {number} 0 for the furthest top and 1 for furthest bottom
        */
-      var getSelectionYPercent = function(){
-        return ($scope.imgtop-$('.plane').offset().top)/getPlaneHeight();
+      var getSelectionYPercent = function () {
+        return ($scope.imgtop - $('.plane').offset().top) / getPlaneHeight();
       };
 
       /**
@@ -162,9 +162,8 @@ angular.module('myApp.emotions', ['ngRoute'])
         var plane_height = CSS_plane.outerHeight();
 
         /* Calculate the location of the selection image */
-        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
-        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
-
+        $scope.imgleft = event.pageX - ($scope.imgwidth / 2) - CSS_plane.offset().left;
+        $scope.imgtop = event.pageY - ($scope.imgheight / 2) - CSS_plane.offset().top;
         /* Calculate the features required to request for music */
         $scope.songPosition = calcSongPositions($scope.imgleft, $scope.imgtop, plane_width, plane_height, CSS_plane.offset());
 
@@ -183,27 +182,28 @@ angular.module('myApp.emotions', ['ngRoute'])
       /**
        * Updates the image position and size and saves it.
        */
-      var updateWindow = function (){
+      var updateWindow = function () {
         setImageSize();
         var CSS_plane = $('.plane');
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth()*EmotionsService.getSavedValues().selection_img_x_percent;
-        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight()*EmotionsService.getSavedValues().selection_img_y_percent;
+        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
+        console.log($scope.imgleft);
+        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
         EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionXPercent(), getSelectionYPercent());
       };
 
       /**
        * Initialize the image position and size.
        */
-      var initWindow = function(){
+      var initWindow = function () {
         setImageSize();
         var CSS_plane = $('.plane');
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth()*EmotionsService.getSavedValues().selection_img_x_percent;
+        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
 
         /*
          For some arcane reason the top offset is 33.28 pixels smaller when the page is first loaded compared to after a click,
          so we'll apply this ugly workaround for now. TODO: Fix this strange behaviour
          */
-        $scope.imgtop = 33.28 + CSS_plane.offset().top + getPlaneHeight()*EmotionsService.getSavedValues().selection_img_y_percent;
+        $scope.imgtop = 33.28 + CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
       };
 
       /**
@@ -217,7 +217,7 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.imgtop = prevValues.imgtop;
         $scope.feature_list = prevValues.feature_list;
 
-        if(getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent){
+        if (getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent) {
           initWindow();
         }
       };
@@ -225,7 +225,7 @@ angular.module('myApp.emotions', ['ngRoute'])
       /**
        * Initializes the handling of window resizing
        */
-      var initWindowHandling = function(){
+      var initWindowHandling = function () {
         var oldWidth = getPlaneWidth();
 
         $(window).on('resize.doResize', function () {
@@ -236,13 +236,13 @@ angular.module('myApp.emotions', ['ngRoute'])
             $timeout.cancel(updateStuffTimer);
           }
 
-          updateStuffTimer = $timeout(function() {
+          updateStuffTimer = $timeout(function () {
             updateWindow();
             oldWidth = newWidth;
           }, 100);
         });
 
-        $scope.$on('$destroy',function (){
+        $scope.$on('$destroy', function () {
           $(window).off('resize.doResize'); // remove the handler added earlier
         });
       };

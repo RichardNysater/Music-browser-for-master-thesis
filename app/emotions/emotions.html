@@ -8,12 +8,20 @@
       <p class="plane-label">{{topright.emotion}}</p>
     </div>
   </div>
-
   <div class="row">
     <div class="col-xs-2">
     </div>
     <div class="col-xs-8">
-      <div class="plane" ng-click='planeClick($event)'></div>
+
+
+      <div class="plane" ng-click='planeClick($event)'>
+        <div class="plane-vertical-line"></div>
+        <div class="plane-horizontal-line"></div>
+        <div ng-if="imgleft" class="selection-image-div" ng-style="{left: imgleft, top: imgtop}">
+          <img class="selection-image" src="/img/marker.png" ng-style="{width: imgwidth, height: imgheight}"/>
+        </div>
+      </div>
+
     </div>
     <div class="col-xs-2 ">
     </div>
@@ -44,8 +52,3 @@
     </div>
   </div>
 </div>
-<img ng-repeat="song in songs" class="image" src="/img/songmarker.png" ng-attr-title="{{song.songID}}"
-     ng-style="{position:'absolute', left: song.left, top: song.top, width: imgwidth, height: imgheight}"/>
-
-<img ng-if=imgleft id="selection-image" src="/img/marker.png"
-     ng-style="{position:'absolute', left: imgleft, top: imgtop, width: imgwidth, height: imgheight}"/>

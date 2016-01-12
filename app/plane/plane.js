@@ -14,24 +14,24 @@ angular.module('myApp.plane', ['ngRoute'])
    * The plane allows a user to click somewhere in a 2d-plane with perceptual features as x-axis and y-axis,
    * the application will then create a playlist based on where the user clicked.
    */
-  .controller('PlaneCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService','$timeout',
+  .controller('PlaneCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService', '$timeout',
     function ($scope, ResourcesService, SongRequestService, PlaneService, $timeout) {
 
       /**
        * Set the size of the selection image
        */
-      var setImageSize = function(){
+      var setImageSize = function () {
         var CSS_plane = $('.plane');
-        $scope.imgwidth = CSS_plane.outerWidth() * 1/(100/($scope.feature_variance*2));
-        $scope.imgheight = CSS_plane.outerHeight() * 1/(100/($scope.feature_variance*2));
+        $scope.imgwidth = CSS_plane.outerWidth() * 1 / (100 / ($scope.feature_variance * 2));
+        $scope.imgheight = CSS_plane.outerHeight() * 1 / (100 / ($scope.feature_variance * 2));
       };
 
       /**
        * Updates the selection image and plays songs based on the current selection after variance is changed
        */
-      $scope.varianceChanged = function(){
-        var prevPageX = $scope.imgleft + ($scope.imgwidth/2);
-        var prevPageY = $scope.imgtop + ($scope.imgheight/2);
+      $scope.varianceChanged = function () {
+        var prevPageX = $scope.imgleft + ($scope.imgwidth / 2);
+        var prevPageY = $scope.imgtop + ($scope.imgheight / 2);
         setImageSize();
 
         $scope.imgleft = prevPageX - ($scope.imgwidth / 2);
@@ -44,18 +44,18 @@ angular.module('myApp.plane', ['ngRoute'])
       /**
        * Sets the min and max values for the selected perceptual features based on variance.
        */
-      var setFeatureRanges = function(){
-        $scope.x_min_value = Math.max($scope.xpercent - $scope.feature_variance,0);
-        $scope.x_max_value = Math.min($scope.xpercent + $scope.feature_variance,100);
+      var setFeatureRanges = function () {
+        $scope.x_min_value = Math.max($scope.xpercent - $scope.feature_variance, 0);
+        $scope.x_max_value = Math.min($scope.xpercent + $scope.feature_variance, 100);
 
-        $scope.y_min_value = Math.max($scope.ypercent - $scope.feature_variance,0);
-        $scope.y_max_value = Math.min($scope.ypercent + $scope.feature_variance,100);
+        $scope.y_min_value = Math.max($scope.ypercent - $scope.feature_variance, 0);
+        $scope.y_max_value = Math.min($scope.ypercent + $scope.feature_variance, 100);
       };
 
       /**
        * Fetches and plays songs based on where the user clicked and what the variance is set to
        */
-      var playSongs = function(){
+      var playSongs = function () {
         setFeatureRanges();
         var xFeature = {
           feature: {id: $scope.firstSelect.id},
@@ -79,8 +79,9 @@ angular.module('myApp.plane', ['ngRoute'])
       $scope.planeClick = function (event) {
         var CSS_plane = $('.plane');
         setImageSize();
-        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
-        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
+        //TODO: Find out why we have to remove CSS_plane.offset() from the image even though image position is absolute
+        $scope.imgleft = event.pageX - ($scope.imgwidth / 2) - CSS_plane.offset().left;
+        $scope.imgtop = event.pageY - ($scope.imgheight / 2) - CSS_plane.offset().top;
 
         $scope.xpercent = Math.round(100 * (event.offsetX / CSS_plane.outerWidth()));
         $scope.ypercent = 100 - Math.round(100 * (event.offsetY / (CSS_plane.outerHeight())));
@@ -96,7 +97,7 @@ angular.module('myApp.plane', ['ngRoute'])
        * Returns the inner width of the plane
        * @returns {*|jQuery}
        */
-      var getPlaneWidth = function(){
+      var getPlaneWidth = function () {
         return $('.plane').innerWidth();
       };
 
@@ -104,7 +105,7 @@ angular.module('myApp.plane', ['ngRoute'])
        * Returns the inner height of the plane
        * @returns {*|jQuery}
        */
-      var getPlaneHeight = function(){
+      var getPlaneHeight = function () {
         return $('.plane').innerHeight();
       };
 
@@ -112,42 +113,42 @@ angular.module('myApp.plane', ['ngRoute'])
        * Return where on the plane's x-axis (width) the selection marker is
        * @returns {number} 0 for the furthest left and 1 for furthest right
        */
-      var getSelectionXPercent = function(){
-        return ($scope.imgleft-$('.plane').offset().left)/getPlaneWidth();
+      var getSelectionXPercent = function () {
+        return ($scope.imgleft - $('.plane').offset().left) / getPlaneWidth();
       };
 
       /**
        * Return where on the plane's y-axis (height) the selection marker is
        * @returns {number} 0 for the furthest top and 1 for furthest bottom
        */
-      var getSelectionYPercent = function(){
-        return ($scope.imgtop-$('.plane').offset().top)/getPlaneHeight();
+      var getSelectionYPercent = function () {
+        return ($scope.imgtop - $('.plane').offset().top) / getPlaneHeight();
       };
 
       /**
        * Updates the image position and size and saves it.
        */
-      var updateWindow = function (){
+      var updateWindow = function () {
         setImageSize();
         var CSS_plane = $('.plane');
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_img_x_percent;
-        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight()*PlaneService.getSavedValues().selection_img_y_percent;
+        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * PlaneService.getSavedValues().selection_img_x_percent;
+        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * PlaneService.getSavedValues().selection_img_y_percent;
         PlaneService.saveUpdatedWindow($scope.imgleft, $scope.imgwidth, $scope.imgheight, getSelectionXPercent(), getSelectionYPercent());
       };
 
       /**
        * Initialize the image position and size.
        */
-      var initWindow = function (){
+      var initWindow = function () {
         setImageSize();
         var CSS_plane = $('.plane');
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth()*PlaneService.getSavedValues().selection_img_x_percent;
+        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * PlaneService.getSavedValues().selection_img_x_percent;
 
         /*
-          For some arcane reason the top offset is 33.28 pixels smaller when the page is first loaded compared to after a click,
-          so we'll apply this ugly workaround for now. TODO: Fix this strange behaviour
+         For some arcane reason the top offset is 33.28 pixels smaller when the page is first loaded compared to after a click,
+         so we'll apply this ugly workaround for now. TODO: Fix this strange behaviour
          */
-        $scope.imgtop = 33.28+CSS_plane.offset().top + getPlaneHeight()*PlaneService.getSavedValues().selection_img_y_percent;
+        $scope.imgtop = 33.28 + CSS_plane.offset().top + getPlaneHeight() * PlaneService.getSavedValues().selection_img_y_percent;
       };
 
       /**
@@ -167,7 +168,7 @@ angular.module('myApp.plane', ['ngRoute'])
         $scope.imgleft = prevValues.imgleft;
         $scope.imgtop = prevValues.imgtop;
 
-        if(getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent){ // Update the window if required
+        if (getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent) { // Update the window if required
           initWindow();
         }
 
@@ -190,7 +191,7 @@ angular.module('myApp.plane', ['ngRoute'])
       /**
        * Initializes the handling of window resizing
        */
-      var initWindowHandling = function(){
+      var initWindowHandling = function () {
         var oldWidth = getPlaneWidth();
 
         $(window).on('resize.doResize', function () {
@@ -201,13 +202,13 @@ angular.module('myApp.plane', ['ngRoute'])
             $timeout.cancel(updateStuffTimer);
           }
 
-          updateStuffTimer = $timeout(function() {
+          updateStuffTimer = $timeout(function () {
             updateWindow();
             oldWidth = newWidth;
           }, 100);
         });
 
-        $scope.$on('$destroy',function (){
+        $scope.$on('$destroy', function () {
           $(window).off('resize.doResize'); // remove the handler added earlier
         });
       };
