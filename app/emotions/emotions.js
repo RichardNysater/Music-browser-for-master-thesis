@@ -152,18 +152,28 @@ angular.module('myApp.emotions', ['ngRoute'])
       };
 
       /**
+       * Sets the plane's offsets (used to position selection image)
+       * @param offset The plane's offsets
+       */
+      var setOffsets = function (offset) {
+        $scope.leftPlaneOffset = offset.left;
+        $scope.topPlaneOffset = offset.top;
+      };
+
+      /**
        * planeClick is called whenever a user clicks on the 2d-plane
        * @param event Event
        */
       $scope.planeClick = function (event) {
         var CSS_plane = $('.plane');
         setImageSize();
+        setOffsets(CSS_plane.offset());
         var plane_width = CSS_plane.outerWidth();
         var plane_height = CSS_plane.outerHeight();
 
         /* Calculate the location of the selection image */
-        $scope.imgleft = event.pageX - ($scope.imgwidth / 2) - CSS_plane.offset().left;
-        $scope.imgtop = event.pageY - ($scope.imgheight / 2) - CSS_plane.offset().top;
+        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
+        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
         /* Calculate the features required to request for music */
         $scope.songPosition = calcSongPositions($scope.imgleft, $scope.imgtop, plane_width, plane_height, CSS_plane.offset());
 
@@ -185,6 +195,7 @@ angular.module('myApp.emotions', ['ngRoute'])
       var updateWindow = function () {
         setImageSize();
         var CSS_plane = $('.plane');
+        setOffsets(CSS_plane.offset());
         $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
         console.log($scope.imgleft);
         $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
@@ -197,13 +208,9 @@ angular.module('myApp.emotions', ['ngRoute'])
       var initWindow = function () {
         setImageSize();
         var CSS_plane = $('.plane');
+        setOffsets(CSS_plane.offset());
         $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
-
-        /*
-         For some arcane reason the top offset is 33.28 pixels smaller when the page is first loaded compared to after a click,
-         so we'll apply this ugly workaround for now. TODO: Fix this strange behaviour
-         */
-        $scope.imgtop = 33.28 + CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
+        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
       };
 
       /**

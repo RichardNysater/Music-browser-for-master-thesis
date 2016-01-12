@@ -122,11 +122,6 @@
     clear: both;
 }
 
-.selection-image-div {
-    position:absolute;
-    pointer-events: none;
-}
-
 .selection-image {
     position:absolute;
     pointer-events: none;

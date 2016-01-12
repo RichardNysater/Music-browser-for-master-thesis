@@ -20,9 +20,9 @@
       <div class="plane" ng-click='planeClick($event)'>
         <div class="plane-vertical-line"></div>
         <div class="plane-horizontal-line"></div>
-        <div ng-if="imgleft" class="selection-image-div" ng-style="{left: imgleft, top: imgtop}">
-          <img class="selection-image" src="/img/marker.png" ng-style="{width: imgwidth, height: imgheight}"/>
-        </div>
+        <img ng-if="imgleft" class="selection-image" src="/img/marker.png"
+             ng-style="{left: imgleft-leftPlaneOffset, top: imgtop-topPlaneOffset, width: imgwidth, height: imgheight}">
+        </img>
       </div>
     </div>
     <div class="col-xs-2 side-label plane-row">
