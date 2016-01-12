@@ -9,3 +9,8 @@
 .perceptual-names{
     font-size: 12px;
 }
+
+/* Override the CSS for the normal disabled sliders */
+.ngrs-range-slider.ngrs-disabled .ngrs-value{
+    color: #575757;
+}
