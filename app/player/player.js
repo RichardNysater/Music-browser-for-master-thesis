@@ -14,9 +14,6 @@ angular.module('myApp.player', ['ngRoute'])
    */
   .controller('PlayerController', ['$scope','SongRequestService','PlayerService',
     function ($scope,SongRequestService,PlayerService) {
-      $scope.is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; // Identify if user is using chrome.
-      $scope.autoplay = PlayerService.getAutoPlay();
-      console.log($scope.autoplay);
 
       /**
        * Toggles whether songs should be autoplayed or not
@@ -35,12 +32,27 @@ angular.module('myApp.player', ['ngRoute'])
         PlayerService.saveVolume(volume);
       };
 
+      /**
+       * Initializes the volume slider in the player footer
+       */
+      var initVolumeSlider = function(){
+        var volumeSlider = $("#volume-slider");
+        volumeSlider.slider({ min: 0, max: 100, value: PlayerService.getVolume() });
+
+        volumeSlider.on("slide", function(slideEvt) {
+          $scope.setVolume(slideEvt.value);
+        });
+
+        volumeSlider.on("slideStop", function(slideEvt) {
+          $scope.setVolume(slideEvt.value);
+        });
+      };
+
       /* Controller body starts here */
-      var volumeSlider = $("#volume-slider");
-      volumeSlider.slider({ min: 0, max: 100, value: PlayerService.getVolume() });
-      volumeSlider.on("slide", function(slideEvt) {
-        $scope.setVolume(slideEvt.value);
-      });
+      $scope.is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; // Identify if user is using chrome.
+      $scope.autoplay = PlayerService.getAutoPlay();
+
+      initVolumeSlider();
 
 
     }]);
