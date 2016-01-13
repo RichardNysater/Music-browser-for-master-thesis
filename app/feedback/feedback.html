@@ -11,10 +11,10 @@
 
         <div ng-if="question.type === 'buttons'" class="btn-group col-xs-12" data-toggle="buttons">
           <!-- If question is rate from 1-9 -->
-          <label class="btn btn-primary" ng-class="{active: button.val === question.selected}"
+          <label class="radio-inline"
                  ng-repeat="button in buttons"
                  ng-click="buttonClick(question, button.val)">
-            <input type="radio" name="{{question.id}}"> {{button.val}}
+            <input type="radio" name="{{question.id}}" ng-checked="question.selected === button.val" value="true"> {{button.val}}
           </label>
         </div>
 
