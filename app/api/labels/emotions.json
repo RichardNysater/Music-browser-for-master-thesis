@@ -5,53 +5,53 @@
     "features": [
       {
         "feature": "Activity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Articulation",
-        "minvalue": 60,
-        "maxvalue": 100
+        "minValue": 60,
+        "maxValue": 100
       },
       {
         "feature": "Dissonance",
-        "minvalue": 0,
-        "maxvalue": 60
+        "minValue": 0,
+        "maxValue": 60
       },
       {
         "feature": "HarmonicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Modality",
-        "minvalue": 70,
-        "maxvalue": 100
+        "minValue": 70,
+        "maxValue": 100
       },
       {
         "feature": "Pitch",
-        "minvalue": 60,
-        "maxvalue": 100
+        "minValue": 60,
+        "maxValue": 100
       },
       {
         "feature": "RhythmicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Speed",
-        "minvalue": 60,
-        "maxvalue": 100
+        "minValue": 60,
+        "maxValue": 100
       },
       {
         "feature": "Valence",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       }
     ]
   },
@@ -61,53 +61,53 @@
     "features": [
       {
         "feature": "Activity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Articulation",
-        "minvalue": 0,
-        "maxvalue": 40
+        "minValue": 0,
+        "maxValue": 40
       },
       {
         "feature": "Dissonance",
-        "minvalue": 20,
-        "maxvalue": 100
+        "minValue": 20,
+        "maxValue": 100
       },
       {
         "feature": "HarmonicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Modality",
-        "minvalue": 0,
-        "maxvalue": 30
+        "minValue": 0,
+        "maxValue": 30
       },
       {
         "feature": "Pitch",
-        "minvalue": 0,
-        "maxvalue": 40
+        "minValue": 0,
+        "maxValue": 40
       },
       {
         "feature": "RhythmicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Speed",
-        "minvalue": 0,
-        "maxvalue": 40
+        "minValue": 0,
+        "maxValue": 40
       },
       {
         "feature": "Valence",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       }
     ]
   },
@@ -117,53 +117,53 @@
     "features": [
       {
         "feature": "Activity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Articulation",
-        "minvalue": 0,
-        "maxvalue": 60
+        "minValue": 0,
+        "maxValue": 60
       },
       {
         "feature": "Dissonance",
-        "minvalue": 0,
-        "maxvalue": 60
+        "minValue": 0,
+        "maxValue": 60
       },
       {
         "feature": "HarmonicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Modality",
-        "minvalue": 55,
-        "maxvalue": 100
+        "minValue": 55,
+        "maxValue": 100
       },
       {
         "feature": "Pitch",
-        "minvalue": 25,
-        "maxvalue": 75
+        "minValue": 25,
+        "maxValue": 75
       },
       {
         "feature": "RhythmicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Speed",
-        "minvalue": 15,
-        "maxvalue": 50
+        "minValue": 15,
+        "maxValue": 50
       },
       {
         "feature": "Valence",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       }
     ]
   },
@@ -173,53 +173,53 @@
     "features": [
       {
         "feature": "Activity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Articulation",
-        "minvalue": 20,
-        "maxvalue": 80
+        "minValue": 20,
+        "maxValue": 80
       },
       {
         "feature": "Dissonance",
-        "minvalue": 40,
-        "maxvalue": 100
+        "minValue": 40,
+        "maxValue": 100
       },
       {
         "feature": "HarmonicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Modality",
-        "minvalue": 0,
-        "maxvalue": 60
+        "minValue": 0,
+        "maxValue": 60
       },
       {
         "feature": "Pitch",
-        "minvalue": 0,
-        "maxvalue": 40
+        "minValue": 0,
+        "maxValue": 40
       },
       {
         "feature": "RhythmicComplexity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Speed",
-        "minvalue": 60,
-        "maxvalue": 100
+        "minValue": 60,
+        "maxValue": 100
       },
       {
         "feature": "Valence",
-        "minvalue": 0,
-        "maxvalue": 100
+        "minValue": 0,
+        "maxValue": 100
       }
     ]
   }

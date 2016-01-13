@@ -2,7 +2,7 @@
   <div class="col-sm-1 hidden-xs"></div>
   <div class="col-sm-11 col-xs-12">
     <div class="row">
-      <div ng-repeat="cur in featurelist" class="col-xs-12 col-sm-6">
+      <div ng-repeat="cur in featureList" class="col-xs-12 col-sm-6">
         <div class="row">
           <div class="col-xs-3"></div>
           <div class="col-xs-6 text-buffer feature-id">
@@ -16,7 +16,7 @@
           </div>
           <div class="col-xs-6">
             <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true" on-handle-up="sendRequestForClosest(cur.feature.id)" min="0"
-                 max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
+                 max="100" model-min="cur.minValue" model-max="cur.maxValue"></div>
           </div>
           <div class="col-xs-3 text-buffer max-label">
             <p>{{cur.feature.high}}</p>

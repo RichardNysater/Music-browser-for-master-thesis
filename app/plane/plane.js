@@ -49,23 +49,23 @@ angular.module('myApp.plane', ['ngRoute'])
        * Set the size of the selection image
        */
       var setImageSize = function () {
-        var CSS_plane = $('.plane');
-        $scope.imgwidth = CSS_plane.outerWidth() * 1 / (100 / ($scope.feature_variance * 2));
-        $scope.imgheight = CSS_plane.outerHeight() * 1 / (100 / ($scope.feature_variance * 2));
+        var CSSPlane = $('.plane');
+        $scope.imgWidth = CSSPlane.outerWidth() * 1 / (100 / ($scope.featureVariance * 2));
+        $scope.imgHeight = CSSPlane.outerHeight() * 1 / (100 / ($scope.featureVariance * 2));
       };
 
       /**
        * Updates the selection image and plays songs based on the current selection after variance is changed
        */
       $scope.varianceChanged = function () {
-        var prevPageX = $scope.imgleft + ($scope.imgwidth / 2);
-        var prevPageY = $scope.imgtop + ($scope.imgheight / 2);
+        var prevPageX = $scope.imgLeft + ($scope.imgWidth / 2);
+        var prevPageY = $scope.imgTop + ($scope.imgHeight / 2);
         setImageSize();
 
-        $scope.imgleft = prevPageX - ($scope.imgwidth / 2);
-        $scope.imgtop = prevPageY - ($scope.imgheight / 2);
-        PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight,
-          getSelectionXPercent(), getSelectionYPercent(), $scope.xpercent, $scope.ypercent);
+        $scope.imgLeft = prevPageX - ($scope.imgWidth / 2);
+        $scope.imgTop = prevPageY - ($scope.imgHeight / 2);
+        PlaneService.saveClick($scope.featureVariance, $scope.firstSelect, $scope.secondSelect, $scope.imgLeft, $scope.imgTop, $scope.imgWidth, $scope.imgHeight,
+          getSelectionXPercent(), getSelectionYPercent(), $scope.xPercent, $scope.yPercent);
         playSongs();
       };
 
@@ -73,11 +73,11 @@ angular.module('myApp.plane', ['ngRoute'])
        * Sets the min and max values for the selected perceptual features based on variance.
        */
       var setFeatureRanges = function () {
-        $scope.x_min_value = Math.max($scope.xpercent - $scope.feature_variance, 0);
-        $scope.x_max_value = Math.min($scope.xpercent + $scope.feature_variance, 100);
+        $scope.xMinValue = Math.max($scope.xPercent - $scope.featureVariance, 0);
+        $scope.xMaxValue = Math.min($scope.xPercent + $scope.featureVariance, 100);
 
-        $scope.y_min_value = Math.max($scope.ypercent - $scope.feature_variance, 0);
-        $scope.y_max_value = Math.min($scope.ypercent + $scope.feature_variance, 100);
+        $scope.yMinValue = Math.max($scope.yPercent - $scope.featureVariance, 0);
+        $scope.yMaxValue = Math.min($scope.yPercent + $scope.featureVariance, 100);
       };
 
       /**
@@ -87,13 +87,13 @@ angular.module('myApp.plane', ['ngRoute'])
         setFeatureRanges();
         var xFeature = {
           feature: {id: $scope.firstSelect.id},
-          minvalue: $scope.x_min_value,
-          maxvalue: $scope.x_max_value
+          minValue: $scope.xMinValue,
+          maxValue: $scope.xMaxValue
         };
         var yFeature = {
           feature: {id: $scope.secondSelect.id},
-          minvalue: $scope.y_min_value,
-          maxvalue: $scope.y_max_value
+          minValue: $scope.yMinValue,
+          maxValue: $scope.yMaxValue
         };
 
         SongRequestService.playMatchingSongs([xFeature, yFeature],addedSongs);
@@ -115,18 +115,18 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       $scope.planeClick = function (event) {
         $scope.showError = false;
-        var CSS_plane = $('.plane');
+        var CSSPlane = $('.plane');
         setImageSize();
-        setOffsets(CSS_plane.offset());
-        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
-        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
+        setOffsets(CSSPlane.offset());
+        $scope.imgLeft = event.pageX - ($scope.imgWidth / 2);
+        $scope.imgTop = event.pageY - ($scope.imgHeight / 2);
 
-        $scope.xpercent = Math.round(100 * (event.offsetX / CSS_plane.outerWidth()));
-        $scope.ypercent = 100 - Math.round(100 * (event.offsetY / (CSS_plane.outerHeight())));
+        $scope.xPercent = Math.round(100 * (event.offsetX / CSSPlane.outerWidth()));
+        $scope.yPercent = 100 - Math.round(100 * (event.offsetY / (CSSPlane.outerHeight())));
 
         // Save the current variables used for the click
-        PlaneService.saveClick($scope.feature_variance, $scope.firstSelect, $scope.secondSelect, $scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight,
-          getSelectionXPercent(), getSelectionYPercent(), $scope.xpercent, $scope.ypercent);
+        PlaneService.saveClick($scope.featureVariance, $scope.firstSelect, $scope.secondSelect, $scope.imgLeft, $scope.imgTop, $scope.imgWidth, $scope.imgHeight,
+          getSelectionXPercent(), getSelectionYPercent(), $scope.xPercent, $scope.yPercent);
 
         playSongs();
       };
@@ -152,7 +152,7 @@ angular.module('myApp.plane', ['ngRoute'])
        * @returns {number} 0 for the furthest left and 1 for furthest right
        */
       var getSelectionXPercent = function () {
-        return ($scope.imgleft - $('.plane').offset().left) / getPlaneWidth();
+        return ($scope.imgLeft - $('.plane').offset().left) / getPlaneWidth();
       };
 
       /**
@@ -160,7 +160,7 @@ angular.module('myApp.plane', ['ngRoute'])
        * @returns {number} 0 for the furthest top and 1 for furthest bottom
        */
       var getSelectionYPercent = function () {
-        return ($scope.imgtop - $('.plane').offset().top) / getPlaneHeight();
+        return ($scope.imgTop - $('.plane').offset().top) / getPlaneHeight();
       };
 
       /**
@@ -168,11 +168,11 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       var updateWindow = function () {
         setImageSize();
-        var CSS_plane = $('.plane');
-        setOffsets(CSS_plane.offset());
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * PlaneService.getSavedValues().selection_img_x_percent;
-        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * PlaneService.getSavedValues().selection_img_y_percent;
-        PlaneService.saveUpdatedWindow($scope.imgleft, $scope.imgwidth, $scope.imgheight, getSelectionXPercent(), getSelectionYPercent());
+        var CSSPlane = $('.plane');
+        setOffsets(CSSPlane.offset());
+        $scope.imgLeft = CSSPlane.offset().left + getPlaneWidth() * PlaneService.getSavedValues().selectionImgXPercent;
+        $scope.imgTop = CSSPlane.offset().top + getPlaneHeight() * PlaneService.getSavedValues().selectionImgYPercent;
+        PlaneService.saveUpdatedWindow($scope.imgLeft, $scope.imgWidth, $scope.imgHeight, getSelectionXPercent(), getSelectionYPercent());
       };
 
       /**
@@ -180,10 +180,10 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       var initWindow = function () {
         setImageSize();
-        var CSS_plane = $('.plane');
-        setOffsets(CSS_plane.offset());
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * PlaneService.getSavedValues().selection_img_x_percent;
-        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * PlaneService.getSavedValues().selection_img_y_percent;
+        var CSSPlane = $('.plane');
+        setOffsets(CSSPlane.offset());
+        $scope.imgLeft = CSSPlane.offset().left + getPlaneWidth() * PlaneService.getSavedValues().selectionImgXPercent;
+        $scope.imgTop = CSSPlane.offset().top + getPlaneHeight() * PlaneService.getSavedValues().selectionImgYPercent;
       };
 
       /**
@@ -193,22 +193,22 @@ angular.module('myApp.plane', ['ngRoute'])
       var loadValues = function (features) {
         var prevValues = PlaneService.getSavedValues();
         if (prevValues.variance) {
-          $scope.feature_variance = prevValues.variance;
+          $scope.featureVariance = prevValues.variance;
         }
         else {
-          $scope.feature_variance = 13; // Default variance
+          $scope.featureVariance = 13; // Default variance
         }
-        $scope.imgwidth = prevValues.imgwidth;
-        $scope.imgheight = prevValues.imgheight;
-        $scope.imgleft = prevValues.imgleft;
-        $scope.imgtop = prevValues.imgtop;
+        $scope.imgWidth = prevValues.imgWidth;
+        $scope.imgHeight = prevValues.imgHeight;
+        $scope.imgLeft = prevValues.imgLeft;
+        $scope.imgTop = prevValues.imgTop;
 
-        if (getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent) { // Update the window if required
+        if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) { // Update the window if required
           initWindow();
         }
 
-        $scope.xpercent = prevValues.xpercent;
-        $scope.ypercent = prevValues.ypercent;
+        $scope.xPercent = prevValues.xPercent;
+        $scope.yPercent = prevValues.yPercent;
 
         for (var i = 0; i < features.length; i++) { // Existing features should be selected in the select boxes
           if (prevValues.firstSelect && features[i].id == prevValues.firstSelect.id) {

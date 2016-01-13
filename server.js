@@ -42,15 +42,15 @@ var connectToDatabase = (function*(databaseDetails) {
 var createQueryForSongs = function (con, features, databaseDetails) {
 
   var query = "SELECT songID FROM ?? WHERE ";
-  var inserts = [databaseDetails.database + "." + databaseDetails.songtable];
+  var inserts = [databaseDetails.database + "." + databaseDetails.songTable];
 
   if (features.length > 1) {
     for (var i = 0; i < features.length - 1; i++) {
-      inserts.push(features[i].feature.id, features[i].minvalue, features[i].maxvalue);
+      inserts.push(features[i].feature.id, features[i].minValue, features[i].maxValue);
       query += "?? BETWEEN ? AND ? AND "
     }
   }
-  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minvalue, features[features.length - 1].maxvalue);
+  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minValue, features[features.length - 1].maxValue);
   query += "?? BETWEEN ? AND ? ORDER BY RAND() LIMIT " + MAX_SONGS_RETURNED;
 
   try {
@@ -76,8 +76,8 @@ var createClosestQueryForSongs = function (con, features, databaseDetails) {
 
   // Build the take-nearest-match part of the query string (i.e ABS(Feature - (max+min)/2) for each relevant feature)
   for (var i = 0; i < features.length; i++) {
-    if (features[i].minvalue > 0 || features[i].maxvalue < 100) { // We disregard the features that can be between 0 and 100
-      var middle = Math.round((features[i].minvalue + features[i].maxvalue) / 2);
+    if (features[i].minValue > 0 || features[i].maxValue < 100) { // We disregard the features that can be between 0 and 100
+      var middle = Math.round((features[i].minValue + features[i].maxValue) / 2);
       query += "+ABS(?? - ?)";
       inserts.push(features[i].feature.id, middle);
       featuresUsed++;
@@ -92,16 +92,16 @@ var createClosestQueryForSongs = function (con, features, databaseDetails) {
   // Build the second part of the query string which ensures that all songs are inside the chosen ranges
   query += ")/" + featuresUsed + " as distance FROM (";
   query += "SELECT * FROM ?? WHERE ";
-  inserts.push(databaseDetails.database + "." + databaseDetails.songtable);
+  inserts.push(databaseDetails.database + "." + databaseDetails.songTable);
 
   if (features.length > 1) {
-    for (var i = 0; i < features.length - 1; i++) {
+    for (i = 0; i < features.length - 1; i++) {
       query += "?? BETWEEN ? AND ? AND ";
-      inserts.push(features[i].feature.id, features[i].minvalue, features[i].maxvalue);
+      inserts.push(features[i].feature.id, features[i].minValue, features[i].maxValue);
     }
   }
   query += "?? BETWEEN ? AND ?) AS n ORDER BY distance LIMIT " + MAX_SONGS_RETURNED; // Order by distance, so closest songs are first
-  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minvalue, features[features.length - 1].maxvalue);
+  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minValue, features[features.length - 1].maxValue);
   try {
     query = mysqlHelper.format(query, inserts);
   } catch (err) {
@@ -132,7 +132,7 @@ var createSubmitFeedbackQuery = function (con, feedback, databaseDetails) {
     "timestamp = VALUES(timestamp)," +
     "rating = VALUES(rating)," +
     "comment = VALUES(comment)";
-  var inserts = [databaseDetails.database + "." + databaseDetails.feedbacktable];
+  var inserts = [databaseDetails.database + "." + databaseDetails.feedbackTable];
 
   inserts.push(feedback.userID);
   inserts.push(getTimestamp());

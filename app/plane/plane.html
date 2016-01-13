@@ -11,16 +11,15 @@
       <p class="plane-label inner-side-label-left rotate-text-left">{{firstSelect.low}}</p>
     </div>
     <div class="col-xs-8">
-      <div ng-if="!imgleft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
-      <!--Hide this after user clicks-->
-      <div ng-if="!imgleft" class="hint-small visible-xs "> Click inside the plane</div>
-      <!--Hide this after user clicks-->
+      <!--Hide hint after user clicks-->
+      <div ng-if="!imgLeft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
+      <div ng-if="!imgLeft" class="hint-small visible-xs "> Click inside the plane</div>
+
       <div class="plane" ng-click='planeClick($event)'>
         <div class="plane-vertical-line"></div>
         <div class="plane-horizontal-line"></div>
-        <img ng-if="imgleft" class="selection-image" src="/img/marker.png"
-             ng-style="{left: imgleft-leftPlaneOffset, top: imgtop-topPlaneOffset, width: imgwidth, height: imgheight}">
-        </img>
+        <img ng-if="imgLeft" class="selection-image" src="/img/marker.png"
+             ng-style="{left: imgLeft-leftPlaneOffset, top: imgTop-topPlaneOffset, width: imgWidth, height: imgHeight}">
       </div>
     </div>
     <div class="col-xs-2 side-label plane-row">
@@ -54,7 +53,7 @@
         <label>Selection size</label>
         <rzslider rz-slider-hide-limit-labels="true"
                   rz-slider-floor="5"
-                  rz-slider-model="feature_variance"
+                  rz-slider-model="featureVariance"
                   rz-slider-ceil="25"
                   rz-slider-on-end="varianceChanged()">
         </rzslider>
@@ -63,10 +62,10 @@
   </form>
 </div>
 
-<p ng-if="imgleft" class="percent-label"> {{firstSelect.id}}: {{x_min_value}}-{{x_max_value}}%,
-  {{secondSelect.id}}:{{y_min_value}}-{{y_max_value}}% </p>
+<p ng-if="imgLeft" class="percent-label"> {{firstSelect.id}}: {{xMinValue}}-{{xMaxValue}}%,
+  {{secondSelect.id}}:{{yMinValue}}-{{yMaxValue}}% </p>
 
-<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgleft-60+imgwidth/2, top: imgtop+imgheight}">
+<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgLeft-60+imgWidth/2, top: imgTop+imgHeight}">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
   No new songs found

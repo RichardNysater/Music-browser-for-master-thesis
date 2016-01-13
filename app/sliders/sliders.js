@@ -52,7 +52,6 @@ angular.module('myApp.sliders', ['ngRoute'])
         var sliderOffset = $('.'+sliderId).offset();
         $scope.errorLeft = sliderOffset.left;
         $scope.errorTop = sliderOffset.top+35;
-
       };
 
       /**
@@ -60,8 +59,8 @@ angular.module('myApp.sliders', ['ngRoute'])
        */
       $scope.sendRequestForClosest = function (sliderId) {
         setErrorLocation(sliderId);
-        SlidersService.saveSliders($scope.featurelist);
-        SongRequestService.playMatchingSongs($scope.featurelist,addedSongs,"Closest");
+        SlidersService.saveSliders($scope.featureList);
+        SongRequestService.playMatchingSongs($scope.featureList,addedSongs,"Closest");
       };
 
       /**
@@ -75,9 +74,9 @@ angular.module('myApp.sliders', ['ngRoute'])
        * Resets all the sliders to the original settings
        */
       $scope.resetSliders = function(){
-        for(var i = 0; i < $scope.featurelist.length; i++){
-          $scope.featurelist[i].minvalue = 0;
-          $scope.featurelist[i].maxvalue = 100;
+        for(var i = 0; i < $scope.featureList.length; i++){
+          $scope.featureList[i].minValue = 0;
+          $scope.featureList[i].maxValue = 100;
         }
       };
 
@@ -85,20 +84,20 @@ angular.module('myApp.sliders', ['ngRoute'])
        * Loads existing values
        */
       var loadValues = function () {
-        $scope.featurelist = SlidersService.getSavedValues().features;
+        $scope.featureList = SlidersService.getSavedValues().features;
       };
 
       /* Controller body starts here */
 
-      $scope.featurelist = [];
+      $scope.featureList = [];
 
       /**
-       * Load the featurelist if possible, otherwise build it
+       * Load the featureList if possible, otherwise build it
        */
       if (!SlidersService.getSavedValues().features) {
         ResourcesService.Features.query().$promise.then(function (data) {
           for (var i = 0; i < data.length; i++) {
-            $scope.featurelist.push({"feature": data[i], "minvalue": 0, "maxvalue": 100});
+            $scope.featureList.push({"feature": data[i], "minValue": 0, "maxValue": 100});
           }
         }, function (err) {
           throw "No features were returned by query: " + err;

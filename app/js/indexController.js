@@ -18,10 +18,10 @@ IndexController.controller('IndexController', ['$scope', '$location',
       {"id": "Sliders", "link": "#sliders"}
     ];
 
-    $scope.helpsections = [
+    $scope.helpSections = [
       {"id": "Feedback", "link": "#feedback"},
       {"id": "Info", "link": "#info"}
-    ]
+    ];
 
     /**
      * Initializes the main menu sections
@@ -36,9 +36,9 @@ IndexController.controller('IndexController', ['$scope', '$location',
         }
       }
 
-      for (var i = 0; i < $scope.helpsections.length; i++) { // Highlights the current location on the navbar
-        if ($scope.helpsections[i].link === '#' + initPath) {
-          selected = $scope.helpsections[i];
+      for (i = 0; i < $scope.helpSections.length; i++) { // Highlights the current location on the navbar
+        if ($scope.helpSections[i].link === '#' + initPath) {
+          selected = $scope.helpSections[i];
           break;
         }
       }

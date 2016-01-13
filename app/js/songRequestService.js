@@ -9,16 +9,16 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
 
     /**
      * Sends a request to the server for songs matching the input features with the given requestType
-     * @param featurelist The features to match
+     * @param featureList The features to match
      * @param requestType The type of request to make
      * @returns {*} A promise which contains the songs if successfull
      */
-    this.sendRequest = function (featurelist, requestType) {
+    this.sendRequest = function (featureList, requestType) {
       var req = {
         method: 'POST',
         url: '/api/songrequest',
         data: {
-          features: featurelist,
+          features: featureList,
           requestType: requestType
         }
       };
@@ -84,13 +84,13 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
      * Sends a request to the server for all songs matching the input features
      * and adds them to the playlist.
      *
-     * @param feature_list The features to match
+     * @param featureList The features to match
      * @param callback Call the optional callback with the results as parameter
      * @param requestType The request type to give to the server for the query
      */
-    this.playMatchingSongs = function (feature_list, callback, requestType) {
+    this.playMatchingSongs = function (featureList, callback, requestType) {
 
-      var request = this.sendRequest(feature_list, requestType);
+      var request = this.sendRequest(featureList, requestType);
 
       request.then(function successCallback(response) {
         var res = response.data;

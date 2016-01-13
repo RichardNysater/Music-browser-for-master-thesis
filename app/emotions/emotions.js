@@ -49,54 +49,54 @@ angular.module('myApp.emotions', ['ngRoute'])
        * Set the size of the selection image
        */
       var setImageSize = function () {
-        var CSS_plane = $('.plane');
-        $scope.imgwidth = CSS_plane.outerWidth() * 1 / (100 / ($scope.feature_variance));
-        $scope.imgheight = CSS_plane.outerHeight() * 1 / (100 / ($scope.feature_variance));
+        var CSSPlane = $('.plane');
+        $scope.imgWidth = CSSPlane.outerWidth() * 1 / (100 / ($scope.featureVariance));
+        $scope.imgHeight = CSSPlane.outerHeight() * 1 / (100 / ($scope.featureVariance));
       };
 
       /**
        * Calculate the min-max values of each feature based on the distance between the click and the corners
-       * @param x_coord The x-coordinate inside the plane.
-       * @param y_coord The y-coordinate inside the plane.
-       * @param plane_width The total width of the plane
-       * @param plane_height The total height of the plane
+       * @param xCoord The x-coordinate inside the plane.
+       * @param yCoord The y-coordinate inside the plane.
+       * @param planeWidth The total width of the plane
+       * @param planeHeight The total height of the plane
        * @returns {Array} An array with each feature's min and max value calculated
        */
-      var calcFeatures = function (x_coord, y_coord, plane_width, plane_height) {
-        var feature_list = [];
+      var calcFeatures = function (xCoord, yCoord, planeWidth, planeHeight) {
+        var featureList = [];
 
         /* Scale the coordinate system to be between -1 and 1 */
-        var x = 2 * ((x_coord / plane_width) - 0.5);
-        var y = 2 * (0.5 - (y_coord / plane_height));
+        var x = 2 * ((xCoord / planeWidth) - 0.5);
+        var y = 2 * (0.5 - (yCoord / planeHeight));
 
         /* Interpolate the features based on the distance to each emotion
          See http://www.speech.kth.se/prod/publications/files/1344.pdf for the algorithm used */
         for (var i = 0; i < $scope.emotions[0].features.length; i++) {
-          var tr_max = $scope.topright.features[i].maxvalue;
-          var tl_max = $scope.topleft.features[i].maxvalue;
-          var bl_max = $scope.bottomleft.features[i].maxvalue;
-          var br_max = $scope.bottomright.features[i].maxvalue;
+          var trMax = $scope.topRight.features[i].maxValue;
+          var tlMax = $scope.topLeft.features[i].maxValue;
+          var blMax = $scope.bottomLeft.features[i].maxValue;
+          var brMax = $scope.bottomRight.features[i].maxValue;
 
-          var tr_min = $scope.topright.features[i].minvalue;
-          var tl_min = $scope.topleft.features[i].minvalue;
-          var bl_min = $scope.bottomleft.features[i].minvalue;
-          var br_min = $scope.bottomright.features[i].minvalue;
+          var trMin = $scope.topRight.features[i].minValue;
+          var tlMin = $scope.topLeft.features[i].minValue;
+          var blMin = $scope.bottomLeft.features[i].minValue;
+          var brMin = $scope.bottomRight.features[i].minValue;
 
-          var max_val = Math.round((0.25 * y * (x * (tr_max - tl_max - br_max + bl_max) + tr_max + tl_max - br_max - bl_max))
-            + (0.25 * ((x * (tr_max - tl_max + br_max - bl_max)) + tr_max + tl_max + br_max + bl_max)));
-          max_val = Math.min($scope.feature_variance + max_val, 100); // Limit max to 100
+          var maxVal = Math.round((0.25 * y * (x * (trMax - tlMax - brMax + blMax) + trMax + tlMax - brMax - blMax))
+            + (0.25 * ((x * (trMax - tlMax + brMax - blMax)) + trMax + tlMax + brMax + blMax)));
+          maxVal = Math.min($scope.featureVariance + maxVal, 100); // Limit max to 100
 
-          var min_val = Math.round(0.25 * y * (x * (tr_min - tl_min - br_min + bl_min)
-            + tr_min + tl_min - br_min - bl_min) + 0.25 * (x * (tr_min - tl_min + br_min - bl_min) + tr_min + tl_min + br_min + bl_min));
-          min_val = Math.max(min_val - $scope.feature_variance, 0); // Limit min to 0
+          var minVal = Math.round(0.25 * y * (x * (trMin - tlMin - brMin + blMin)
+            + trMin + tlMin - brMin - blMin) + 0.25 * (x * (trMin - tlMin + brMin - blMin) + trMin + tlMin + brMin + blMin));
+          minVal = Math.max(minVal - $scope.featureVariance, 0); // Limit min to 0
 
-          feature_list.push({
+          featureList.push({
             "feature": {"id": $scope.emotions[0].features[i].feature},
-            "minvalue": min_val,
-            "maxvalue": max_val
+            "minValue": minVal,
+            "maxValue": maxVal
           });
         }
-        return feature_list;
+        return featureList;
       };
 
       /**
@@ -120,7 +120,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        * @returns {number} 0 for the furthest left and 1 for furthest right
        */
       var getSelectionXPercent = function () {
-        return ($scope.imgleft - $('.plane').offset().left) / getPlaneWidth();
+        return ($scope.imgLeft - $('.plane').offset().left) / getPlaneWidth();
       };
 
       /**
@@ -128,7 +128,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        * @returns {number} 0 for the furthest top and 1 for furthest bottom
        */
       var getSelectionYPercent = function () {
-        return ($scope.imgtop - $('.plane').offset().top) / getPlaneHeight();
+        return ($scope.imgTop - $('.plane').offset().top) / getPlaneHeight();
       };
 
       /**
@@ -146,22 +146,22 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       $scope.planeClick = function (event) {
         $scope.showError = false;
-        var CSS_plane = $('.plane');
+        var CSSPlane = $('.plane');
         setImageSize();
-        setOffsets(CSS_plane.offset());
-        var plane_width = CSS_plane.outerWidth();
-        var plane_height = CSS_plane.outerHeight();
+        setOffsets(CSSPlane.offset());
+        var planeWidth = CSSPlane.outerWidth();
+        var planeHeight = CSSPlane.outerHeight();
 
         /* Calculate the location of the selection image */
-        $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
-        $scope.imgtop = event.pageY - ($scope.imgheight / 2);
+        $scope.imgLeft = event.pageX - ($scope.imgWidth / 2);
+        $scope.imgTop = event.pageY - ($scope.imgHeight / 2);
         /* Calculate the features required to request for music */
-        var feature_list = calcFeatures(event.offsetX, event.offsetY, plane_width, plane_height);
-        SongRequestService.playMatchingSongs(feature_list, addedSongs);
-        $scope.feature_list = feature_list;
+        var featureList = calcFeatures(event.offsetX, event.offsetY, planeWidth, planeHeight);
+        SongRequestService.playMatchingSongs(featureList, addedSongs);
+        $scope.featureList = featureList;
 
         // Save the current variables used for the click
-        EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionXPercent(), getSelectionYPercent());
+        EmotionsService.saveClick($scope.imgLeft, $scope.imgTop, $scope.imgWidth, $scope.imgHeight, $scope.featureList, getSelectionXPercent(), getSelectionYPercent());
       };
 
       /**
@@ -169,11 +169,11 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var updateWindow = function () {
         setImageSize();
-        var CSS_plane = $('.plane');
-        setOffsets(CSS_plane.offset());
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
-        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
-        EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionXPercent(), getSelectionYPercent());
+        var CSSPlane = $('.plane');
+        setOffsets(CSSPlane.offset());
+        $scope.imgLeft = CSSPlane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selectionImgXPercent;
+        $scope.imgTop = CSSPlane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selectionImgYPercent;
+        EmotionsService.saveClick($scope.imgLeft, $scope.imgTop, $scope.imgWidth, $scope.imgHeight, $scope.featureList, getSelectionXPercent(), getSelectionYPercent());
       };
 
       /**
@@ -181,10 +181,10 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var initWindow = function () {
         setImageSize();
-        var CSS_plane = $('.plane');
-        setOffsets(CSS_plane.offset());
-        $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
-        $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
+        var CSSPlane = $('.plane');
+        setOffsets(CSSPlane.offset());
+        $scope.imgLeft = CSSPlane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selectionImgXPercent;
+        $scope.imgTop = CSSPlane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selectionImgYPercent;
       };
 
       /**
@@ -192,13 +192,13 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var loadValues = function () {
         var prevValues = EmotionsService.getSavedValues();
-        $scope.imgwidth = prevValues.imgwidth;
-        $scope.imgheight = prevValues.imgheight;
-        $scope.imgleft = prevValues.imgleft;
-        $scope.imgtop = prevValues.imgtop;
-        $scope.feature_list = prevValues.feature_list;
+        $scope.imgWidth = prevValues.imgWidth;
+        $scope.imgHeight = prevValues.imgHeight;
+        $scope.imgLeft = prevValues.imgLeft;
+        $scope.imgTop = prevValues.imgTop;
+        $scope.featureList = prevValues.featureList;
 
-        if (getSelectionXPercent() != prevValues.selection_img_x_percent || getSelectionYPercent() != prevValues.selection_img_y_percent) {
+        if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) {
           initWindow();
         }
       };
@@ -229,16 +229,16 @@ angular.module('myApp.emotions', ['ngRoute'])
       };
 
       /* Controller body starts here */
-      $scope.feature_variance = 5;
+      $scope.featureVariance = 5;
 
       // Get labels, initialize select boxes and load existing values
       ResourcesService.Labels.emotions().$promise.then(function (data) {
         $scope.emotions = data;
         loadValues(data);
-        $scope.topleft = data[0];
-        $scope.bottomright = data[1];
-        $scope.topright = data[2];
-        $scope.bottomleft = data[3];
+        $scope.topLeft = data[0];
+        $scope.bottomRight = data[1];
+        $scope.topRight = data[2];
+        $scope.bottomLeft = data[3];
       }, function (err) {
         throw "No emotions were returned by query: " + err;
       });

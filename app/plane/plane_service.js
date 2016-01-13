@@ -13,23 +13,25 @@ PlaneService.service('PlaneService', function () {
    * @param secondSelect The feature selected as y-axis
    * @param left The css-value for where the image should be displayed
    * @param top The css-value for where the image should be displayed
-   * @param selection_img_x_percent The x-position of the selection marker in percent
-   * @param selection_img_y_percent The y-position of the selection marker in percent
+   * @param selectionImgXPercent The x-position of the selection marker in percent
+   * @param selectionImgYPercent The y-position of the selection marker in percent
    * @param width The width of the image
    * @param height The height of the image
+   * @param xPercent Where in the x-axis the user clicked in percent
+   * @param yPercent Where in the y-axis the user clicked in percent
    */
-  this.saveClick = function (variance, firstSelect, secondSelect, left, top, width, height, selection_img_x_percent, selection_img_y_percent,xpercent, ypercent) {
+  this.saveClick = function (variance, firstSelect, secondSelect, left, top, width, height, selectionImgXPercent, selectionImgYPercent,xPercent, yPercent) {
     savedValues.variance = variance;
     savedValues.firstSelect = firstSelect;
     savedValues.secondSelect = secondSelect;
-    savedValues.imgleft = left;
-    savedValues.imgtop = top;
-    savedValues.imgwidth = width;
-    savedValues.imgheight = height;
-    savedValues.selection_img_x_percent = selection_img_x_percent;
-    savedValues.selection_img_y_percent = selection_img_y_percent;
-    savedValues.xpercent = xpercent;
-    savedValues.ypercent = ypercent;
+    savedValues.imgLeft = left;
+    savedValues.imgTop = top;
+    savedValues.imgWidth = width;
+    savedValues.imgHeight = height;
+    savedValues.selectionImgXPercent = selectionImgXPercent;
+    savedValues.selectionImgYPercent = selectionImgYPercent;
+    savedValues.xPercent = xPercent;
+    savedValues.yPercent = yPercent;
   };
 
   /**
@@ -37,15 +39,15 @@ PlaneService.service('PlaneService', function () {
    * @param left The css-value for where the image should be displayed
    * @param width The width of the selection image
    * @param height The height of the selection image
-   * @param selection_img_x_percent The x-position of the selection marker in percent
-   * @param selection_img_y_percent The y-position of the selection marker in percent
+   * @param selectionImgXPercent The x-position of the selection marker in percent
+   * @param selectionImgYPercent The y-position of the selection marker in percent
    */
-  this.saveUpdatedWindow = function(left, width, height, selection_img_x_percent, selection_img_y_percent){
-    savedValues.imgleft = left;
-    savedValues.selection_img_x_percent = selection_img_x_percent;
-    savedValues.selection_img_y_percent = selection_img_y_percent;
-    savedValues.imgwidth = width;
-    savedValues.imgheight = height;
+  this.saveUpdatedWindow = function(left, width, height, selectionImgXPercent, selectionImgYPercent){
+    savedValues.imgLeft = left;
+    savedValues.selectionImgXPercent = selectionImgXPercent;
+    savedValues.selectionImgYPercent = selectionImgYPercent;
+    savedValues.imgWidth = width;
+    savedValues.imgHeight = height;
   };
 
   /**

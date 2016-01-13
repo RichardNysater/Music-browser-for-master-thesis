@@ -19,8 +19,8 @@ angular.module('myApp.player', ['ngRoute'])
        * Toggles whether songs should be autoplayed or not
        */
       $scope.toggleAutoPlay = function(){
-        $scope.autoplay = !$scope.autoplay;
-        PlayerService.saveAutoPlay($scope.autoplay);
+        $scope.autoPlay = !$scope.autoPlay;
+        PlayerService.saveAutoPlay($scope.autoPlay);
       };
 
       /**
@@ -49,10 +49,8 @@ angular.module('myApp.player', ['ngRoute'])
       };
 
       /* Controller body starts here */
-      $scope.is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; // Identify if user is using chrome.
-      $scope.autoplay = PlayerService.getAutoPlay();
+      $scope.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; // Identify if user is using chrome.
+      $scope.autoPlay = PlayerService.getAutoPlay();
 
       initVolumeSlider();
-
-
     }]);

@@ -12,18 +12,18 @@ EmotionsService.service('EmotionsService', function () {
    * @param top The css-value for where the image should be displayed
    * @param width The width of the image
    * @param height The height of the image
-   * @param feature_list The list of features to save
-   * @param selection_img_x_percent The x-position of the selection marker in percent
-   * @param selection_img_y_percent The y-position of the selection marker in percent
+   * @param featureList The list of features to save
+   * @param selectionImgXPercent The x-position of the selection marker in percent
+   * @param selectionImgYPercent The y-position of the selection marker in percent
    */
-  this.saveClick = function (left, top, width, height, feature_list, selection_img_x_percent, selection_img_y_percent) {
-    savedValues.imgleft = left;
-    savedValues.imgtop = top;
-    savedValues.imgwidth = width;
-    savedValues.imgheight = height;
-    savedValues.feature_list = feature_list;
-    savedValues.selection_img_x_percent = selection_img_x_percent;
-    savedValues.selection_img_y_percent = selection_img_y_percent;
+  this.saveClick = function (left, top, width, height, featureList, selectionImgXPercent, selectionImgYPercent) {
+    savedValues.imgLeft = left;
+    savedValues.imgTop = top;
+    savedValues.imgWidth = width;
+    savedValues.imgHeight = height;
+    savedValues.featureList = featureList;
+    savedValues.selectionImgXPercent = selectionImgXPercent;
+    savedValues.selectionImgYPercent = selectionImgYPercent;
   };
 
   /**

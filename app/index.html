@@ -66,7 +66,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-repeat="section in helpsections" ng-class="{active : isSelected(section)}">
+        <li ng-repeat="section in helpSections" ng-class="{active : isSelected(section)}">
           <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
         </li>
       </ul>
@@ -123,7 +123,7 @@
             <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
           </button>
 
-          <button type="button" class="btn btn-default" ng-class="{active: autoplay}" ng-click="toggleAutoPlay()" title="Toggle autoplay">
+          <button type="button" class="btn btn-default" ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()" title="Toggle autoplay">
             <span>Auto</span>
           </button>
 
@@ -152,12 +152,12 @@
             <p>{{ currentPostion }}</p>
           </div>
           <div class="col-xs-12 col-sm-7 col-lg-10">
-            <div ng-if="!is_chrome" class="progress seeking clickable" title="Skip to here" seek-track style="margin: 0;">
+            <div ng-if="!isChrome" class="progress seeking clickable" title="Skip to here" seek-track style="margin: 0;">
               <div class="progress-bar" role="progressbar" aria-valuenow="0"
                    aria-valuemin="0" aria-valuemax="100" ng-style="{width: (progress+'%')}">
               </div>
             </div>
-            <div ng-if="is_chrome" class="progress" style="margin: 0;"> <!-- Chrome does not support seeking for some reason -->
+            <div ng-if="isChrome" class="progress" style="margin: 0;"> <!-- Chrome does not support seeking for some reason -->
               <div class="progress-bar" role="progressbar" aria-valuenow="0"
                    aria-valuemin="0" aria-valuemax="100" ng-style="{width: (progress+'%')}">
               </div>
