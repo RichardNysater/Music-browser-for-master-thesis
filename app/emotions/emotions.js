@@ -16,7 +16,6 @@ angular.module('myApp.emotions', ['ngRoute'])
    */
   .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', '$timeout',
     function ($scope, ResourcesService, SongRequestService, EmotionsService, $timeout) {
-      var DISPLAY_SONGS = false;
       const ERROR_DURATION = 3000;
       var activeErrors = 0;
 
@@ -133,53 +132,6 @@ angular.module('myApp.emotions', ['ngRoute'])
       };
 
       /**
-       * Adds the input songs to the scope for display
-       * @param songs The songs to display
-       */
-      var displaySongs = function (songs) {
-        $scope.songs = [];
-        var songPositions = $scope.songPosition;
-        for (var i = 0; i < songs.length; i++) {
-          if (songPositions.length > 0) {
-            var random = Math.floor(Math.random() * (songPositions.length)); // Random a number between 0 and the amount of remaining positions
-            var pos = songPositions[random];
-            songPositions.splice(random, 1);
-
-            $scope.songs.push({left: pos.left, top: pos.top, songID: songs[i].songID});
-          }
-        }
-      };
-
-      /**
-       * Calculate positions around the selected position to display songs
-       * @param middle_x The x position of the click
-       * @param middle_y The y position of the click
-       * @param plane_width The width of the plane
-       * @param plane_height The height of the plane
-       * @param offset The offset for the plane
-       * @returns {Array} An array of coordinates around the selected position
-       */
-      var calcSongPositions = function (middle_x, middle_y, plane_width, plane_height, offset) {
-        var positions = [];
-        var xScale = plane_width / 30;
-        var yScale = plane_height / 30;
-
-        for (var i = -2; i < 3; i++) {
-          for (var j = -2; j < 3; j++) {
-            var left = middle_x + i * xScale;
-            var top = middle_y + j * yScale;
-            var check_left = left - offset.left;
-            var check_top = top - offset.top;
-
-            if (check_left >= 0 && check_left <= plane_width && check_top >= 0 && check_top <= plane_height) {
-              positions.push({left: left, top: top});
-            }
-          }
-        }
-        return positions;
-      };
-
-      /**
        * Sets the plane's offsets (used to position selection image)
        * @param offset The plane's offsets
        */
@@ -204,14 +156,8 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.imgleft = event.pageX - ($scope.imgwidth / 2);
         $scope.imgtop = event.pageY - ($scope.imgheight / 2);
         /* Calculate the features required to request for music */
-        $scope.songPosition = calcSongPositions($scope.imgleft, $scope.imgtop, plane_width, plane_height, CSS_plane.offset());
-
         var feature_list = calcFeatures(event.offsetX, event.offsetY, plane_width, plane_height);
-        if (DISPLAY_SONGS) {
-          SongRequestService.playMatchingSongs(feature_list, addedSongs);
-        } else {
-          SongRequestService.playMatchingSongs(feature_list, addedSongs);
-        }
+        SongRequestService.playMatchingSongs(feature_list, addedSongs);
         $scope.feature_list = feature_list;
 
         // Save the current variables used for the click
