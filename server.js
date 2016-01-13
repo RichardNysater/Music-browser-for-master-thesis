@@ -41,7 +41,7 @@ var connectToDatabase = (function*(databaseDetails) {
  */
 var createQueryForSongs = function (con, features, databaseDetails) {
 
-  var query = "SELECT * FROM ?? WHERE ";
+  var query = "SELECT songID FROM ?? WHERE ";
   var inserts = [databaseDetails.database + "." + databaseDetails.songtable];
 
   if (features.length > 1) {
@@ -62,12 +62,61 @@ var createQueryForSongs = function (con, features, databaseDetails) {
 };
 
 /**
+ * Creatures a query-string for the songs which are closest to the middle of the ranges for the perceptual features
+ * while still matching the ranges.
+ * @param con The database connection
+ * @param features The list of min-max values of features
+ * @param databaseDetails The database details
+ * @returns {string} A string which can be used to query for input songs
+ */
+var createClosestQueryForSongs = function (con, features, databaseDetails) {
+  var query = "SELECT songID, (";
+  var inserts = [];
+  var featuresUsed = 0;
+
+  // Build the take-nearest-match part of the query string (i.e ABS(Feature - (max+min)/2) for each relevant feature)
+  for (var i = 0; i < features.length; i++) {
+    if (features[i].minvalue > 0 || features[i].maxvalue < 100) { // We disregard the features that can be between 0 and 100
+      var middle = Math.round((features[i].minvalue + features[i].maxvalue) / 2);
+      query += "+ABS(?? - ?)";
+      inserts.push(features[i].feature.id, middle);
+      featuresUsed++;
+    }
+  }
+
+  // If all features were between 0-100 then we return a normal query instead
+  if (featuresUsed === 0) {
+    return createQueryForSongs(con, features, databaseDetails);
+  }
+
+  // Build the second part of the query string which ensures that all songs are inside the chosen ranges
+  query += ")/" + featuresUsed + " as distance FROM (";
+  query += "SELECT * FROM ?? WHERE ";
+  inserts.push(databaseDetails.database + "." + databaseDetails.songtable);
+
+  if (features.length > 1) {
+    for (var i = 0; i < features.length - 1; i++) {
+      query += "?? BETWEEN ? AND ? AND ";
+      inserts.push(features[i].feature.id, features[i].minvalue, features[i].maxvalue);
+    }
+  }
+  query += "?? BETWEEN ? AND ?) AS n ORDER BY distance LIMIT " + MAX_SONGS_RETURNED; // Order by distance, so closest songs are first
+  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minvalue, features[features.length - 1].maxvalue);
+  try {
+    query = mysqlHelper.format(query, inserts);
+  } catch (err) {
+    console.log('Error formatting closest songrequest query!');
+  }
+  return query;
+};
+
+/**
  * Creates a timestamp of the current time
  * @returns {string} A MySQL-formatted timestamp containing the current time in UTC+1 (Stockholm)
  */
 var getTimestamp = function () {
   var date = new Date();
-  date.setUTCHours(date.getUTCHours()+1); // Stockholm is UTC +1.
+  date.setUTCHours(date.getUTCHours() + 1); // Stockholm is UTC +1.
   return date.toISOString().slice(0, 19).replace('T', ' '); // Gets a MySQL-formatted timestamp from current time;
 };
 
@@ -105,11 +154,18 @@ var createSubmitFeedbackQuery = function (con, feedback, databaseDetails) {
  */
 router.post('/api/songrequest', function *(next) {
   var features = this.request.body.features;
+  var requestType = this.request.body.requestType;
   this.response.status = 200;
   try {
     var databaseDetails = getDatabaseDetails();
     var con = yield connectToDatabase(databaseDetails);
-    var q = createQueryForSongs(con, features, databaseDetails);
+    var q;
+    if (requestType === "Closest") {
+      q = createClosestQueryForSongs(con, features, databaseDetails);
+    }
+    else {
+      q = createQueryForSongs(con, features, databaseDetails);
+    }
     var res = yield con.query(q);
     con.end();
   } catch (err) {
