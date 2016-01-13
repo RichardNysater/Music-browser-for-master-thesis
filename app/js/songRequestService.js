@@ -100,10 +100,9 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
      * and adds them to the playlist.
      *
      * @param feature_list The features to match
-     * @param autoplay If true, start playing songs immediately
      * @param callback Call the optional callback with the results as parameter
      */
-    this.playMatchingSongs = function (feature_list, autoplay, callback) {
+    this.playMatchingSongs = function (feature_list, callback) {
 
       var request = this.sendRequest(feature_list);
 
@@ -112,16 +111,15 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
         if (res.length > 0) {
           if (angularPlayer.getPlaylist().length > 0) { // Clear the playlist if needed
             angularPlayer.clearPlaylist(function (param) {
-              addSongs(res, autoplay);
+              addSongs(res, autoPlay);
             });
           }
           else {
-            addSongs(res, autoplay);
+            addSongs(res, autoPlay);
           }
-
-          if (callback) { // Only call the callback if it exists
-            callback(res);
-          }
+        }
+        if (callback) { // Only call the callback if it exists
+          callback(res);
         }
       }, function errorCallback() {
         console.log("Failed to query for songs.");

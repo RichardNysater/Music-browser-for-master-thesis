@@ -141,7 +141,7 @@
           <p class="title-text hidden-xs" ng-if="!(currentPlaying.title && currentPlaying.artist)">
             {{ currentPlaying.id}}
           </p>
-          <p class="visible-xs col-xs-12">
+          <p class="visible-xs col-xs-12" ng-if="currentPlaying.id">
             {{currentPlaying.id}} - {{currentPostion}}/{{currentDuration}}
           </p>
         </div>

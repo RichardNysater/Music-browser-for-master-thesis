@@ -15,7 +15,7 @@
             <p>{{cur.feature.low}}</p>
           </div>
           <div class="col-xs-6">
-            <div range-slider attach-handle-values="true" show-values="true" on-handle-up="sendRequest()" min="0"
+            <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true" on-handle-up="sendRequest(cur.feature.id)" min="0"
                  max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
           </div>
           <div class="col-xs-3 text-buffer max-label">
@@ -32,4 +32,11 @@
       <div class="col-xs-4"></div>
     </div>
   </div>
+</div>
+
+
+<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: errorLeft, top: errorTop}">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  No new songs found
 </div>

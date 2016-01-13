@@ -1,5 +1,3 @@
-<div id="background"></div>
-
 <div id="plane-wrapper row">
   <div class="row">
     <div class="col-xs-2"></div>
@@ -67,3 +65,9 @@
 
 <p ng-if="imgleft" class="percent-label"> {{firstSelect.id}}: {{x_min_value}}-{{x_max_value}}%,
   {{secondSelect.id}}:{{y_min_value}}-{{y_max_value}}% </p>
+
+<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgleft-60+imgwidth/2, top: imgtop+imgheight}">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  No new songs found
+</div>

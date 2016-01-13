@@ -13,15 +13,55 @@ angular.module('myApp.sliders', ['ngRoute'])
    * The sliders controller handles the sliders for the /sliders page and allows users full control over the ranges
    * of the perceptual features.
    */
-  .controller('SlidersCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'angularPlayer', 'SlidersService',
-    function ($scope, ResourcesService, SongRequestService, angularPlayer, SlidersService) {
+  .controller('SlidersCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'angularPlayer', 'SlidersService','$timeout',
+    function ($scope, ResourcesService, SongRequestService, angularPlayer, SlidersService, $timeout) {
+      const ERROR_DURATION = 3000;
+      var activeErrors = 0;
+
+      /**
+       * Shows the "No songs found"-error
+       * @param duration The duration to show the error for
+       */
+      var showNoSongsFoundError = function (duration) {
+        $scope.showError = true;
+        activeErrors++;
+        var thisError = activeErrors;
+        $timeout(function () {
+          if (thisError === activeErrors) { // No new errors have been added during the timeout
+            $scope.showError = false;
+            activeErrors = 0;
+          }
+        }, duration);
+      };
+
+      /**
+       * Callback function which gets called when songs are to be added
+       * @param res The added songs
+       */
+      var addedSongs = function (res) {
+        if (res.length === 0) {
+          showNoSongsFoundError(ERROR_DURATION);
+        }
+      };
+
+      /**
+       * Sets the location of the error
+       * @param sliderId The id of the slider used
+       */
+      var setErrorLocation = function(sliderId){
+        var sliderOffset = $('.'+sliderId).offset();
+        $scope.errorLeft = sliderOffset.left;
+        $scope.errorTop = sliderOffset.top+35;
+
+      };
 
       /**
        * Sends a request to play songs matching the features selected in the sliders
        */
-      $scope.sendRequest = function () {
+      $scope.sendRequest = function (sliderId) {
+        setErrorLocation(sliderId);
         SlidersService.saveSliders($scope.featurelist);
-        SongRequestService.playMatchingSongs($scope.featurelist);
+        SongRequestService.playMatchingSongs($scope.featurelist,addedSongs);
       };
 
       /**

@@ -17,6 +17,34 @@ angular.module('myApp.emotions', ['ngRoute'])
   .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', '$timeout',
     function ($scope, ResourcesService, SongRequestService, EmotionsService, $timeout) {
       var DISPLAY_SONGS = false;
+      const ERROR_DURATION = 3000;
+      var activeErrors = 0;
+
+      /**
+       * Shows the "No songs found"-error
+       * @param duration The duration to show the error for
+       */
+      var showNoSongsFoundError = function (duration) {
+        $scope.showError = true;
+        activeErrors++;
+        var thisError = activeErrors;
+        $timeout(function () {
+          if (thisError === activeErrors) { // No new errors have been added during the timeout
+            $scope.showError = false;
+            activeErrors = 0;
+          }
+        }, duration);
+      };
+
+      /**
+       * Callback function which gets called when songs are to be added
+       * @param res The added songs
+       */
+      var addedSongs = function (res) {
+        if (res.length === 0) {
+          showNoSongsFoundError(ERROR_DURATION);
+        }
+      };
 
       /**
        * Set the size of the selection image
@@ -165,6 +193,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        * @param event Event
        */
       $scope.planeClick = function (event) {
+        $scope.showError = false;
         var CSS_plane = $('.plane');
         setImageSize();
         setOffsets(CSS_plane.offset());
@@ -179,9 +208,9 @@ angular.module('myApp.emotions', ['ngRoute'])
 
         var feature_list = calcFeatures(event.offsetX, event.offsetY, plane_width, plane_height);
         if (DISPLAY_SONGS) {
-          SongRequestService.playMatchingSongs(feature_list, displaySongs);
+          SongRequestService.playMatchingSongs(feature_list, addedSongs);
         } else {
-          SongRequestService.playMatchingSongs(feature_list);
+          SongRequestService.playMatchingSongs(feature_list, addedSongs);
         }
         $scope.feature_list = feature_list;
 
@@ -197,7 +226,6 @@ angular.module('myApp.emotions', ['ngRoute'])
         var CSS_plane = $('.plane');
         setOffsets(CSS_plane.offset());
         $scope.imgleft = CSS_plane.offset().left + getPlaneWidth() * EmotionsService.getSavedValues().selection_img_x_percent;
-        console.log($scope.imgleft);
         $scope.imgtop = CSS_plane.offset().top + getPlaneHeight() * EmotionsService.getSavedValues().selection_img_y_percent;
         EmotionsService.saveClick($scope.imgleft, $scope.imgtop, $scope.imgwidth, $scope.imgheight, $scope.feature_list, getSelectionXPercent(), getSelectionYPercent());
       };

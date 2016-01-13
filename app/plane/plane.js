@@ -16,6 +16,34 @@ angular.module('myApp.plane', ['ngRoute'])
    */
   .controller('PlaneCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService', '$timeout',
     function ($scope, ResourcesService, SongRequestService, PlaneService, $timeout) {
+      const ERROR_DURATION = 3000;
+      var activeErrors = 0;
+
+      /**
+       * Shows the "No songs found"-error
+       * @param duration The duration to show the error for
+       */
+      var showNoSongsFoundError = function (duration) {
+        $scope.showError = true;
+        activeErrors++;
+        var thisError = activeErrors;
+        $timeout(function () {
+          if (thisError === activeErrors) { // No new errors have been added during the timeout
+            $scope.showError = false;
+            activeErrors = 0;
+          }
+        }, duration);
+      };
+
+      /**
+       * Callback function which gets called when songs are to be added
+       * @param res The added songs
+       */
+      var addedSongs = function (res) {
+        if (res.length === 0) {
+          showNoSongsFoundError(ERROR_DURATION);
+        }
+      };
 
       /**
        * Set the size of the selection image
@@ -68,7 +96,7 @@ angular.module('myApp.plane', ['ngRoute'])
           maxvalue: $scope.y_max_value
         };
 
-        SongRequestService.playMatchingSongs([xFeature, yFeature]);
+        SongRequestService.playMatchingSongs([xFeature, yFeature],addedSongs);
       };
 
       /**
@@ -86,6 +114,7 @@ angular.module('myApp.plane', ['ngRoute'])
        * @param event Event
        */
       $scope.planeClick = function (event) {
+        $scope.showError = false;
         var CSS_plane = $('.plane');
         setImageSize();
         setOffsets(CSS_plane.offset());
