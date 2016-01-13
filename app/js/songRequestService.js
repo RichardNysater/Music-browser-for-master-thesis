@@ -3,26 +3,9 @@ var SongRequestService = angular.module('SongRequestService', ['ngResource']);
 /**
  * Handle the sending of requests for songs to the server
  */
-SongRequestService.service('SongRequestService', ['$resource', '$http', 'angularPlayer',
-  function ($resource, $http, angularPlayer) {
-    var autoPlay = false;
-    var volume = 100;
-
-    /**
-     * Sets whether or not tracks added should be autoplayed
-     * @param bool true if tracks should be autoplayed
-     */
-    this.setAutoPlay = function(bool){
-      autoPlay = bool;
-    };
-
-    /**
-     * Returns whether tracks should be autoplayed or not
-     * @returns {*} true if tracks should be autoplayed
-     */
-    this.getAutoPlay = function(){
-      return autoPlay;
-    };
+SongRequestService.service('SongRequestService', ['$resource', '$http', 'angularPlayer', 'PlayerService',
+  function ($resource, $http, angularPlayer, PlayerService) {
+    var volume = PlayerService.getVolume();
 
     /**
      * Sends a request to the server for songs matching the input features
@@ -90,7 +73,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
       }
       applyVolume();
       angularPlayer.playTrack(key);
-      if(!autoPlay) {
+      if(!PlayerService.getAutoPlay()) {
         angularPlayer.pause();
       }
     };
@@ -111,11 +94,11 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
         if (res.length > 0) {
           if (angularPlayer.getPlaylist().length > 0) { // Clear the playlist if needed
             angularPlayer.clearPlaylist(function (param) {
-              addSongs(res, autoPlay);
+              addSongs(res);
             });
           }
           else {
-            addSongs(res, autoPlay);
+            addSongs(res);
           }
         }
         if (callback) { // Only call the callback if it exists
