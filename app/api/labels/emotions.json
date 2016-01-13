@@ -71,7 +71,7 @@
       },
       {
         "feature": "Dissonance",
-        "minvalue": 40,
+        "minvalue": 20,
         "maxvalue": 100
       },
       {
@@ -194,7 +194,7 @@
       {
         "feature": "Modality",
         "minvalue": 0,
-        "maxvalue": 45
+        "maxvalue": 60
       },
       {
         "feature": "Pitch",
@@ -213,7 +213,7 @@
       },
       {
         "feature": "Speed",
-        "minvalue": 70,
+        "minvalue": 60,
         "maxvalue": 100
       },
       {
