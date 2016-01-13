@@ -58,10 +58,10 @@ angular.module('myApp.sliders', ['ngRoute'])
       /**
        * Sends a request to play songs matching the features selected in the sliders
        */
-      $scope.sendRequest = function (sliderId) {
+      $scope.sendRequestForClosest = function (sliderId) {
         setErrorLocation(sliderId);
         SlidersService.saveSliders($scope.featurelist);
-        SongRequestService.playMatchingSongs($scope.featurelist,addedSongs);
+        SongRequestService.playMatchingSongs($scope.featurelist,addedSongs,"Closest");
       };
 
       /**

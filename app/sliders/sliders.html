@@ -15,7 +15,7 @@
             <p>{{cur.feature.low}}</p>
           </div>
           <div class="col-xs-6">
-            <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true" on-handle-up="sendRequest(cur.feature.id)" min="0"
+            <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true" on-handle-up="sendRequestForClosest(cur.feature.id)" min="0"
                  max="100" model-min="cur.minvalue" model-max="cur.maxvalue"></div>
           </div>
           <div class="col-xs-3 text-buffer max-label">
