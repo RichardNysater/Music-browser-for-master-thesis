@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "Perceptual-feature-music-discover",
   "private": true,
-  "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "version": "0.0.1",
+  "description": "A music browser which uses perceptual features to discover new music",
+  "repository": "https://github.com/RichardNysater/exjobb",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.2",
