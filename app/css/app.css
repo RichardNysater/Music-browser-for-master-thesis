@@ -104,6 +104,19 @@ body {
 
 
 /* Playlist on the left */
+.playlist-item{
+    padding: 0;
+}
+
+.playlist-item-title{
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.playlist-item-remove{
+    padding: 10px 0;
+}
+
 .clickable {
     cursor: pointer;
 }

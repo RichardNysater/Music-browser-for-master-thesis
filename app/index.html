@@ -79,21 +79,23 @@
     <!-- Playlist on the left -->
     <div id="playlist" class="hidden-xs">
       <div id="list-group">
-        <div class="list-group-item playlist-item"><b>Playlist</b></div>
-        <div ng-if="playlist.length === 0" class="list-group-item playlist-item">Empty</div>
+        <div class="list-group-item playlist-item playlist-item-title"><b>Playlist</b></div>
+        <div ng-if="playlist.length === 0" class="list-group-item playlist-item playlist-item-title">Empty</div>
+
         <a ng-repeat="song in playlist" class="list-group-item playlist-item"
            ng-class="{active: currentPlaying.id == song.id}" ng-animate="{enter: 'playlist-fade-enter'}">
           <div class="row">
-            <div class="col-xs-8 clickable" play-from-playlist="song" title="Play song">
+            <div class="col-xs-8 clickable playlist-item-title" play-from-playlist="song" title="Play song">
               {{ song.title }}
             </div>
             <div class="col-xs-4">
-              <span class="glyphicon glyphicon-remove clickable" remove-from-playlist="song"
+              <span class="glyphicon glyphicon-remove clickable playlist-item-remove" remove-from-playlist="song"
                     title="Remove from playlist"
                     data-index="{{$index}}"></span>
             </div>
           </div>
         </a>
+
       </div>
     </div>
   </div>
