@@ -11,45 +11,100 @@
     content: "[";
 }
 
-/* Sticky footer */
-html {
-    position: relative;
-    min-height: 100%;
+/* Playlist on the left */
+
+.glyphicon-remove:hover {
+    color: darkred;
 }
 
+.playlist-template {
+    pointer-events: none;
+    text-align: center;
+}
+
+.playlist-item-title {
+    text-align: center;
+}
+
+.playlist-item-remove {
+    position: relative;
+    left: -3px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#playlist {
+    z-index: 100;
+    margin: 0;
+}
+
+/* Animations */
+
+/* Playlist animation */
+.playlist-item.ng-enter {
+    /* standard transition code */
+    transition: 0.5s linear all;
+    opacity: 0;
+}
+
+.playlist-item.ng-enter-stagger {
+    /* this will have a 100ms delay between each successive leave animation */
+    transition-delay: 0.1s;
+    animation-delay: 0.1s;
+
+    /* As of 1.4.4, this must always be set: it signals ngAnimate
+      to not accidentally inherit a delay property from another CSS class */
+    transition-duration: 0s;
+}
+
+.playlist-item.ng-enter.ng-enter-active {
+    /* standard transition styles */
+    opacity: 1;
+}
+
+/* Player footer animations */
+.fade-in-out {
+    transition: 1s linear all;
+    opacity: 1;
+}
+
+.fade-in-out.ng-hide {
+    opacity: 0;
+}
+
+/* Error box */
+.noSongsFoundError {
+    position: absolute;
+    text-align: center;
+    width: 20%;
+    max-width: 150px;
+    min-width: 120px;
+    padding: 0;
+    pointer-events: none;
+}
+
+/* Animations for the error box */
+.animate-if.ng-enter {
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+/* Sticky footer */
 body {
     /* Margin bottom by footer height*/
     margin-bottom: 70px;
-
     overflow-y: scroll; /* Always display scrollbar to prevent pushing content */
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-
-    /*Set the fixed height of the footer here*/
-    height: 60px;
-    background-color: #f5f5f5;
-}
-
-.menu:after {
-    content: "]";
-}
-
-.menu > li {
-    display: inline;
-}
-
-.menu > li:before {
-    content: "|";
-    padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-    content: "";
-    padding: 0;
 }
 
 /* Player footer */
@@ -79,19 +134,20 @@ body {
     left: -20px;
 }
 
-.vol-down-icon{
+.vol-down-icon {
     top: 23px;
-    left: -20px;
+    left: -25px;
 }
 
-.vol-up-icon{
+.vol-up-icon {
     top: -18px;
     left: 92px;
+    pointer-events: none;
 }
 
-.volume-bar{
-    top:10px;
-    position:relative;
+.volume-bar {
+    top: 10px;
+    position: relative;
 }
 
 .slider-selection {
@@ -101,88 +157,3 @@ body {
 .slider-track-high {
     background: #e1e1e1;
 }
-
-
-/* Playlist on the left */
-.playlist-item{
-    padding: 0;
-}
-
-.playlist-item-title{
-    text-align: center;
-    padding: 10px 15px;
-}
-
-.playlist-item-remove{
-    padding: 10px 0;
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-#playlist {
-    z-index: 100;
-    width: 110px;
-    position: absolute;
-}
-
-/* Animations */
-
-/* Playlist animation */
-.playlist-item.ng-enter {
-    /* standard transition code */
-    transition: 0.5s linear all;
-    opacity:0;
-}
-.playlist-item.ng-enter-stagger {
-    /* this will have a 100ms delay between each successive leave animation */
-    transition-delay: 0.1s;
-    animation-delay: 0.1s;
-
-    /* As of 1.4.4, this must always be set: it signals ngAnimate
-      to not accidentally inherit a delay property from another CSS class */
-    transition-duration: 0s;
-}
-.playlist-item.ng-enter.ng-enter-active {
-    /* standard transition styles */
-    opacity:1;
-}
-
-/* Player footer animations */
-.fade-in-out {
-  transition: 1s linear all;
-  opacity: 1;
-}
-
-.fade-in-out.ng-hide {
-  opacity: 0;
-}
-
-
-/* Error box */
-.noSongsFoundError{
-    position:absolute;
-    text-align: center;
-    width: 20%;
-    max-width: 150px;
-    min-width: 120px;
-    padding:0;
-    pointer-events: none;
-}
-
-/* Animations for the error box */
-.animate-if.ng-enter{
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-}
-
-.animate-if.ng-enter,
-.animate-if.ng-leave.ng-leave-active {
-    opacity:0;
-}
-
-.animate-if.ng-leave,
-.animate-if.ng-enter.ng-enter-active {
-    opacity:1;
-}
-
