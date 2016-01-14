@@ -15,10 +15,10 @@
       <div ng-if="!imgLeft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
       <div ng-if="!imgLeft" class="hint-small visible-xs "> Click inside the plane</div>
 
-      <div class="plane" ng-click='planeClick($event)'>
+      <div class="plane clickable" ng-click='planeClick($event)'>
         <div class="plane-vertical-line"></div>
         <div class="plane-horizontal-line"></div>
-        <img ng-if="imgLeft" class="selection-image" src="/img/marker.png"
+        <img ng-if="imgLeft" class="selection-image" src="/img/circle-marker.png"
              ng-style="{left: imgLeft-leftPlaneOffset, top: imgTop-topPlaneOffset, width: imgWidth, height: imgHeight}">
       </div>
     </div>
@@ -65,8 +65,8 @@
 <p ng-if="imgLeft" class="percent-label"> {{firstSelect.id}}: {{xMinValue}}-{{xMaxValue}}%,
   {{secondSelect.id}}:{{yMinValue}}-{{yMaxValue}}% </p>
 
-<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgLeft-60+imgWidth/2, top: imgTop+imgHeight}">
+<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgLeft-leftPlaneOffset+leftPlaneOffset/9 + imgWidth/2, top: imgTop-topPlaneOffset+topPlaneOffset/2 + imgHeight}">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
-  No new songs found
+  No songs found
 </div>
