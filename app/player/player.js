@@ -28,8 +28,24 @@ angular.module('myApp.player', ['ngRoute'])
        * @param volume The volume to set songs to (0-100)
        */
       $scope.setVolume = function(volume){
+        $scope.volume = volume;
         SongRequestService.setVolume(volume);
         PlayerService.saveVolume(volume);
+      };
+
+      /**
+       * Toggles mute on or off
+       */
+      $scope.toggleMute = function(){
+        if($scope.volume == 0) {
+          $scope.setVolume(unMutedVolume);
+          $('#volume-slider').slider('setValue',unMutedVolume);
+        }
+        else{
+          unMutedVolume = $scope.volume;
+          $scope.setVolume(0);
+          $('#volume-slider').slider('setValue',0);
+        }
       };
 
       /**
@@ -37,7 +53,7 @@ angular.module('myApp.player', ['ngRoute'])
        */
       var initVolumeSlider = function(){
         var volumeSlider = $("#volume-slider");
-        volumeSlider.slider({ min: 0, max: 100, value: PlayerService.getVolume() });
+        volumeSlider.slider({ min: 0, max: 100, value: $scope.volume });
 
         volumeSlider.on("slide", function(slideEvt) {
           $scope.setVolume(slideEvt.value);
@@ -49,6 +65,8 @@ angular.module('myApp.player', ['ngRoute'])
       };
 
       /* Controller body starts here */
+      var unMutedVolume = PlayerService.getVolume();
+      $scope.volume = PlayerService.getVolume();
       $scope.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; // Identify if user is using chrome.
       $scope.autoPlay = PlayerService.getAutoPlay();
 
