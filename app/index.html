@@ -74,41 +74,41 @@
   </div>
 </nav>
 
-<div class="container-fluid">
-  <div class="row">
-    <!-- Playlist on the left -->
-    <div id="playlist" class="hidden-xs">
-      <div id="list-group">
-        <div class="list-group-item playlist-item playlist-item-title"><b>Playlist</b></div>
-        <div ng-if="playlist.length === 0" class="list-group-item playlist-item playlist-item-title">Empty</div>
-
-        <a ng-repeat="song in playlist" class="list-group-item playlist-item"
-           ng-class="{active: currentPlaying.id == song.id}" ng-animate="{enter: 'playlist-fade-enter'}">
-          <div class="row">
-            <div class="col-xs-8 clickable playlist-item-title" play-from-playlist="song" title="Play song">
-              {{ song.title }}
-            </div>
-            <div class="col-xs-4">
-              <span class="glyphicon glyphicon-remove clickable playlist-item-remove" remove-from-playlist="song"
-                    title="Remove from playlist"
-                    data-index="{{$index}}"></span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </div>
-</div>
 <!-- content -->
 <div class="container">
-  <div class="content" ng-view></div>
+  <div class="row">
+    <!-- Playlist on the left -->
+    <div class="hidden-xs col-sm-2">
+      <div id="playlist">
+        <div id="list-group">
+          <div class="list-group-item playlist-item playlist-template"><b style="font-size:15px">Playlist</b></div>
+          <div ng-if="playlist.length === 0" class="list-group-item playlist-item playlist-template">Empty</div>
+
+          <a ng-repeat="song in playlist" class="list-group-item playlist-item clickable"
+             ng-class="{active: currentPlaying.id == song.id}" ng-animate="{enter: 'playlist-fade-enter'}" play-from-playlist="song">
+            <div class="row">
+              <div class="col-md-9 col-sm-8 playlist-item-title"  title="Play song">
+                {{ song.title }}
+              </div>
+              <div class="col-md-3 col-sm-4">
+                <div class="glyphicon glyphicon-remove clickable playlist-item-remove" ng-click="$event.stopPropagation()" remove-from-playlist="song"
+                     title="Remove from playlist"
+                     data-index="{{$index}}"></div>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <div class="content col-sm-9" ng-view></div>
+  </div>
 </div>
 
 
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController">
-  <div class="fade-in-out container">
+  <div class="container">
     <div class="row">
 
       <!-- Left player buttons -->
@@ -123,12 +123,13 @@
             <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
           </button>
 
-          <button type="button" class="btn btn-default" ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()" title="Toggle autoplay">
-            <span>Auto</span>
-          </button>
-
           <button type="button" class="btn btn-default" next-track title="Next track">
             <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="btn btn-default" ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()"
+                  title="Toggle autoplay">
+            <span>Auto</span>
           </button>
         </div>
       </div>
@@ -136,7 +137,7 @@
       <!-- Song track bar -->
       <div class="col-xs-5 col-sm-6 col-lg-8">
         <div class="row">
-          <p class="text-center" ng-show="playlist.length === 0" >No tracks in playlist</p>
+          <p class="text-center" ng-show="playlist.length === 0">No tracks in playlist</p>
           <p class="artist-title-text hidden-xs" ng-if="currentPlaying.title && currentPlaying.artist">
             {{ currentPlaying.title }} by {{ currentPlaying.artist }}
           </p>
@@ -151,13 +152,15 @@
           <div class="hidden-xs col-sm-3 col-lg-1 cur-duration">
             <p>{{ currentPostion }}</p>
           </div>
-          <div class="col-xs-12 col-sm-7 col-lg-10">
-            <div ng-if="!isChrome" class="progress seeking clickable" title="Skip to here" seek-track style="margin: 0;">
+          <div class="col-xs-12 col-sm-7 col-lg-10 ">
+            <div ng-if="!isChrome" class="progress seeking clickable" title="Skip to here" seek-track
+                 style="margin: 0;">
               <div class="progress-bar" role="progressbar" aria-valuenow="0"
                    aria-valuemin="0" aria-valuemax="100" ng-style="{width: (progress+'%')}">
               </div>
             </div>
-            <div ng-if="isChrome" class="progress" style="margin: 0;"> <!-- Chrome does not support seeking for some reason -->
+            <div ng-if="isChrome" class="progress" style="margin: 0;">
+              <!-- Chrome does not support seeking for some reason -->
               <div class="progress-bar" role="progressbar" aria-valuenow="0"
                    aria-valuemin="0" aria-valuemax="100" ng-style="{width: (progress+'%')}">
               </div>
@@ -172,15 +175,18 @@
       <div class="hidden-xs"> <!-- Hide for small viewports -->
         <!-- Right player buttons -->
         <div class="col-sm-2 col-lg-2">
-            <div class="volume-bar">
-              <span class="glyphicon glyphicon-volume-down vol-down-icon"></span>
-            </div>
-            <div class="volume-bar">
-              <input id="volume-slider" class="volume-bar" type="text" data-slider-step="1" style="width: 80px">
-            </div>
-            <div class="volume-bar">
-              <span class="glyphicon glyphicon-volume-up vol-up-icon"></span>
-            </div>
+          <div class="volume-bar">
+            <span ng-if="volume!== 0" class="glyphicon glyphicon-volume-down vol-down-icon"
+                  ng-click="muteVolume()"></span>
+            <span ng-if="volume === 0" class="glyphicon glyphicon-volume-off vol-down-icon"
+                  ng-click="muteVolume()"></span>
+          </div>
+          <div class="volume-bar">
+            <input id="volume-slider" class="volume-bar" type="text" data-slider-step="1" style="width: 80px">
+          </div>
+          <div class="volume-bar">
+            <span class="glyphicon glyphicon-volume-up vol-up-icon"></span>
+          </div>
         </div>
       </div>
     </div>

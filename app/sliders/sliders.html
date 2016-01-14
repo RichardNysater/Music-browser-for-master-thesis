@@ -1,7 +1,6 @@
 <div class="row">
-  <div class="col-sm-1 hidden-xs"></div>
-  <div class="col-sm-11 col-xs-12">
-    <div class="row">
+  <div class="col-xs-12">
+    <div class="row slider-wrapper">
       <div ng-repeat="cur in featureList" class="col-xs-12 col-sm-6">
         <div class="row">
           <div class="col-xs-3"></div>
@@ -14,8 +13,9 @@
           <div class="col-xs-3 text-buffer min-label">
             <p>{{cur.feature.low}}</p>
           </div>
-          <div class="col-xs-6">
-            <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true" on-handle-up="sendRequestForClosest(cur.feature.id)" min="0"
+          <div class="col-xs-6 slider">
+            <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true"
+                 on-handle-up="sendRequestForClosest(cur.feature.id)" min="0"
                  max="100" model-min="cur.minValue" model-max="cur.maxValue"></div>
           </div>
           <div class="col-xs-3 text-buffer max-label">
@@ -35,8 +35,9 @@
 </div>
 
 
-<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: errorLeft, top: errorTop}">
+<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert"
+     ng-style="{left: errorLeft, top: errorTop}">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
-  No new songs found
+  No songs found
 </div>

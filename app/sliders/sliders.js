@@ -49,9 +49,10 @@ angular.module('myApp.sliders', ['ngRoute'])
        * @param sliderId The id of the slider used
        */
       var setErrorLocation = function(sliderId){
-        var sliderOffset = $('.'+sliderId).offset();
-        $scope.errorLeft = sliderOffset.left;
-        $scope.errorTop = sliderOffset.top+35;
+        var slider = $('.'+sliderId);
+        var sliderWrapper = $('.slider-wrapper').offset();
+        $scope.errorLeft = slider.offset().left-sliderWrapper.left+10;
+        $scope.errorTop = slider.offset().top-sliderWrapper.top+45;
       };
 
       /**
