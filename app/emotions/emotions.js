@@ -50,8 +50,8 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var setImageSize = function () {
         var CSSPlane = $('.plane');
-        $scope.imgWidth = CSSPlane.outerWidth() * 1 / (100 / ($scope.featureVariance));
-        $scope.imgHeight = CSSPlane.outerHeight() * 1 / (100 / ($scope.featureVariance));
+        $scope.imgWidth = CSSPlane.outerWidth() * 1 / (100 / ($scope.featureVariance)*1.1);
+        $scope.imgHeight = CSSPlane.outerHeight() * 1 / (100 / ($scope.featureVariance)*1.1);
       };
 
       /**
