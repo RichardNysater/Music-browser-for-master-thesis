@@ -62,6 +62,7 @@ angular.module('myApp.sliders', ['ngRoute'])
         setErrorLocation(sliderId);
         SlidersService.saveSliders($scope.featureList);
         SongRequestService.playMatchingSongs($scope.featureList,addedSongs,"Closest");
+        SlidersService.setLastRequest(SongRequestService.getRequestAmount());
       };
 
       /**
@@ -86,6 +87,9 @@ angular.module('myApp.sliders', ['ngRoute'])
        */
       var loadValues = function () {
         $scope.featureList = SlidersService.getSavedValues().features;
+        if(SlidersService.getLastRequest() !== SongRequestService.getRequestAmount()){
+          $scope.resetSliders();
+        }
       };
 
       /* Controller body starts here */

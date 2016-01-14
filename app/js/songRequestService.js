@@ -6,6 +6,7 @@ var SongRequestService = angular.module('SongRequestService', ['ngResource']);
 SongRequestService.service('SongRequestService', ['$resource', '$http', 'angularPlayer', 'PlayerService',
   function ($resource, $http, angularPlayer, PlayerService) {
     var volume = PlayerService.getVolume();
+    var requestAmount = 0;
 
     /**
      * Sends a request to the server for songs matching the input features with the given requestType
@@ -22,7 +23,16 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
           requestType: requestType
         }
       };
+      requestAmount++;
       return $http(req);
+    };
+
+    /**
+     * Returns the amount of requests gotten
+     * @returns {number} An integer with containing the amount of requests done
+     */
+    this.getRequestAmount = function(){
+      return requestAmount
     };
 
     /**

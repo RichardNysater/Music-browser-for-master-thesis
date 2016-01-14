@@ -5,6 +5,24 @@ var EmotionsService = angular.module('EmotionsService', []);
  */
 EmotionsService.service('EmotionsService', function () {
   var savedValues = {};
+  var lastRequest;
+
+  /**
+   * Sets which request number was last sent
+   * @param requestNumber The number of the last request sent
+   */
+  this.setLastRequest = function(requestNumber){
+    lastRequest = requestNumber;
+  };
+
+  /**
+   * Gets the number of the last request sent
+   * @returns {*} An integer showing which request was last sent by the controller
+   */
+  this.getLastRequest = function(){
+    return lastRequest;
+  };
+
 
   /**
    * Should be called to save values for a click in the 2d-plane.

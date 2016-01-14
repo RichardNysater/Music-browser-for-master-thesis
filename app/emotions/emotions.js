@@ -158,6 +158,7 @@ angular.module('myApp.emotions', ['ngRoute'])
         /* Calculate the features required to request for music */
         var featureList = calcFeatures(event.offsetX, event.offsetY, planeWidth, planeHeight);
         SongRequestService.playMatchingSongs(featureList, addedSongs);
+        EmotionsService.setLastRequest(SongRequestService.getRequestAmount());
         $scope.featureList = featureList;
 
         // Save the current variables used for the click
@@ -192,14 +193,16 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var loadValues = function () {
         var prevValues = EmotionsService.getSavedValues();
-        $scope.imgWidth = prevValues.imgWidth;
-        $scope.imgHeight = prevValues.imgHeight;
-        $scope.imgLeft = prevValues.imgLeft;
-        $scope.imgTop = prevValues.imgTop;
-        $scope.featureList = prevValues.featureList;
+        if(EmotionsService.getLastRequest() === SongRequestService.getRequestAmount()) {
+          $scope.imgWidth = prevValues.imgWidth;
+          $scope.imgHeight = prevValues.imgHeight;
+          $scope.imgLeft = prevValues.imgLeft;
+          $scope.imgTop = prevValues.imgTop;
+          $scope.featureList = prevValues.featureList;
 
-        if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) {
-          initWindow();
+          if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) {
+            initWindow();
+          }
         }
       };
 

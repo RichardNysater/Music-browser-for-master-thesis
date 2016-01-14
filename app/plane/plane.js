@@ -96,7 +96,8 @@ angular.module('myApp.plane', ['ngRoute'])
           maxValue: $scope.yMaxValue
         };
 
-        SongRequestService.playMatchingSongs([xFeature, yFeature],addedSongs);
+        SongRequestService.playMatchingSongs([xFeature, yFeature], addedSongs);
+        PlaneService.setLastRequest(SongRequestService.getRequestAmount());
       };
 
       /**
@@ -198,17 +199,6 @@ angular.module('myApp.plane', ['ngRoute'])
         else {
           $scope.featureVariance = 13; // Default variance
         }
-        $scope.imgWidth = prevValues.imgWidth;
-        $scope.imgHeight = prevValues.imgHeight;
-        $scope.imgLeft = prevValues.imgLeft;
-        $scope.imgTop = prevValues.imgTop;
-
-        if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) { // Update the window if required
-          initWindow();
-        }
-
-        $scope.xPercent = prevValues.xPercent;
-        $scope.yPercent = prevValues.yPercent;
 
         for (var i = 0; i < features.length; i++) { // Existing features should be selected in the select boxes
           if (prevValues.firstSelect && features[i].id == prevValues.firstSelect.id) {
@@ -220,7 +210,23 @@ angular.module('myApp.plane', ['ngRoute'])
           }
         }
 
-        setFeatureRanges();
+        // Only load selection marker location if no request was done elsewhere
+        if (SongRequestService.getRequestAmount() === PlaneService.getLastRequest()) {
+          $scope.imgWidth = prevValues.imgWidth;
+          $scope.imgHeight = prevValues.imgHeight;
+          $scope.imgLeft = prevValues.imgLeft;
+          $scope.imgTop = prevValues.imgTop;
+
+          if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) { // Update the window if required
+            initWindow();
+          }
+
+          $scope.xPercent = prevValues.xPercent;
+          $scope.yPercent = prevValues.yPercent;
+
+
+          setFeatureRanges();
+        }
       };
 
       /**
