@@ -1,11 +1,11 @@
-<div id="row">
+<div id="row" >
   <div class="row">
     <div class="col-xs-4 vertical-label">
-      <p class="plane-label">{{topLeft.emotion}}</p>
+      <p class="plane-label" ng-cloak>{{topLeft.emotion}}</p>
     </div>
     <div class="col-xs-4"></div>
     <div class="col-xs-4 vertical-label">
-      <p class="plane-label">{{topRight.emotion}}</p>
+      <p class="plane-label" ng-cloak>{{topRight.emotion}}</p>
     </div>
   </div>
   <div class="row">
@@ -16,11 +16,11 @@
       <div ng-if="!imgLeft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
       <div ng-if="!imgLeft" class="hint-small visible-xs "> Click inside the plane</div>
 
-      <div class="plane clickable" ng-click='planeClick($event)'>
+      <div class="plane clickable" ng-click='planeClick($event)' ng-cloak>
         <div class="plane-vertical-line"></div>
         <div class="plane-horizontal-line"></div>
         <img ng-if="imgLeft" class="selection-image" src="/img/cross-marker.png"
-             ng-style="{left: imgLeft-leftPlaneOffset, top: imgTop-topPlaneOffset, width: imgWidth, height: imgHeight}">
+             ng-style="{left: imgLeft-leftPlaneOffset, top: imgTop-topPlaneOffset, width: imgWidth, height: imgHeight}" ng-cloak>
       </div>
     </div>
     <div class="col-xs-2 ">
@@ -29,18 +29,18 @@
 
   <div class="row">
     <div class="col-xs-4 vertical-label">
-      <p class="plane-label">{{bottomLeft.emotion}}</p>
+      <p class="plane-label" ng-cloak>{{bottomLeft.emotion}}</p>
     </div>
     <div class="col-xs-4"></div>
     <div class="col-xs-4 vertical-label">
-      <p class="plane-label">{{bottomRight.emotion}}</p>
+      <p class="plane-label" ng-cloak>{{bottomRight.emotion}}</p>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <h2 class="text-center" ng-if="feature_list">Perceptual feature ranges</h2>
-  <div class="col-sm-6 col-xs-12" ng-repeat="cur in featureList">
+  <h2 class="text-center" ng-if="featureList">Perceptual feature ranges</h2>
+  <div class="col-sm-6 col-xs-12" ng-repeat="cur in featureList" ng-cloak>
     <div class="row">
       <div class="col-xs-4 col-sm-5 v-center text-right">
         <p class="perceptual-names"><b>{{cur.feature.id}}:</b></p>
@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgLeft-60-leftPlaneOffset, top: imgTop+30-topPlaneOffset}">
+<div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgLeft-60-leftPlaneOffset, top: imgTop+30-topPlaneOffset}" ng-cloak>
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
   No songs found

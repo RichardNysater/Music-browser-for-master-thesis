@@ -3,7 +3,7 @@
 
     <p>When you are done using the application, please answer the questions below. Thank you!</p>
 
-    <div class="evaluation-wrapper" ng-repeat="evaluation in evaluations">
+    <div class="evaluation-wrapper" ng-repeat="evaluation in evaluations" ng-cloak>
       <h3>{{evaluation.eval_header}}</h3>
       <div class="row" ng-repeat="question in evaluation.questions">
         <div class="text col-xs-12"> {{question.text}}</div>
