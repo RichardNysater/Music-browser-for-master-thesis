@@ -1,6 +1,7 @@
 var serveFolder = require('koa-static-folder');
 var serve = require('koa-static');
 var koa = require('koa');
+var range = require('koa-range');
 var app = koa();
 var router = require('koa-router')();
 var bodyParser = require('koa-bodyparser');
@@ -206,7 +207,7 @@ router.post('/api/feedbacksubmit', function *(next) {
   }
 });
 
-
+app.use(range);
 app.use(bodyParser());
 app.use(serveFolder('./node_modules/bootstrap/dist')); //Serve the bootstrap dist folder
 app.use(serve('app/')); //Serve the application folder
