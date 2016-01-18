@@ -7,6 +7,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
   function ($resource, $http, angularPlayer, PlayerService) {
     var volume = PlayerService.getVolume();
     var requestAmount = 0;
+    const MUSIC_FORMAT = "mp3";
 
     /**
      * Sends a request to the server for songs matching the input features with the given requestType
@@ -63,15 +64,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
       var key = null;
       for (var i = 0; i < songs.length; i++) {
         var id = songs[i].songID;
-
-        var url = "/api/music/";
-
-        if (window.soundManager.canPlayMIME("audio/ogg")) { // Try to play the ogg-format if it's supported, otherwise default to mp3
-          url += id + ".ogg";
-        }
-        else {
-          url += id + ".mp3";
-        }
+        var url = "/api/music/"+id+"."+MUSIC_FORMAT;
 
         var tmp = angularPlayer.addTrack({
           "title": id,
