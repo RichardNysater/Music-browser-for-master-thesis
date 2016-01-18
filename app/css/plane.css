@@ -107,6 +107,7 @@
     pointer-events: none;
     font-family: Nevis;
     font-size: 24px;
+    height: 34.28px; /* Set the height to prevent pop-in effects */
     margin: 0;
 }
 
