@@ -193,7 +193,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var loadValues = function () {
         var prevValues = EmotionsService.getSavedValues();
-        if(EmotionsService.getLastRequest() === SongRequestService.getRequestAmount()) {
+        if(EmotionsService.getLastRequest() == SongRequestService.getRequestAmount()) {
           $scope.imgWidth = prevValues.imgWidth;
           $scope.imgHeight = prevValues.imgHeight;
           $scope.imgLeft = prevValues.imgLeft;
@@ -202,6 +202,9 @@ angular.module('myApp.emotions', ['ngRoute'])
 
           if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) {
             initWindow();
+          }
+          else{
+            setOffsets($('.plane').offset());
           }
         }
       };

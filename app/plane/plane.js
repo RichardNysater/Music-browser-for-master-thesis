@@ -220,6 +220,9 @@ angular.module('myApp.plane', ['ngRoute'])
           if (getSelectionXPercent() != prevValues.selectionImgXPercent || getSelectionYPercent() != prevValues.selectionImgYPercent) { // Update the window if required
             initWindow();
           }
+          else{
+            setOffsets($('.plane').offset());
+          }
 
           $scope.xPercent = prevValues.xPercent;
           $scope.yPercent = prevValues.yPercent;
@@ -261,13 +264,16 @@ angular.module('myApp.plane', ['ngRoute'])
       ResourcesService.Features.query().$promise.then(function (data) {
         $scope.features = data;
         loadValues(data);
-
         if (!$scope.firstSelect) {
           $scope.firstSelect = $scope.features[0];
         }
         if (!$scope.secondSelect) {
           $scope.secondSelect = $scope.features[$scope.features.length - 1];
         }
+
+        $timeout(function () {
+          $scope.pageLoaded = true;
+        }, 400);
       }, function (err) {
         throw "No features were returned by query: " + err;
       });
