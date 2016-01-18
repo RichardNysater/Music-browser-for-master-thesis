@@ -128,15 +128,15 @@
           </button>
 
           <button type="button" class="btn btn-default" play-pause-toggle title="Toggle play/pause">
-            <span ng-if=!isPlaying class="glyphicon glyphicon-play" aria-hidden="true"></span>
-            <span ng-if=isPlaying class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+            <span ng-if="playlist.length === 0 || !isPlaying" class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            <span ng-if="playlist.length !== 0 && isPlaying" class="glyphicon glyphicon-pause" aria-hidden="true"></span>
           </button>
 
           <button type="button" class="btn btn-default" next-track title="Next track">
             <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
           </button>
 
-          <button type="button" class="btn btn-default" ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()"
+          <button type="button" class="btn btn-default " ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()"
                   title="Toggle autoplay">
             <span>Auto</span>
           </button>
@@ -147,13 +147,13 @@
       <div class="col-xs-5 col-sm-6 col-lg-8">
         <div class="row">
           <p class="text-center" ng-show="playlist.length === 0">No tracks in playlist</p>
-          <p class="artist-title-text hidden-xs" ng-if="currentPlaying.title && currentPlaying.artist">
+          <p class="artist-title-text hidden-xs" ng-if="playlist.length !== 0 && currentPlaying.title && currentPlaying.artist">
             {{ currentPlaying.title }} by {{ currentPlaying.artist }}
           </p>
-          <p class="title-text hidden-xs" ng-if="!(currentPlaying.title && currentPlaying.artist)">
+          <p class="title-text hidden-xs" ng-if="playlist.length !== 0 && !(currentPlaying.title && currentPlaying.artist)">
             {{ currentPlaying.id}}
           </p>
-          <p class="visible-xs col-xs-12" ng-if="currentPlaying.id">
+          <p class="visible-xs col-xs-12" ng-if="playlist.length !== 0 && currentPlaying.id">
             {{currentPlaying.id}} - {{currentPostion}}/{{currentDuration}}
           </p>
         </div>
