@@ -157,3 +157,7 @@ body {
 .slider-track-high {
     background: #e1e1e1;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
