@@ -38,7 +38,7 @@ PlaneService.service('PlaneService', function () {
    * @param yPercent Where in the y-axis the user clicked in percent
    */
   this.saveClick = function (variance, firstSelect, secondSelect, left, top, width, height, selectionImgXPercent, selectionImgYPercent,xPercent, yPercent) {
-    savedValues.variance = variance;
+    savedValues.featureVariance = variance;
     savedValues.firstSelect = firstSelect;
     savedValues.secondSelect = secondSelect;
     savedValues.imgLeft = left;
