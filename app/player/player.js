@@ -12,8 +12,8 @@ angular.module('myApp.player', ['ngRoute'])
   /**
    * The PlayerController handles the music player at the bottom of the website.
    */
-  .controller('PlayerController', ['$scope','SongRequestService','PlayerService',
-    function ($scope,SongRequestService,PlayerService) {
+  .controller('PlayerController', ['$scope','SongRequestService','PlayerService','angularPlayer',
+    function ($scope,SongRequestService,PlayerService, angularPlayer) {
 
       /**
        * Toggles whether songs should be autoplayed or not
@@ -31,6 +31,24 @@ angular.module('myApp.player', ['ngRoute'])
         $scope.volume = volume;
         SongRequestService.setVolume(volume);
         PlayerService.saveVolume(volume);
+      };
+
+      /**
+       * Starts playing the next track in the playlist
+       * If there is no track, the current track is set to the first track in the playlist and music is paused
+       * This function should be called whenever a song has been removed from the playlist
+       *
+       * @param $index The index (in the playlist) where the removed song was
+       * @param song The removed song
+       */
+      $scope.songRemoved = function($index, song){
+        if($scope.playlist[$index] && song.id === angularPlayer.getCurrentTrack()){
+          angularPlayer.playTrack($scope.playlist[$index].id);
+        }
+        else if($scope.playlist[0] && song.id === angularPlayer.getCurrentTrack()){
+          angularPlayer.playTrack($scope.playlist[0].id);
+          angularPlayer.pause();
+        }
       };
 
       /**

@@ -81,7 +81,7 @@
 </nav>
 
 <!-- content -->
-<div class="container">
+<div class="container" ng-controller="PlayerController">
   <div class="row">
     <!-- Playlist on the left -->
     <div class="hidden-xs col-sm-2">
@@ -100,7 +100,7 @@
               </div>
               <div class="col-md-3 col-sm-4">
                 <div class="glyphicon glyphicon-remove clickable playlist-item-remove"
-                     ng-click="$event.stopPropagation()" remove-from-playlist="song"
+                     ng-click="$event.stopPropagation(); songRemoved($index, song)" remove-from-playlist="song"
                      title="Remove from playlist"
                      data-index="{{$index}}"></div>
               </div>
