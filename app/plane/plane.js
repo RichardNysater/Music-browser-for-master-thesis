@@ -193,8 +193,8 @@ angular.module('myApp.plane', ['ngRoute'])
        */
       var loadValues = function (features) {
         var prevValues = PlaneService.getSavedValues();
-        if (prevValues.variance) {
-          $scope.featureVariance = prevValues.variance;
+        if (prevValues.featureVariance) {
+          $scope.featureVariance = prevValues.featureVariance;
         }
         else {
           $scope.featureVariance = 13; // Default variance
@@ -227,7 +227,6 @@ angular.module('myApp.plane', ['ngRoute'])
           $scope.xPercent = prevValues.xPercent;
           $scope.yPercent = prevValues.yPercent;
 
-
           setFeatureRanges();
         }
       };
@@ -257,6 +256,18 @@ angular.module('myApp.plane', ['ngRoute'])
         });
       };
 
+      /**
+       * Sets that the page has fully loaded after 400 ms
+       */
+      var setPageLoaded = function() {
+        $scope.pageLoaded = true;
+        $timeout(function () {
+          $scope.sliderLoaded = true;
+          $timeout(function () {
+            $scope.$broadcast('rzSliderForceRender'); // Tell the selection slider to render itself
+          });
+        }, 400);
+      };
 
       /* Controller body starts here */
 
@@ -270,10 +281,7 @@ angular.module('myApp.plane', ['ngRoute'])
         if (!$scope.secondSelect) {
           $scope.secondSelect = $scope.features[$scope.features.length - 1];
         }
-
-        $timeout(function () {
-          $scope.pageLoaded = true;
-        }, 400);
+        setPageLoaded();
       }, function (err) {
         throw "No features were returned by query: " + err;
       });

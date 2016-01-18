@@ -234,6 +234,15 @@ angular.module('myApp.emotions', ['ngRoute'])
         });
       };
 
+      /**
+       * Sets that the page has fully loaded
+       */
+      var setPageLoaded = function() {
+        $timeout(function () {
+          $scope.pageLoaded = true;
+        });
+      };
+
       /* Controller body starts here */
       $scope.featureVariance = 5;
 
@@ -245,6 +254,7 @@ angular.module('myApp.emotions', ['ngRoute'])
         $scope.bottomRight = data[1];
         $scope.topRight = data[2];
         $scope.bottomLeft = data[3];
+        setPageLoaded();
       }, function (err) {
         throw "No emotions were returned by query: " + err;
       });

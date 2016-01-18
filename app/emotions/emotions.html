@@ -13,8 +13,8 @@
     </div>
     <div class="col-xs-8">
       <!--Hide hint after user clicks-->
-      <div ng-if="!imgLeft" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
-      <div ng-if="!imgLeft" class="hint-small visible-xs "> Click inside the plane</div>
+      <div ng-if="!imgLeft && pageLoaded" class="hint-large hidden-xs "> Click anywhere inside the plane to begin</div>
+      <div ng-if="!imgLeft && pageLoaded" class="hint-small visible-xs "> Click inside the plane</div>
 
       <div class="plane clickable" ng-click='planeClick($event)'>
         <div class="plane-vertical-line"></div>

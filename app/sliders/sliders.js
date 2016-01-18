@@ -113,10 +113,10 @@ angular.module('myApp.sliders', ['ngRoute'])
           for (var i = 0; i < data.length; i++) {
             $scope.featureList.push({"feature": data[i], "minValue": 0, "maxValue": 100});
           }
+          setPageLoaded();
         }, function (err) {
           throw "No features were returned by query: " + err;
         });
-        setPageLoaded();
       }
       else {
         loadValues();

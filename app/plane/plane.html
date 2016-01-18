@@ -12,8 +12,8 @@
     </div>
     <div class="col-xs-8">
       <!--Hide hint after user clicks-->
-      <div ng-if="!imgLeft" class="hint-large hidden-xs " ng-cloak> Click anywhere inside the plane to begin</div>
-      <div ng-if="!imgLeft" class="hint-small visible-xs " ng-cloak> Click inside the plane</div>
+      <div ng-if="!imgLeft && pageLoaded" class="hint-large hidden-xs" ng-cloak> Click anywhere inside the plane to begin</div>
+      <div ng-if="!imgLeft && pageLoaded" class="hint-small visible-xs" ng-cloak> Click inside the plane</div>
 
       <div class="plane clickable" ng-click='planeClick($event)'>
         <div class="plane-vertical-line"></div>
@@ -36,8 +36,8 @@
   </div>
 </div>
 
-<div id="label-wrapper row" ng-show="pageLoaded">
-  <form id="label-select" role="form">
+<div id="label-wrapper row" ng-show="sliderLoaded">
+  <form id="label-select" role="form" >
     <div class="row">
       <div class="form-group col-xs-6">
         <label for="sel1">X-axis</label>
@@ -64,7 +64,7 @@
   </form>
 </div>
 
-<p ng-if="imgLeft" class="percent-label" ng-cloak> {{firstSelect.id}}: {{xMinValue}}-{{xMaxValue}}%,
+<p ng-if="imgLeft" class="percent-label" ng-cloak ng-show="sliderLoaded"> {{firstSelect.id}}: {{xMinValue}}-{{xMaxValue}}%,
   {{secondSelect.id}}:{{yMinValue}}-{{yMaxValue}}% </p>
 
 <div ng-if="showError && imgLeft" class="alert alert-danger noSongsFoundError animate-if" role="alert"
