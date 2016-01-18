@@ -92,6 +92,15 @@ angular.module('myApp.sliders', ['ngRoute'])
         }
       };
 
+      /**
+       * Sets that the page has fully loaded after 200 ms
+       */
+      var setPageLoaded = function() {
+        $timeout(function () {
+          $scope.pageLoaded = true;
+        }, 200);
+      };
+
       /* Controller body starts here */
 
       $scope.featureList = [];
@@ -107,9 +116,12 @@ angular.module('myApp.sliders', ['ngRoute'])
         }, function (err) {
           throw "No features were returned by query: " + err;
         });
+        setPageLoaded();
       }
       else {
         loadValues();
+        setPageLoaded();
       }
+
 
     }]);
