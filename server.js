@@ -125,17 +125,19 @@ var getTimestamp = function () {
  * Create a query-string for submitting feedback
  * @param con The database connection
  * @param feedback User feedback containing userID, questionID and rating or comment
+ * @param userIP The IP of the connected user
  * @param databaseDetails The database details
  * @returns {string} A string which can be used to submit the given feedback
  */
-var createSubmitFeedbackQuery = function (con, feedback, databaseDetails) {
-  var query = "INSERT INTO ?? (userID,timestamp,questionID,rating,comment) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+var createSubmitFeedbackQuery = function (con, feedback, userIP, databaseDetails) {
+  var query = "INSERT INTO ?? (userID,userIP,timestamp,questionID,rating,comment) VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
     "timestamp = VALUES(timestamp)," +
     "rating = VALUES(rating)," +
     "comment = VALUES(comment)";
   var inserts = [databaseDetails.database + "." + databaseDetails.feedbackTable];
 
   inserts.push(feedback.userID);
+  inserts.push(userIP);
   inserts.push(getTimestamp());
   inserts.push(feedback.questionID);
   inserts.push(feedback.rating);
@@ -190,7 +192,7 @@ router.post('/api/feedbacksubmit', function *(next) {
     try {
       var databaseDetails = getDatabaseDetails();
       var con = yield connectToDatabase(databaseDetails);
-      var q = createSubmitFeedbackQuery(con, feedback, databaseDetails);
+      var q = createSubmitFeedbackQuery(con, feedback, this.request.ip, databaseDetails);
       yield con.query(q);
       con.end();
       this.response.body = "Successfully submitted feedback, thank you!";

@@ -1,7 +1,8 @@
 CREATE DATABASE IF NOT EXISTS Music;
 CREATE TABLE IF NOT EXISTS Music.feedback
 (
-userID varchar(128),
+userID varchar(36),
+userIP varchar(45),
 timestamp timestamp,
 questionID varchar(64),
 rating int,
