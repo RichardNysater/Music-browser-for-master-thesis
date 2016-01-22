@@ -1,7 +1,7 @@
 [
   {
-    "eval_name": "general",
-    "eval_header": "General information",
+    "sectionName": "general",
+    "sectionHeader": "General information",
     "questions": [
       {
         "id": "musicImportance",
@@ -79,8 +79,8 @@
     ]
   },
   {
-    "eval_name": "emotions",
-    "eval_header": "Emotions",
+    "sectionName": "emotions",
+    "sectionHeader": "Emotions",
     "questions": [
       {
         "id": "emotionsSimplicity",
@@ -95,8 +95,8 @@
     ]
   },
   {
-    "eval_name": "plane",
-    "eval_header": "Plane",
+    "sectionName": "plane",
+    "sectionHeader": "Plane",
     "questions": [
       {
         "id": "planeSimplicity",
@@ -111,8 +111,8 @@
     ]
   },
   {
-    "eval_name": "sliders",
-    "eval_header": "Sliders",
+    "sectionName": "sliders",
+    "sectionHeader": "Sliders",
     "questions": [
       {
         "id": "slidersSimplicity",
@@ -127,8 +127,8 @@
     ]
   },
   {
-    "eval_name": "website",
-    "eval_header": "Website",
+    "sectionName": "website",
+    "sectionHeader": "Website",
     "questions": [
       {
         "id": "websiteSimplicity",
