@@ -4,7 +4,7 @@
     <p>When you are done using the application, please answer the questions below. Thank you!</p>
 
     <div class="evaluation-wrapper" ng-repeat="evaluation in evaluations" ng-cloak>
-      <h3>{{evaluation.eval_header}}</h3>
+      <h3>{{evaluation.sectionHeader}}</h3>
       <div class="row" ng-repeat="question in evaluation.questions">
         <div class="text col-xs-12"> {{question.text}}</div>
 
@@ -27,6 +27,13 @@
         </div>
         <div class="col-xs-12"><p></p></div> <!-- Blank space between questions -->
       </div>
+
+      <div class="from-group comments">
+        <label for="{{evaluation.sectionName}}" class="comment-label">Other comments</label>
+        <textarea ng-model="evaluation.comment" class="form-control" id="{{evaluation.sectionNAme}}"
+                  ng-blur="writtenComment(evaluation.sectionName, evaluation.comment)"></textarea>
+      </div>
+
     </div>
 
   </div>

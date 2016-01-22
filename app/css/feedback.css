@@ -1,3 +1,11 @@
 .select-list{ /* Prevent select-box from growing too large. */
     max-width: 320px;
 }
+
+.comments{
+    max-width: 550px;
+}
+
+.comment-label{
+    font-weight: normal;
+}

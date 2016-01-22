@@ -38,6 +38,20 @@ angular.module('myApp.feedback', ['ngRoute'])
         FeedbackSubmitService.submitFeedback(feedback);
       };
 
+      /**
+       * Whenever the user has finished writing a comment
+       * @param sectionName The name of the section for the comment
+       * @param text The comment
+       */
+      $scope.writtenComment = function (sectionName, text) {
+        if (text.length > 1500) { // Disregard text after 1500 characters (very likely spam or garbage input)
+          text = text.substring(0, 1500);
+        }
+        var feedback = {questionID: sectionName, comment: text};
+        FeedbackService.saveFeedback(sectionName, text);
+        FeedbackSubmitService.submitFeedback(feedback);
+      };
+
       // Initialize values of buttons
       $scope.buttons = [{val: 1}, {val: 2}, {val: 3}, {val: 4}, {val: 5}, {val: 6}, {val: 7}, {val: 8}, {val: 9}];
 
@@ -46,15 +60,22 @@ angular.module('myApp.feedback', ['ngRoute'])
         // Load previously selected ratings for the questions
         var prevFeedback = FeedbackService.getFeedback();
         for (var i = 0; i < data.length; i++) {
-          for (var j = 0; j < data[i].questions.length; j++) {
+          var comment = prevFeedback[data[i].sectionName]; // Exists if a user has input a comment for this section
+          if (comment) {
+            data[i].comment = comment;
+          }
 
-            var answer = prevFeedback[data[i].questions[j].id]; //Exists if user previously answered question
+          for (var j = 0; j < data[i].questions.length; j++) {
+            var answer = prevFeedback[data[i].questions[j].id]; // Exists if user previously answered question
             if (answer) {
               data[i].questions[j].selected = answer;
             }
             else if (data[i].questions[j].type === "selectlist") {
               data[i].questions[j].selected = data[i].questions[j].options[0]; //Pre-select first option
-              FeedbackSubmitService.submitFeedback({questionID: data[i].questions[j].id, comment:data[i].questions[j].selected.text});
+              FeedbackSubmitService.submitFeedback({
+                questionID: data[i].questions[j].id,
+                comment: data[i].questions[j].selected.text
+              });
             }
           }
         }
