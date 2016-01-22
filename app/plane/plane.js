@@ -279,7 +279,7 @@ angular.module('myApp.plane', ['ngRoute'])
           $scope.firstSelect = $scope.features[0];
         }
         if (!$scope.secondSelect) {
-          $scope.secondSelect = $scope.features[$scope.features.length - 1];
+          $scope.secondSelect = $scope.features[1];
         }
         setPageLoaded();
       }, function (err) {

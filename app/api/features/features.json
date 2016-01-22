@@ -5,9 +5,29 @@
     "high": "High"
   },
   {
+    "id": "Valence",
+    "low": "Negative",
+    "high": "Positive"
+  },
+  {
+    "id": "Speed",
+    "low": "Slow",
+    "high": "Fast"
+  },
+  {
+    "id": "Modality",
+    "low": "Minor",
+    "high": "Major"
+  },
+  {
     "id": "Articulation",
     "low": "Legato",
     "high": "Staccato"
+  },
+  {
+    "id": "Pitch",
+    "low": "Low",
+    "high": "High"
   },
   {
     "id": "Dissonance",
@@ -20,16 +40,6 @@
     "high": "Complex"
   },
   {
-    "id": "Modality",
-    "low": "Minor",
-    "high": "Major"
-  },
-  {
-    "id": "Pitch",
-    "low": "Low",
-    "high": "High"
-  },
-  {
     "id": "RhythmicComplexity",
     "low": "Simple",
     "high": "Complex"
@@ -38,15 +48,5 @@
     "id": "RhythmicClarity",
     "low": "Flowing",
     "high": "Firm"
-  },
-  {
-    "id": "Speed",
-    "low": "Slow",
-    "high": "Fast"
-  },
-  {
-    "id": "Valence",
-    "low": "Negative",
-    "high": "Positive"
   }
 ]

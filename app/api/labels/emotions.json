@@ -9,7 +9,27 @@
         "maxValue": 100
       },
       {
+        "feature": "Valence",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "feature": "Speed",
+        "minValue": 60,
+        "maxValue": 100
+      },
+      {
+        "feature": "Modality",
+        "minValue": 70,
+        "maxValue": 100
+      },
+      {
         "feature": "Articulation",
+        "minValue": 60,
+        "maxValue": 100
+      },
+      {
+        "feature": "Pitch",
         "minValue": 60,
         "maxValue": 100
       },
@@ -24,32 +44,12 @@
         "maxValue": 100
       },
       {
-        "feature": "Modality",
-        "minValue": 70,
-        "maxValue": 100
-      },
-      {
-        "feature": "Pitch",
-        "minValue": 60,
-        "maxValue": 100
-      },
-      {
         "feature": "RhythmicComplexity",
         "minValue": 0,
         "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minValue": 0,
-        "maxValue": 100
-      },
-      {
-        "feature": "Speed",
-        "minValue": 60,
-        "maxValue": 100
-      },
-      {
-        "feature": "Valence",
         "minValue": 0,
         "maxValue": 100
       }
@@ -65,7 +65,27 @@
         "maxValue": 100
       },
       {
+        "feature": "Valence",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "feature": "Speed",
+        "minValue": 0,
+        "maxValue": 40
+      },
+      {
+        "feature": "Modality",
+        "minValue": 0,
+        "maxValue": 30
+      },
+      {
         "feature": "Articulation",
+        "minValue": 0,
+        "maxValue": 40
+      },
+      {
+        "feature": "Pitch",
         "minValue": 0,
         "maxValue": 40
       },
@@ -80,32 +100,12 @@
         "maxValue": 100
       },
       {
-        "feature": "Modality",
-        "minValue": 0,
-        "maxValue": 30
-      },
-      {
-        "feature": "Pitch",
-        "minValue": 0,
-        "maxValue": 40
-      },
-      {
         "feature": "RhythmicComplexity",
         "minValue": 0,
         "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minValue": 0,
-        "maxValue": 100
-      },
-      {
-        "feature": "Speed",
-        "minValue": 0,
-        "maxValue": 40
-      },
-      {
-        "feature": "Valence",
         "minValue": 0,
         "maxValue": 100
       }
@@ -121,9 +121,29 @@
         "maxValue": 100
       },
       {
+        "feature": "Valence",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "feature": "Speed",
+        "minValue": 15,
+        "maxValue": 50
+      },
+      {
+        "feature": "Modality",
+        "minValue": 55,
+        "maxValue": 100
+      },
+      {
         "feature": "Articulation",
         "minValue": 0,
         "maxValue": 60
+      },
+      {
+        "feature": "Pitch",
+        "minValue": 25,
+        "maxValue": 75
       },
       {
         "feature": "Dissonance",
@@ -136,32 +156,12 @@
         "maxValue": 100
       },
       {
-        "feature": "Modality",
-        "minValue": 55,
-        "maxValue": 100
-      },
-      {
-        "feature": "Pitch",
-        "minValue": 25,
-        "maxValue": 75
-      },
-      {
         "feature": "RhythmicComplexity",
         "minValue": 0,
         "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minValue": 0,
-        "maxValue": 100
-      },
-      {
-        "feature": "Speed",
-        "minValue": 15,
-        "maxValue": 50
-      },
-      {
-        "feature": "Valence",
         "minValue": 0,
         "maxValue": 100
       }
@@ -177,9 +177,29 @@
         "maxValue": 100
       },
       {
+        "feature": "Valence",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "feature": "Speed",
+        "minValue": 60,
+        "maxValue": 100
+      },
+      {
+        "feature": "Modality",
+        "minValue": 0,
+        "maxValue": 60
+      },
+      {
         "feature": "Articulation",
         "minValue": 20,
         "maxValue": 80
+      },
+      {
+        "feature": "Pitch",
+        "minValue": 0,
+        "maxValue": 40
       },
       {
         "feature": "Dissonance",
@@ -192,32 +212,12 @@
         "maxValue": 100
       },
       {
-        "feature": "Modality",
-        "minValue": 0,
-        "maxValue": 60
-      },
-      {
-        "feature": "Pitch",
-        "minValue": 0,
-        "maxValue": 40
-      },
-      {
         "feature": "RhythmicComplexity",
         "minValue": 0,
         "maxValue": 100
       },
       {
         "feature": "RhythmicClarity",
-        "minValue": 0,
-        "maxValue": 100
-      },
-      {
-        "feature": "Speed",
-        "minValue": 60,
-        "maxValue": 100
-      },
-      {
-        "feature": "Valence",
         "minValue": 0,
         "maxValue": 100
       }
