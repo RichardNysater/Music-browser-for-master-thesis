@@ -64,13 +64,15 @@
       <ul class="nav navbar-nav">
         <!-- Generate sections on the left side of navbar -->
         <li ng-repeat="section in sections" ng-class="{active : isSelected(section)}" ng-cloak>
-          <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
+          <a data-toggle="collapse" data-target=".navbar-collapse.in" ng-click="setSelected(section)"
+             ng-href="{{section.link}}">{{section.id}}</a>
         </li>
       </ul>
       <!-- Generate sections on the right side of navbar -->
       <ul class="nav navbar-nav navbar-right">
         <li ng-repeat="section in helpSections" ng-class="{active : isSelected(section)}" ng-cloak>
-          <a ng-click="setSelected(section)" ng-href="{{section.link}}">{{section.id}}</a>
+          <a data-toggle="collapse" data-target=".navbar-collapse.in" ng-click="setSelected(section)"
+             ng-href="{{section.link}}">{{section.id}}</a>
         </li>
       </ul>
     </div>
@@ -125,8 +127,10 @@
           </button>
 
           <button type="button" class="btn btn-default" play-pause-toggle title="Toggle play/pause">
-            <span ng-if="playlist.length === 0 || !isPlaying" class="glyphicon glyphicon-play" aria-hidden="true"></span>
-            <span ng-if="playlist.length !== 0 && isPlaying" class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+            <span ng-if="playlist.length === 0 || !isPlaying" class="glyphicon glyphicon-play"
+                  aria-hidden="true"></span>
+            <span ng-if="playlist.length !== 0 && isPlaying" class="glyphicon glyphicon-pause"
+                  aria-hidden="true"></span>
           </button>
 
           <button type="button" class="btn btn-default" next-track title="Next track">
@@ -144,10 +148,12 @@
       <div class="col-xs-5 col-sm-6 col-lg-8">
         <div class="row">
           <p class="text-center" ng-show="playlist.length === 0">No tracks in playlist</p>
-          <p class="artist-title-text hidden-xs" ng-if="playlist.length !== 0 && currentPlaying.title && currentPlaying.artist">
+          <p class="artist-title-text hidden-xs"
+             ng-if="playlist.length !== 0 && currentPlaying.title && currentPlaying.artist">
             {{ currentPlaying.title }} by {{ currentPlaying.artist }}
           </p>
-          <p class="title-text hidden-xs" ng-if="playlist.length !== 0 && !(currentPlaying.title && currentPlaying.artist)">
+          <p class="title-text hidden-xs"
+             ng-if="playlist.length !== 0 && !(currentPlaying.title && currentPlaying.artist)">
             {{ currentPlaying.id}}
           </p>
           <p class="visible-xs col-xs-12" ng-if="playlist.length !== 0 && currentPlaying.id">
