@@ -97,7 +97,7 @@ angular.module('myApp.plane', ['ngRoute'])
         };
 
         SongRequestService.playMatchingSongs([xFeature, yFeature], addedSongs);
-        PlaneService.setLastRequest(SongRequestService.getRequestAmount());
+        PlaneService.setLastRequestNumber(SongRequestService.getLastRequestNumber());
       };
 
       /**
@@ -211,7 +211,7 @@ angular.module('myApp.plane', ['ngRoute'])
         }
 
         // Only load selection marker location if no request was done elsewhere
-        if (SongRequestService.getRequestAmount() === PlaneService.getLastRequest()) {
+        if (PlaneService.getLastRequestNumber() === SongRequestService.getLastRequestNumber()) {
           $scope.imgWidth = prevValues.imgWidth;
           $scope.imgHeight = prevValues.imgHeight;
           $scope.imgLeft = prevValues.imgLeft;

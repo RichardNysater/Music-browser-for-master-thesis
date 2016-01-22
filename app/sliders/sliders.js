@@ -62,7 +62,7 @@ angular.module('myApp.sliders', ['ngRoute'])
         setErrorLocation(sliderId);
         SlidersService.saveSliders($scope.featureList);
         SongRequestService.playMatchingSongs($scope.featureList,addedSongs,"Closest");
-        SlidersService.setLastRequest(SongRequestService.getRequestAmount());
+        SlidersService.setLastRequestNumber(SongRequestService.getLastRequestNumber());
       };
 
       /**
@@ -87,7 +87,8 @@ angular.module('myApp.sliders', ['ngRoute'])
        */
       var loadValues = function () {
         $scope.featureList = SlidersService.getSavedValues().features;
-        if(SlidersService.getLastRequest() !== SongRequestService.getRequestAmount()){
+        // Check if another request has been done on another page, if so, reset the sliders
+        if(SlidersService.getLastRequestNumber() !== SongRequestService.getLastRequestNumber()){
           $scope.resetSliders();
         }
       };
@@ -108,12 +109,26 @@ angular.module('myApp.sliders', ['ngRoute'])
       /**
        * Load the featureList if possible, otherwise build it
        */
-      if (!SlidersService.getSavedValues().features) {
+      if(SlidersService.hasTransferred()){
         ResourcesService.Features.query().$promise.then(function (data) {
-          for (var i = 0; i < data.length; i++) {
-            data[i].minValue = 0;
-            data[i].maxValue = 100;
-            $scope.featureList.push(data[i]);
+          $scope.featureList = SlidersService.getTransferredValues();
+          for (var i = 0; i < data.length; i++){
+            $scope.featureList[i].low = data[i].low;
+            $scope.featureList[i].high = data[i].high;
+          }
+          SlidersService.clearTransferredValues();
+          SlidersService.saveSliders($scope.featureList);
+          setPageLoaded();
+        }, function (err) {
+          throw "No features were returned by query: " + err;
+        });
+      }
+      else if (!SlidersService.getSavedValues().features) {
+        ResourcesService.Features.query().$promise.then(function (data) {
+          $scope.featureList = data;
+          for (var i = 0; i < $scope.featureList.length; i++) {
+            $scope.featureList[i].minValue = 0;
+            $scope.featureList[i].maxValue = 100;
           }
           setPageLoaded();
         }, function (err) {

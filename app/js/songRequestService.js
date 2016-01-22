@@ -6,7 +6,7 @@ var SongRequestService = angular.module('SongRequestService', ['ngResource']);
 SongRequestService.service('SongRequestService', ['$resource', '$http', 'angularPlayer', 'PlayerService',
   function ($resource, $http, angularPlayer, PlayerService) {
     var volume = PlayerService.getVolume();
-    var requestAmount = 0;
+    var lastRequestNumber = 0;
     const MUSIC_FORMATS = ["ogg", "mp3"]; // This list should include the available formats for the music files
 
     /**
@@ -52,16 +52,16 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
           requestType: requestType
         }
       };
-      requestAmount++;
+      lastRequestNumber++;
       return $http(req);
     };
 
     /**
-     * Returns the amount of requests gotten
-     * @returns {number} An integer with containing the amount of requests done
+     * Returns the current request number
+     * @returns {number} An integer with containing the number of the last request made
      */
-    this.getRequestAmount = function () {
-      return requestAmount
+    this.getLastRequestNumber = function () {
+      return lastRequestNumber;
     };
 
     /**

@@ -51,6 +51,11 @@
       </div>
     </div>
   </div>
+  <div class="col-xs-12" ng-if="featureList">
+    <button type="button" class="btn btn-primary center-block" ng-click="transferToSliders()" >
+      Copy values to Sliders page
+    </button>
+  </div>
 </div>
 
 <div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert" ng-style="{left: imgLeft-60-leftPlaneOffset, top: imgTop+30-topPlaneOffset}" ng-cloak>

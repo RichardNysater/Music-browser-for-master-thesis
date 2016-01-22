@@ -14,8 +14,8 @@ angular.module('myApp.emotions', ['ngRoute'])
    * The emotion plane allows a user to click somewhere in a 2d-plane with four emotions in each corner,
    * the application will then create a playlist based on the distance to each emotion.
    */
-  .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', '$timeout',
-    function ($scope, ResourcesService, SongRequestService, EmotionsService, $timeout) {
+  .controller('EmotionsCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', 'SlidersService', '$timeout',
+    function ($scope, ResourcesService, SongRequestService, EmotionsService, SlidersService, $timeout) {
       const ERROR_DURATION = 3000;
       var activeErrors = 0;
 
@@ -158,11 +158,18 @@ angular.module('myApp.emotions', ['ngRoute'])
         /* Calculate the features required to request for music */
         var featureList = calcFeatures(event.offsetX, event.offsetY, planeWidth, planeHeight);
         SongRequestService.playMatchingSongs(featureList, addedSongs);
-        EmotionsService.setLastRequest(SongRequestService.getRequestAmount());
+        EmotionsService.setLastRequestNumber(SongRequestService.getLastRequestNumber());
         $scope.featureList = featureList;
 
         // Save the current variables used for the click
         EmotionsService.saveClick($scope.imgLeft, $scope.imgTop, $scope.imgWidth, $scope.imgHeight, $scope.featureList, getSelectionXPercent(), getSelectionYPercent());
+      };
+
+      /**
+       * Transfer the current feature values over to the sliders page
+       */
+      $scope.transferToSliders = function(){
+        SlidersService.transferFeatures($scope.featureList, EmotionsService.getLastRequestNumber());
       };
 
       /**
@@ -193,7 +200,7 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       var loadValues = function () {
         var prevValues = EmotionsService.getSavedValues();
-        if(EmotionsService.getLastRequest() == SongRequestService.getRequestAmount()) {
+        if(EmotionsService.getLastRequestNumber() == SongRequestService.getLastRequestNumber()) {
           $scope.imgWidth = prevValues.imgWidth;
           $scope.imgHeight = prevValues.imgHeight;
           $scope.imgLeft = prevValues.imgLeft;
