@@ -141,6 +141,9 @@ var createSubmitFeedbackQuery = function (con, feedback, userIP, databaseDetails
   inserts.push(getTimestamp());
   inserts.push(feedback.questionID);
   inserts.push(feedback.rating);
+  if(feedback.comment && feedback.comment.length > 1500){ // Trim size of comment to 1500, which is much more space than any sane person would use
+    feedback.comment = feedback.comment.substring(0, 1500);
+  }
   inserts.push(feedback.comment);
 
   try {
