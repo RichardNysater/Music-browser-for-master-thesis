@@ -15,7 +15,7 @@
       },
       {
         "id": "musicAge",
-        "type": "selectlist",
+        "type": "selectList",
         "options": [
           {
             "text": "Younger than 18 years"
@@ -40,7 +40,7 @@
       },
       {
         "id": "musicInstrument",
-        "type": "selectlist",
+        "type": "selectList",
         "options": [
           {
             "text": "I have not played an instrument"
@@ -62,7 +62,7 @@
       },
       {
         "id": "musicEducation",
-        "type": "selectlist",
+        "type": "selectList",
         "options": [
           {
             "text": "No, I have not studied music"
@@ -147,7 +147,7 @@
       },
       {
         "id": "websiteAfterfeatures",
-        "type": "selectlist",
+        "type": "selectList",
         "options": [
           {
             "text": "Not at all"

@@ -18,7 +18,7 @@
           </label>
         </div>
 
-        <div ng-if="question.type === 'selectlist'" class="form-group col-xs-12 select-list">
+        <div ng-if="question.type === 'selectList'" class="form-group col-xs-12 select-list">
           <!-- If question is select from a list -->
           <select class="form-control clickable" id="{{question.id}}" data-ng-model="question.selected"
                   ng-options="option.text for option in question.options track by option.text"
@@ -30,7 +30,7 @@
 
       <div class="from-group comments">
         <label for="{{evaluation.sectionName}}" class="comment-label">Other comments</label>
-        <textarea ng-model="evaluation.comment" class="form-control" id="{{evaluation.sectionNAme}}"
+        <textarea ng-model="evaluation.comment" class="form-control" id="{{evaluation.sectionName}}"
                   ng-blur="writtenComment(evaluation.sectionName, evaluation.comment)"></textarea>
       </div>
 
