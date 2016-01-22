@@ -7,13 +7,41 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
   function ($resource, $http, angularPlayer, PlayerService) {
     var volume = PlayerService.getVolume();
     var requestAmount = 0;
-    const MUSIC_FORMAT = "mp3";
+    const MUSIC_FORMATS = ["ogg", "mp3"]; // This list should include the available formats for the music files
+
+    /**
+     * Error function which adds a track with a name that tells the user that their browser doesn't support
+     * any of the available music formats.
+     * TODO: Errors shouldn't be handled this way, the user should receive an error when first loading the site.
+     */
+    var noPlayableMusicFormats = function () {
+      var formats = "";
+      if (MUSIC_FORMATS.length > 0) {
+        for (var i = 0; i < MUSIC_FORMATS.length - 1; i++) {
+          formats += "." + MUSIC_FORMATS[i] + " or ";
+        }
+        formats += "." + MUSIC_FORMATS[MUSIC_FORMATS.length - 1] + "!";
+
+        angularPlayer.addTrack({
+          "title": "Your web browser does not support: " + formats,
+          "id": "Your web browser does not support: " + formats,
+          "url": null
+        });
+      }
+      else {
+        angularPlayer.addTrack({
+          "title": "Server music format configuration error!",
+          "id": "Server music format configuration error!",
+          "url": null
+        });
+      }
+    };
 
     /**
      * Sends a request to the server for songs matching the input features with the given requestType
      * @param featureList The features to match
      * @param requestType The type of request to make
-     * @returns {*} A promise which contains the songs if successfull
+     * @returns {*} A promise which contains the songs if successful
      */
     this.sendRequest = function (featureList, requestType) {
       var req = {
@@ -32,7 +60,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
      * Returns the amount of requests gotten
      * @returns {number} An integer with containing the amount of requests done
      */
-    this.getRequestAmount = function(){
+    this.getRequestAmount = function () {
       return requestAmount
     };
 
@@ -40,7 +68,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
      * Sets the current volume
      * @param vol The volume to play music at (0-100)
      */
-    this.setVolume = function(vol){
+    this.setVolume = function (vol) {
       volume = vol;
       applyVolume();
     };
@@ -48,8 +76,8 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
     /**
      * Because volume is individually set per song, this function sets the current chosen volume to all songs in playlist
      */
-    var applyVolume = function(){
-      for(var i = 0; i < window.soundManager.soundIDs.length; i++) {
+    var applyVolume = function () {
+      for (var i = 0; i < window.soundManager.soundIDs.length; i++) {
         var mySound = window.soundManager.getSoundById(window.soundManager.soundIDs[i]);
         mySound.setVolume(volume);
       }
@@ -64,7 +92,20 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
       var key = null;
       for (var i = 0; i < songs.length; i++) {
         var id = songs[i].songID;
-        var url = "/api/music/"+id+"."+MUSIC_FORMAT;
+        var url = "/api/music/" + id;
+
+        var noPlayableFormat = true;
+        for (var format = 0; format < MUSIC_FORMATS.length; format++) {
+          if (soundManager.canPlayMIME(MUSIC_FORMATS[format])) {
+            url += "." + MUSIC_FORMATS[format];
+            noPlayableFormat = false;
+            break;
+          }
+        }
+        if (noPlayableFormat) {
+          noPlayableMusicFormats();
+          return;
+        }
 
         var tmp = angularPlayer.addTrack({
           "title": id,
@@ -78,7 +119,7 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
       }
       applyVolume();
       angularPlayer.playTrack(key);
-      if(!PlayerService.getAutoPlay()) {
+      if (!PlayerService.getAutoPlay()) {
         angularPlayer.pause();
       }
     };
