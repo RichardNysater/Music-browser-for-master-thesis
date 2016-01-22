@@ -47,11 +47,11 @@ var createQueryForSongs = function (con, features, databaseDetails) {
 
   if (features.length > 1) {
     for (var i = 0; i < features.length - 1; i++) {
-      inserts.push(features[i].feature.id, features[i].minValue, features[i].maxValue);
+      inserts.push(features[i].feature, features[i].minValue, features[i].maxValue);
       query += "?? BETWEEN ? AND ? AND "
     }
   }
-  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minValue, features[features.length - 1].maxValue);
+  inserts.push(features[features.length - 1].feature, features[features.length - 1].minValue, features[features.length - 1].maxValue);
   query += "?? BETWEEN ? AND ? ORDER BY RAND() LIMIT " + MAX_SONGS_RETURNED;
 
   try {
@@ -80,7 +80,7 @@ var createClosestQueryForSongs = function (con, features, databaseDetails) {
     if (features[i].minValue > 0 || features[i].maxValue < 100) { // We disregard the features that can be between 0 and 100
       var middle = Math.round((features[i].minValue + features[i].maxValue) / 2);
       query += "+ABS(?? - ?)";
-      inserts.push(features[i].feature.id, middle);
+      inserts.push(features[i].feature, middle);
       featuresUsed++;
     }
   }
@@ -98,11 +98,11 @@ var createClosestQueryForSongs = function (con, features, databaseDetails) {
   if (features.length > 1) {
     for (i = 0; i < features.length - 1; i++) {
       query += "?? BETWEEN ? AND ? AND ";
-      inserts.push(features[i].feature.id, features[i].minValue, features[i].maxValue);
+      inserts.push(features[i].feature, features[i].minValue, features[i].maxValue);
     }
   }
   query += "?? BETWEEN ? AND ?) AS n ORDER BY distance LIMIT " + MAX_SONGS_RETURNED; // Order by distance, so closest songs are first
-  inserts.push(features[features.length - 1].feature.id, features[features.length - 1].minValue, features[features.length - 1].maxValue);
+  inserts.push(features[features.length - 1].feature, features[features.length - 1].minValue, features[features.length - 1].maxValue);
   try {
     query = mysqlHelper.format(query, inserts);
   } catch (err) {

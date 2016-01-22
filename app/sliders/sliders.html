@@ -5,21 +5,21 @@
         <div class="row">
           <div class="col-xs-3"></div>
           <div class="col-xs-6 text-buffer feature-id">
-            <h5><b>{{cur.feature.id}}</b></h5>
+            <h5><b>{{cur.feature}}</b></h5>
           </div>
           <div class="col-xs-3"></div>
         </div>
         <div class="row top-buffer">
           <div class="col-xs-3 text-buffer min-label">
-            <p>{{cur.feature.low}}</p>
+            <p>{{cur.low}}</p>
           </div>
           <div class="col-xs-6 slider">
-            <div range-slider attach-handle-values="true" ng-class="cur.feature.id" show-values="true"
-                 on-handle-up="sendRequestForClosest(cur.feature.id)" min="0"
+            <div range-slider attach-handle-values="true" ng-class="cur.feature" show-values="true"
+                 on-handle-up="sendRequestForClosest(cur.feature)" min="0"
                  max="100" model-min="cur.minValue" model-max="cur.maxValue"></div>
           </div>
           <div class="col-xs-3 text-buffer max-label">
-            <p>{{cur.feature.high}}</p>
+            <p>{{cur.high}}</p>
           </div>
         </div>
       </div>

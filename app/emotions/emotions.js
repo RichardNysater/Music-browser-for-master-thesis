@@ -91,7 +91,7 @@ angular.module('myApp.emotions', ['ngRoute'])
           minVal = Math.max(minVal - $scope.featureVariance, 0); // Limit min to 0
 
           featureList.push({
-            "feature": {"id": $scope.emotions[0].features[i].feature},
+            "feature": $scope.emotions[0].features[i].feature,
             "minValue": minVal,
             "maxValue": maxVal
           });

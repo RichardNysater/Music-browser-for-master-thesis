@@ -111,7 +111,9 @@ angular.module('myApp.sliders', ['ngRoute'])
       if (!SlidersService.getSavedValues().features) {
         ResourcesService.Features.query().$promise.then(function (data) {
           for (var i = 0; i < data.length; i++) {
-            $scope.featureList.push({"feature": data[i], "minValue": 0, "maxValue": 100});
+            data[i].minValue = 0;
+            data[i].maxValue = 100;
+            $scope.featureList.push(data[i]);
           }
           setPageLoaded();
         }, function (err) {

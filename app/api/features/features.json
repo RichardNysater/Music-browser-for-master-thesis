@@ -1,51 +1,51 @@
 [
   {
-    "id": "Activity",
+    "feature": "Activity",
     "low": "Low",
     "high": "High"
   },
   {
-    "id": "Valence",
+    "feature": "Valence",
     "low": "Negative",
     "high": "Positive"
   },
   {
-    "id": "Speed",
+    "feature": "Speed",
     "low": "Slow",
     "high": "Fast"
   },
   {
-    "id": "Modality",
+    "feature": "Modality",
     "low": "Minor",
     "high": "Major"
   },
   {
-    "id": "Articulation",
+    "feature": "Articulation",
     "low": "Legato",
     "high": "Staccato"
   },
   {
-    "id": "Pitch",
+    "feature": "Pitch",
     "low": "Low",
     "high": "High"
   },
   {
-    "id": "Dissonance",
+    "feature": "Dissonance",
     "low": "Consonant",
     "high": "Dissonant"
   },
   {
-    "id": "HarmonicComplexity",
+    "feature": "HarmonicComplexity",
     "low": "Simple",
     "high": "Complex"
   },
   {
-    "id": "RhythmicComplexity",
+    "feature": "RhythmicComplexity",
     "low": "Simple",
     "high": "Complex"
   },
   {
-    "id": "RhythmicClarity",
+    "feature": "RhythmicClarity",
     "low": "Flowing",
     "high": "Firm"
   }

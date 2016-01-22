@@ -42,12 +42,12 @@
       <div class="form-group col-xs-6">
         <label for="sel1">X-axis</label>
         <select class="form-control" id="sel1" ng-model="firstSelect"
-                ng-options="feature.id for feature in features" ng-cloak></select>
+                ng-options="cur.feature for cur in features" ng-cloak></select>
       </div>
       <div class="form-group col-xs-6">
         <label for="sel2">Y-axis</label>
         <select class="form-control" id="sel2" ng-model="secondSelect"
-                ng-options="feature.id for feature in features" ng-cloak>
+                ng-options="cur.feature for cur in features" ng-cloak>
         </select>
       </div>
       <div class="form-group col-xs-12">
@@ -64,8 +64,8 @@
   </form>
 </div>
 
-<p ng-if="imgLeft" class="percent-label" ng-cloak ng-show="sliderLoaded"> {{firstSelect.id}}: {{xMinValue}}-{{xMaxValue}}%,
-  {{secondSelect.id}}:{{yMinValue}}-{{yMaxValue}}% </p>
+<p ng-if="imgLeft" class="percent-label" ng-cloak ng-show="sliderLoaded"> {{firstSelect.feature}}: {{xMinValue}}-{{xMaxValue}}%,
+  {{secondSelect.feature}}:{{yMinValue}}-{{yMaxValue}}% </p>
 
 <div ng-if="showError && imgLeft" class="alert alert-danger noSongsFoundError animate-if" role="alert"
      ng-style="{left: imgLeft-leftPlaneOffset+leftPlaneOffset/9 + imgWidth/2, top: imgTop-topPlaneOffset+topPlaneOffset/2 + imgHeight}"

@@ -86,12 +86,12 @@ angular.module('myApp.plane', ['ngRoute'])
       var playSongs = function () {
         setFeatureRanges();
         var xFeature = {
-          feature: {id: $scope.firstSelect.id},
+          feature: $scope.firstSelect.feature,
           minValue: $scope.xMinValue,
           maxValue: $scope.xMaxValue
         };
         var yFeature = {
-          feature: {id: $scope.secondSelect.id},
+          feature: $scope.secondSelect.feature,
           minValue: $scope.yMinValue,
           maxValue: $scope.yMaxValue
         };
@@ -201,11 +201,11 @@ angular.module('myApp.plane', ['ngRoute'])
         }
 
         for (var i = 0; i < features.length; i++) { // Existing features should be selected in the select boxes
-          if (prevValues.firstSelect && features[i].id == prevValues.firstSelect.id) {
+          if (prevValues.firstSelect && features[i].feature == prevValues.firstSelect.feature) {
             $scope.firstSelect = features[i];
           }
 
-          if (prevValues.secondSelect && features[i].id == prevValues.secondSelect.id) {
+          if (prevValues.secondSelect && features[i].feature == prevValues.secondSelect.feature) {
             $scope.secondSelect = features[i];
           }
         }
