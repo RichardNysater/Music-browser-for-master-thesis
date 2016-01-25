@@ -1,5 +1,6 @@
 .top-buffer {
-    margin-top: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .text-buffer {
@@ -8,12 +9,20 @@
 
 .feature-id {
     text-align: center;
+    height: 20px;
 }
 
 .min-label {
+    direction: rtl;
     text-align: right;
+    padding-right: 0;
+}
+
+.slider-row {
+    height: 70px;
 }
 
 .max-label {
+    padding-left: 0;
     text-align: left;
 }
