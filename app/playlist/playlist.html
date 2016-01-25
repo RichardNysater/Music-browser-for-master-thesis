@@ -1,0 +1,23 @@
+<div class="playlist" ng-controller="PlayerController" ng-cloak>
+  <div id="list-group">
+    <div class="list-group-item playlist-item playlist-template"><b style="font-size:15px">Playlist</b></div>
+    <!-- Display empty element when no playlist -->
+    <div ng-if="playlist.length === 0" class="list-group-item playlist-item playlist-template">Empty</div>
+    <!-- Generate playlist items from playlist -->
+    <a ng-repeat="song in playlist" class="list-group-item playlist-item clickable"
+       ng-class="{active: currentPlaying.id == song.id}" ng-animate="{enter: 'playlist-fade-enter'}"
+       play-from-playlist="song">
+      <div class="row">
+        <div class="col-md-9 col-sm-8 playlist-item-title" title="Play song">
+          {{ song.title }}
+        </div>
+        <div class="col-md-3 col-sm-4">
+          <div class="glyphicon glyphicon-remove clickable playlist-item-remove"
+               ng-click="$event.stopPropagation(); songRemoved($index, song)" remove-from-playlist="song"
+               title="Remove from playlist"
+               data-index="{{$index}}"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

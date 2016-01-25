@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]>
-<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<html lang="en" ng-app="myApp" ng-strict-di class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html lang="en" ng-app="myApp" ng-strict-di class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<html lang="en" ng-app="myApp" ng-strict-di class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="myApp" ng-strict-di class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
@@ -80,39 +80,9 @@
 </nav>
 
 <!-- content -->
-<div class="container" ng-controller="PlayerController">
-  <div class="row">
-    <!-- Playlist on the left -->
-    <div class="hidden-xs col-sm-2">
-      <div id="playlist" ng-cloak>
-        <div id="list-group">
-          <div class="list-group-item playlist-item playlist-template"><b style="font-size:15px">Playlist</b></div>
-          <!-- Display empty element when no playlist -->
-          <div ng-if="playlist.length === 0" class="list-group-item playlist-item playlist-template">Empty</div>
-          <!-- Generate playlist items from playlist -->
-          <a ng-repeat="song in playlist" class="list-group-item playlist-item clickable"
-             ng-class="{active: currentPlaying.id == song.id}" ng-animate="{enter: 'playlist-fade-enter'}"
-             play-from-playlist="song">
-            <div class="row">
-              <div class="col-md-9 col-sm-8 playlist-item-title" title="Play song">
-                {{ song.title }}
-              </div>
-              <div class="col-md-3 col-sm-4">
-                <div class="glyphicon glyphicon-remove clickable playlist-item-remove"
-                     ng-click="$event.stopPropagation(); songRemoved($index, song)" remove-from-playlist="song"
-                     title="Remove from playlist"
-                     data-index="{{$index}}"></div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="content col-sm-8 col-xs-12" ng-view></div>
-    <div class="hidden-xs col-sm-2"></div>
-  </div>
+<div class="container">
+  <div class="content" ng-view></div>
 </div>
-
 
 <!-- Player footer -->
 <footer class="navbar-fixed-bottom player-footer" ng-controller="PlayerController" ng-cloak>
@@ -233,6 +203,7 @@
 <script src="feedback/feedback.js"></script>
 <script src="feedback/feedback_service.js"></script>
 <script src="playlist/playlist.js"></script>
+<script src="playlist/playlistDirective.js"></script>
 
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>

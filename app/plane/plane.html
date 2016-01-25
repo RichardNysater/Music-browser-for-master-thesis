@@ -1,76 +1,91 @@
-<div id="plane-wrapper row">
-  <div class="row">
-    <div class="col-xs-2"></div>
-    <div class="col-xs-8 vertical-label">
-      <p class="plane-label" ng-cloak>{{secondSelect.high}}</p>
-    </div>
-    <div class="col-xs-2"></div>
+<div class="row">
+  <!-- Playlist on the left -->
+  <div class="hidden-xs col-sm-2">
+    <my-playlist></my-playlist>
   </div>
-  <div class="row">
-    <div class="col-xs-2 side-label plane-row">
-      <p class="plane-label inner-side-label-left rotate-text-left" ng-cloak>{{firstSelect.low}}</p>
-    </div>
-    <div class="col-xs-8">
-      <!--Hide hint after user clicks-->
-      <div ng-if="!imgLeft && pageLoaded" class="hint-large hidden-xs" ng-cloak> Click anywhere inside the plane to begin</div>
-      <div ng-if="!imgLeft && pageLoaded" class="hint-small visible-xs" ng-cloak> Click inside the plane</div>
 
-      <div class="plane clickable" ng-click='planeClick($event)'>
-        <div class="plane-vertical-line"></div>
-        <div class="plane-horizontal-line"></div>
-        <img ng-if="imgLeft" class="selection-image" src="/img/circle-marker.png"
-             ng-style="{left: imgLeft-leftPlaneOffset, top: imgTop-topPlaneOffset, width: imgWidth, height: imgHeight}"
-             ng-cloak>
+  <div class="col-xs-12 col-sm-8">
+    <div id="plane-wrapper row">
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8 vertical-label">
+          <p class="plane-label" ng-cloak>{{secondSelect.high}}</p>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2 side-label plane-row">
+          <p class="plane-label inner-side-label-left rotate-text-left" ng-cloak>{{firstSelect.low}}</p>
+        </div>
+        <div class="col-xs-8">
+          <!--Hide hint after user clicks-->
+          <div ng-if="!imgLeft && pageLoaded" class="hint-large hidden-xs" ng-cloak> Click anywhere inside the plane to
+            begin
+          </div>
+          <div ng-if="!imgLeft && pageLoaded" class="hint-small visible-xs" ng-cloak> Click inside the plane</div>
+
+          <div class="plane clickable" ng-click='planeClick($event)'>
+            <div class="plane-vertical-line"></div>
+            <div class="plane-horizontal-line"></div>
+            <img ng-if="imgLeft" class="selection-image" src="/img/circle-marker.png"
+                 ng-style="{left: imgLeft-leftPlaneOffset, top: imgTop-topPlaneOffset, width: imgWidth, height: imgHeight}"
+                 ng-cloak>
+          </div>
+        </div>
+        <div class="col-xs-2 side-label plane-row">
+          <p class="plane-label inner-side-label-right rotate-text-right" ng-cloak>{{firstSelect.high}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8 vertical-label">
+          <p class="plane-label" ng-cloak>{{secondSelect.low}}</p>
+        </div>
+        <div class="col-xs-2"></div>
       </div>
     </div>
-    <div class="col-xs-2 side-label plane-row">
-      <p class="plane-label inner-side-label-right rotate-text-right" ng-cloak>{{firstSelect.high}}</p>
+
+    <div id="label-wrapper row" ng-show="sliderLoaded">
+      <form id="label-select" role="form">
+        <div class="row">
+          <div class="form-group col-xs-6">
+            <label for="sel1">X-axis</label>
+            <select class="form-control" id="sel1" ng-model="firstSelect"
+                    ng-options="cur.feature for cur in features" ng-cloak></select>
+          </div>
+          <div class="form-group col-xs-6">
+            <label for="sel2">Y-axis</label>
+            <select class="form-control" id="sel2" ng-model="secondSelect"
+                    ng-options="cur.feature for cur in features" ng-cloak>
+            </select>
+          </div>
+          <div class="form-group col-xs-12">
+            <label>Selection size</label>
+            <rzslider
+              rz-slider-hide-limit-labels="true"
+              rz-slider-floor="5"
+              rz-slider-model="featureVariance"
+              rz-slider-ceil="25"
+              rz-slider-on-end="varianceChanged()">
+            </rzslider>
+          </div>
+        </div>
+      </form>
     </div>
+
+    <p ng-if="imgLeft" class="percent-label" ng-cloak ng-show="sliderLoaded"> {{firstSelect.feature}}:
+      {{xMinValue}}-{{xMaxValue}}%,
+      {{secondSelect.feature}}:{{yMinValue}}-{{yMaxValue}}% </p>
+
+    <div ng-if="showError && imgLeft" class="alert alert-danger noSongsFoundError animate-if" role="alert"
+         ng-style="{left: imgLeft-leftPlaneOffset+leftPlaneOffset/9 + imgWidth/2, top: imgTop-topPlaneOffset+topPlaneOffset/2 + imgHeight}"
+         ng-cloak>
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      No songs found
+    </div>
+
   </div>
-  <div class="row">
-    <div class="col-xs-2"></div>
-    <div class="col-xs-8 vertical-label">
-      <p class="plane-label" ng-cloak>{{secondSelect.low}}</p>
-    </div>
-    <div class="col-xs-2"></div>
-  </div>
-</div>
+  <div class="hidden-xs col-sm-2"></div>
 
-<div id="label-wrapper row" ng-show="sliderLoaded">
-  <form id="label-select" role="form" >
-    <div class="row">
-      <div class="form-group col-xs-6">
-        <label for="sel1">X-axis</label>
-        <select class="form-control" id="sel1" ng-model="firstSelect"
-                ng-options="cur.feature for cur in features" ng-cloak></select>
-      </div>
-      <div class="form-group col-xs-6">
-        <label for="sel2">Y-axis</label>
-        <select class="form-control" id="sel2" ng-model="secondSelect"
-                ng-options="cur.feature for cur in features" ng-cloak>
-        </select>
-      </div>
-      <div class="form-group col-xs-12">
-        <label>Selection size</label>
-        <rzslider
-          rz-slider-hide-limit-labels="true"
-          rz-slider-floor="5"
-          rz-slider-model="featureVariance"
-          rz-slider-ceil="25"
-          rz-slider-on-end="varianceChanged()">
-        </rzslider>
-      </div>
-    </div>
-  </form>
-</div>
-
-<p ng-if="imgLeft" class="percent-label" ng-cloak ng-show="sliderLoaded"> {{firstSelect.feature}}: {{xMinValue}}-{{xMaxValue}}%,
-  {{secondSelect.feature}}:{{yMinValue}}-{{yMaxValue}}% </p>
-
-<div ng-if="showError && imgLeft" class="alert alert-danger noSongsFoundError animate-if" role="alert"
-     ng-style="{left: imgLeft-leftPlaneOffset+leftPlaneOffset/9 + imgWidth/2, top: imgTop-topPlaneOffset+topPlaneOffset/2 + imgHeight}"
-     ng-cloak>
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  No songs found
 </div>
