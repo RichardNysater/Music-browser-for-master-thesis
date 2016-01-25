@@ -5,7 +5,7 @@ angular.module('myApp.plane', ['ngRoute'])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/plane', {
       templateUrl: 'plane/plane.html',
-      controller: 'PlaneCtrl'
+      controller: 'PlaneController'
     });
   }])
 
@@ -14,7 +14,7 @@ angular.module('myApp.plane', ['ngRoute'])
    * The plane allows a user to click somewhere in a 2d-plane with perceptual features as x-axis and y-axis,
    * the application will then create a playlist based on where the user clicked.
    */
-  .controller('PlaneCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService', '$timeout',
+  .controller('PlaneController', ['$scope', 'ResourcesService', 'SongRequestService', 'PlaneService', '$timeout',
     function ($scope, ResourcesService, SongRequestService, PlaneService, $timeout) {
       const ERROR_DURATION = 3000;
       var activeErrors = 0;
