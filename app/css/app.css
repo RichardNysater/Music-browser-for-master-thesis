@@ -109,6 +109,7 @@ body {
 
 /* Player footer */
 .player-footer {
+    height: 60px;
     background-color: #f5f5f5;
 }
 
@@ -135,18 +136,18 @@ body {
 }
 
 .vol-down-icon {
-    top: 23px;
-    left: -25px;
+    top: 3px;
+    left: 13px;
 }
 
 .vol-up-icon {
-    top: -18px;
-    left: 92px;
+    top: 3px;
+    left: -13px;
     pointer-events: none;
 }
 
 .volume-bar {
-    top: 10px;
+    top: 30px;
     position: relative;
 }
 

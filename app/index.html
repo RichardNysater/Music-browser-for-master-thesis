@@ -91,7 +91,7 @@
 
       <!-- Buttons on the left side -->
       <div class="col-xs-7 col-sm-3 col-lg-2">
-        <div class="btn-group navbar-btn left-buttons navbar-right" role="group" aria-label="Left Align">
+        <div class="btn-group navbar-btn left-buttons navbar-right pull-left" role="group" aria-label="Left Align">
           <button type="button" class="btn btn-default" prev-track title="Previous track">
             <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
           </button>
@@ -126,7 +126,7 @@
              ng-if="playlist.length !== 0 && !(currentPlaying.title && currentPlaying.artist)">
             {{ currentPlaying.id}}
           </p>
-          <p class="visible-xs col-xs-12" ng-if="playlist.length !== 0 && currentPlaying.id">
+          <p class="visible-xs col-xs-12 text-center" ng-if="playlist.length !== 0 && currentPlaying.id">
             {{currentPlaying.id}} - {{currentPostion}}/{{currentDuration}}
           </p>
         </div>
@@ -150,18 +150,20 @@
 
       <!-- Volume-bar on the right side (hidden for small viewports) -->
       <div class="hidden-xs">
-        <div class="col-sm-2 col-lg-2">
-          <div class="volume-bar">
+        <div class="col-sm-3 col-lg-2">
+          <div class="row">
+            <div class="volume-bar col-xs-2 col-lg-2">
             <span ng-if="volume != 0" class="glyphicon clickable glyphicon-volume-down vol-down-icon"
                   ng-click="toggleMute()" title="Mute volume"></span>
             <span ng-if="volume === 0" class="glyphicon clickable glyphicon-volume-off vol-down-icon"
                   ng-click="toggleMute()" title="Unmute volume"></span>
-          </div>
-          <div class="volume-bar">
-            <input id="volume-slider" class="volume-bar" type="text" data-slider-step="1" style="width: 80px ">
-          </div>
-          <div class="volume-bar">
-            <span class="glyphicon glyphicon-volume-up vol-up-icon"></span>
+            </div>
+            <div class="volume-bar col-xs-8 col-lg-8">
+              <input id="volume-slider" class="volume-bar" type="text" data-slider-step="1" style="width: 100% ">
+            </div>
+            <div class="volume-bar col-xs-2 col-lg-2">
+              <span class="glyphicon glyphicon-volume-up vol-up-icon"></span>
+            </div>
           </div>
         </div>
       </div>
