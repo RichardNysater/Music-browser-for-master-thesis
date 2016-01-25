@@ -5,7 +5,7 @@ angular.module('myApp.sliders', ['ngRoute'])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/sliders', {
       templateUrl: 'sliders/sliders.html',
-      controller: 'SlidersCtrl'
+      controller: 'SlidersController'
     });
   }])
 
@@ -13,7 +13,7 @@ angular.module('myApp.sliders', ['ngRoute'])
    * The sliders controller handles the sliders for the /sliders page and allows users full control over the ranges
    * of the perceptual features.
    */
-  .controller('SlidersCtrl', ['$scope', 'ResourcesService', 'SongRequestService', 'angularPlayer', 'SlidersService','$timeout',
+  .controller('SlidersController', ['$scope', 'ResourcesService', 'SongRequestService', 'angularPlayer', 'SlidersService','$timeout',
     function ($scope, ResourcesService, SongRequestService, angularPlayer, SlidersService, $timeout) {
       const ERROR_DURATION = 3000;
       var activeErrors = 0;
@@ -50,9 +50,8 @@ angular.module('myApp.sliders', ['ngRoute'])
        */
       var setErrorLocation = function(sliderId){
         var slider = $('.'+sliderId);
-        var sliderWrapper = $('.slider-wrapper').offset();
-        $scope.errorLeft = slider.offset().left-sliderWrapper.left+10;
-        $scope.errorTop = slider.offset().top-sliderWrapper.top+45;
+        $scope.errorLeft = slider.offset().left+slider.width()/6;
+        $scope.errorTop = slider.offset().top+35;
       };
 
       /**
