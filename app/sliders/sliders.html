@@ -1,39 +1,48 @@
 <div class="row">
-  <div class="col-xs-12">
+  <!-- Playlist on the left -->
+  <div class="hidden-xs col-sm-2">
+    <my-playlist></my-playlist>
+  </div>
+  <div class="col-xs-12 col-sm-8">
     <div class="row slider-wrapper">
-      <div ng-repeat="cur in featureList" class="col-xs-12 col-sm-6">
+      <div ng-repeat="cur in featureList" class="col-xs-12 col-md-6 slider-row">
         <div class="row">
-          <div class="col-xs-3"></div>
-          <div class="col-xs-6 text-buffer feature-id">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8 feature-id">
             <h5><b>{{cur.feature}}</b></h5>
           </div>
-          <div class="col-xs-3"></div>
+          <div class="col-xs-2"></div>
         </div>
+
         <div class="row top-buffer">
-          <div class="col-xs-3 text-buffer min-label">
+          <div class="col-xs-2 text-buffer min-label">
             <p>{{cur.low}}</p>
           </div>
-          <div class="col-xs-6 slider">
+
+          <div class="col-xs-8 slider">
             <div range-slider attach-handle-values="true" ng-class="cur.feature" show-values="true"
                  on-handle-up="sendRequestForClosest(cur.feature)" min="0"
                  max="100" model-min="cur.minValue" model-max="cur.maxValue"></div>
           </div>
-          <div class="col-xs-3 text-buffer max-label">
+
+          <div class="col-xs-2 text-buffer max-label">
             <p>{{cur.high}}</p>
           </div>
         </div>
       </div>
     </div>
+
     <div class="row" ng-show="pageLoaded" ng-cloak>
       <div class="col-xs-4"></div>
       <div class="col-xs-4 text-center">
-        <button type="button" class="btn btn-primary"  ng-click="resetSliders()">Reset sliders</button>
+        <button type="button" class="btn btn-primary" ng-click="resetSliders()">Reset sliders</button>
       </div>
       <div class="col-xs-4"></div>
     </div>
   </div>
 </div>
 
+<div class="hidden-xs col-sm-2"></div>
 
 <div ng-if="showError" class="alert alert-danger noSongsFoundError animate-if" role="alert"
      ng-style="{left: errorLeft, top: errorTop}">
