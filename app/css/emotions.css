@@ -1,13 +1,22 @@
-.v-center {
-    top: 13px;
-}
-
 .emotion-label{
     text-align: center;
 }
 
+.feature-slider{
+    position:relative;
+    margin-bottom: 4px;
+    height: 50px;
+}
+
 .perceptual-names{
+    position: relative;
     font-size: 12px;
+    height: 12px;
+}
+
+.copy-button{
+    position: relative;
+    margin-top: 5px;
 }
 
 /* Override the CSS for the normal disabled sliders */
