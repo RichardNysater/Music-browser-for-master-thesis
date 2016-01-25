@@ -30,8 +30,13 @@ var myApp = angular.module('myApp', [
   'FeedbackSubmitService',
   'FeedbackService',
   'EmotionsService',
+  'PlaylistDirective',
   'PlayerService'
-]).
-config(['$routeProvider', function($routeProvider) {
+]).config(['$routeProvider', function ($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
+}]);
+
+// Disable debug info for production
+myApp.config(['$compileProvider', function ($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
 }]);
