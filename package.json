@@ -36,7 +36,7 @@
     "koa-router": "^5.3.0",
     "koa-static": "^2.0.0",
     "koa-static-folder": "^0.1.6",
-    "mysql": "^2.10.0",
+    "mysql": "^2.10.2",
     "mysql-co": "0.0.4"
   }
 }
