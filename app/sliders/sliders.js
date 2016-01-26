@@ -65,13 +65,6 @@ angular.module('myApp.sliders', ['ngRoute'])
       };
 
       /**
-       * Adds a percentage sign after the number on the slider
-       */
-      $scope.translate = function (value) {
-        return value + '%';
-      };
-
-      /**
        * Resets all the sliders to the original settings
        */
       $scope.resetSliders = function(){
@@ -105,10 +98,7 @@ angular.module('myApp.sliders', ['ngRoute'])
 
       $scope.featureList = [];
 
-      /**
-       * Load the featureList if possible, otherwise build it
-       */
-      if(SlidersService.hasTransferred()){
+      if(SlidersService.hasTransferred()){ // Check if user has copied values to the sliders page
         ResourcesService.Features.query().$promise.then(function (data) {
           $scope.featureList = SlidersService.getTransferredValues();
           for (var i = 0; i < data.length; i++){
@@ -122,7 +112,7 @@ angular.module('myApp.sliders', ['ngRoute'])
           throw "No features were returned by query: " + err;
         });
       }
-      else if (!SlidersService.getSavedValues().features) {
+      else if (!SlidersService.getSavedValues().features) { // Import saved values if possible
         ResourcesService.Features.query().$promise.then(function (data) {
           $scope.featureList = data;
           for (var i = 0; i < $scope.featureList.length; i++) {
@@ -134,7 +124,7 @@ angular.module('myApp.sliders', ['ngRoute'])
           throw "No features were returned by query: " + err;
         });
       }
-      else {
+      else { // No transferred or saved values exist, build the list ourselves
         loadValues();
         setPageLoaded();
       }
