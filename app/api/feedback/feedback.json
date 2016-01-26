@@ -10,12 +10,30 @@
       },
       {
         "id": "musicFrequency",
-        "type": "buttons",
-        "text": "How often do you listen to music? 1 = never, 5 = once every month, 9 = several times every day"
+        "type": "selectList",
+        "text": "How much do you listen to music?",
+        "options": [
+          {
+            "text": "Very little or not at all"
+          },
+          {
+            "text": "A few times a week"
+          },
+          {
+            "text": "Less than 1 hour a day"
+          },
+          {
+            "text": "2-4 hours a day"
+          },
+          {
+            "text": "5 or more hours a day"
+          }
+        ]
       },
       {
         "id": "musicAge",
         "type": "selectList",
+        "text": "How old are you?",
         "options": [
           {
             "text": "Younger than 18 years"
@@ -35,12 +53,12 @@
           {
             "text": "Older than 56 years"
           }
-        ],
-        "text": "How old are you?"
+        ]
       },
       {
         "id": "musicInstrument",
         "type": "selectList",
+        "text": "Have you played an instrument, and if so, for how long?",
         "options": [
           {
             "text": "I have not played an instrument"
@@ -57,12 +75,12 @@
           {
             "text": "More than 5 years"
           }
-        ],
-        "text": "Have you played an instrument, and if so, for how long?"
+        ]
       },
       {
         "id": "musicEducation",
         "type": "selectList",
+        "text": "Do you have a formal education in music?",
         "options": [
           {
             "text": "No, I have not studied music"
@@ -73,8 +91,7 @@
           {
             "text": "Yes, I have a degree related to music"
           }
-        ],
-        "text": "Do you have a formal education in music?"
+        ]
       }
     ]
   },
@@ -91,6 +108,28 @@
         "id": "emotionsPerformance",
         "type": "buttons",
         "text": "How well did the playlist generation work for the emotions?"
+      },
+      {
+        "id": "emotionsPotential",
+        "type": "selectList",
+        "text": "Would you want to use this type of method if you were looking for new music?",
+        "options": [
+          {
+            "text": "No, it would not work well enough"
+          },
+          {
+            "text": "No, it's too hard to use"
+          },
+          {
+            "text": "No, for reason(s) left in the comments box"
+          },
+          {
+            "text": "Maybe"
+          },
+          {
+            "text": "Yes"
+          }
+        ]
       }
     ]
   },
@@ -107,6 +146,28 @@
         "id": "planePerformance",
         "type": "buttons",
         "text": "How well did the playlist generation work?"
+      },
+      {
+        "id": "planePotential",
+        "type": "selectList",
+        "text": "Would you want to use this type of method if you were looking for new music?",
+        "options": [
+          {
+            "text": "No, it would not work well enough"
+          },
+          {
+            "text": "No, it's too hard to use"
+          },
+          {
+            "text": "No, for reason(s) left in the comments box"
+          },
+          {
+            "text": "Maybe"
+          },
+          {
+            "text": "Yes"
+          }
+        ]
       }
     ]
   },
@@ -123,6 +184,28 @@
         "id": "slidersPerformance",
         "type": "buttons",
         "text": "How well did the playlist generation work?"
+      },
+      {
+        "id": "slidersPotential",
+        "type": "selectList",
+        "text": "Would you want to use this type of method if you were looking for new music?",
+        "options": [
+          {
+            "text": "No, it would not work well enough"
+          },
+          {
+            "text": "No, it's too hard to use"
+          },
+          {
+            "text": "No, for reason(s) left in the comments box"
+          },
+          {
+            "text": "Maybe"
+          },
+          {
+            "text": "Yes"
+          }
+        ]
       }
     ]
   },
@@ -148,6 +231,7 @@
       {
         "id": "websiteAfterfeatures",
         "type": "selectList",
+        "text": "After using the website, do you feel like you have increased your understanding of perceptual features?",
         "options": [
           {
             "text": "Not at all"
@@ -158,8 +242,7 @@
           {
             "text": "A lot"
           }
-        ],
-        "text": "After using the website, do you feel like you have increased your understanding of perceptual features?"
+        ]
       }
     ]
   }
