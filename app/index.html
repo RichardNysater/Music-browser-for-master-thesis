@@ -93,23 +93,22 @@
       <div class="col-xs-7 col-sm-3 col-lg-2">
         <div class="btn-group navbar-btn left-buttons navbar-right pull-left" role="group" aria-label="Left Align">
           <button type="button" class="btn btn-default" prev-track title="Previous track">
-            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-step-backward"></span>
           </button>
 
           <button type="button" class="btn btn-default" play-pause-toggle title="Toggle play/pause">
-            <span ng-if="playlist.length === 0 || !isPlaying" class="glyphicon glyphicon-play"
-                  aria-hidden="true"></span>
-            <span ng-if="playlist.length !== 0 && isPlaying" class="glyphicon glyphicon-pause"
-                  aria-hidden="true"></span>
+            <span ng-if="playlist.length === 0 || !isPlaying" class="glyphicon glyphicon-play"></span>
+            <span ng-if="playlist.length !== 0 && isPlaying" class="glyphicon glyphicon-pause"></span>
           </button>
 
           <button type="button" class="btn btn-default" next-track title="Next track">
-            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-step-forward"></span>
           </button>
 
-          <button type="button" class="btn btn-default " ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()"
+          <button type="button" class="btn btn-default" ng-class="{active: autoPlay}" ng-click="toggleAutoPlay()"
                   title="Toggle autoplay">
-            <span>Auto</span>
+            <span class="hidden-xs">Auto</span>
+            <span class="visible-xs"><small>Auto</small></span>
           </button>
         </div>
       </div>
@@ -127,7 +126,7 @@
             {{ currentPlaying.id}}
           </p>
           <p class="visible-xs col-xs-12 text-center" ng-if="playlist.length !== 0 && currentPlaying.id">
-            {{currentPlaying.id}} - {{currentPostion}}/{{currentDuration}}
+            {{currentPlaying.id}} - {{currentDuration}}
           </p>
         </div>
         <div class="row">
