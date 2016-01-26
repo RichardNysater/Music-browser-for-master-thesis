@@ -5,9 +5,12 @@ var SongRequestService = angular.module('SongRequestService', ['ngResource']);
  */
 SongRequestService.service('SongRequestService', ['$resource', '$http', 'angularPlayer', 'PlayerService',
   function ($resource, $http, angularPlayer, PlayerService) {
-    var volume = PlayerService.getVolume();
-    var lastRequestNumber = 0;
     const MUSIC_FORMATS = ["ogg", "mp3"]; // This list should include the available formats for the music files
+
+    var lastRequestNumber = 0;
+    var volume = PlayerService.getVolume();
+    var lastFeatureList = [];
+    var lastRequestType;
 
     /**
      * Error function which adds a track with a name that tells the user that their browser doesn't support
@@ -125,6 +128,42 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
     };
 
     /**
+     * Checks if a request is the same as the last request made
+     * @param featureList The featureList being sent
+     * @param requestType The type of request being sent
+     * @returns {boolean} True if the request is the same as the last one, false otherwise
+     */
+    var isSameAsLastRequest = function (featureList, requestType) {
+      if (!lastFeatureList || featureList.length != lastFeatureList.length) {
+        return false;
+      }
+      for (var i = 0; i < featureList.length; i++) {
+        if (lastFeatureList[i].minValue !== featureList[i].minValue || lastFeatureList[i].maxValue !== featureList[i].maxValue) {
+          return false;
+        }
+      }
+      return !requestType === !lastRequestType;
+    };
+
+    /**
+     * Saves a request as the last request made
+     * @param featureList The featureList to save
+     * @param requestType The requestType to save
+     */
+    var saveLastRequest = function (featureList, requestType) {
+      lastFeatureList = [];
+      lastRequestType = requestType;
+
+      for (var i = 0; i < featureList.length; i++) {
+        lastFeatureList.push({
+          minValue: featureList[i].minValue,
+          maxValue: featureList[i].maxValue,
+          feature: featureList[i].feature
+        });
+      }
+    };
+
+    /**
      * Sends a request to the server for all songs matching the input features
      * and adds them to the playlist.
      *
@@ -133,27 +172,30 @@ SongRequestService.service('SongRequestService', ['$resource', '$http', 'angular
      * @param requestType The request type to give to the server for the query
      */
     this.playMatchingSongs = function (featureList, callback, requestType) {
+      if (!isSameAsLastRequest(featureList, requestType)) { // Only send a request if the user has a new selection
+        saveLastRequest(featureList, requestType);
 
-      var request = this.sendRequest(featureList, requestType);
+        var request = this.sendRequest(featureList, requestType);
 
-      request.then(function successCallback(response) {
-        var res = response.data;
-        if (res.length > 0) {
-          if (angularPlayer.getPlaylist().length > 0) { // Clear the playlist if needed
-            angularPlayer.clearPlaylist(function (param) {
+        request.then(function successCallback(response) {
+          var res = response.data;
+          if (res.length > 0) {
+            if (angularPlayer.getPlaylist().length > 0) { // Clear the playlist if needed
+              angularPlayer.clearPlaylist(function (param) {
+                addSongs(res);
+              });
+            }
+            else {
               addSongs(res);
-            });
+            }
           }
-          else {
-            addSongs(res);
+          if (callback) { // Only call the callback if it exists
+            callback(res);
           }
-        }
-        if (callback) { // Only call the callback if it exists
-          callback(res);
-        }
-      }, function errorCallback() {
-        console.log("Failed to query for songs.");
-      });
+        }, function errorCallback() {
+          console.log("Failed to query for songs.");
+        });
+      }
     }
 
   }
