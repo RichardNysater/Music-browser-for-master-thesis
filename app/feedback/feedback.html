@@ -3,6 +3,7 @@
   <div class="hidden-xs col-sm-2">
     <my-playlist></my-playlist>
   </div>
+
   <div class="col-xs-12 col-sm-8">
 
     <p>When you are done using the application, please answer the questions below. Thank you!</p>
@@ -13,13 +14,12 @@
         <div class="text col-xs-12"> {{question.text}}</div>
 
         <div ng-if="question.type === 'buttons'" class="btn-group col-xs-12" data-toggle="buttons">
-          <!-- If question is rate from 1-9 -->
-          <label class="radio-inline"
+          <!-- If question uses a likert scale from 1-9 -->
+          <label class="radio-inline button-label"
                  ng-repeat="button in buttons"
                  ng-click="buttonClick(question, button.val)">
-            <input type="radio" class="clickable" name="{{question.id}}" ng-checked="question.selected === button.val"
-                   value="true"> {{button.val}}
-          </label>
+            <input type="radio" class="clickable button" name="{{question.id}}" ng-checked="question.selected === button.val"
+                   value="true">{{button.val}}</label>
         </div>
 
         <div ng-if="question.type === 'selectList'" class="form-group col-xs-12 select-list">
@@ -27,12 +27,13 @@
           <select class="form-control clickable" id="{{question.id}}" data-ng-model="question.selected"
                   ng-options="option.text for option in question.options track by option.text"
                   data-ng-change="selectedOption(question,question.selected)">
+            <option value="" selected="selected">-- Select an answer --</option>
           </select>
         </div>
         <div class="col-xs-12"><p></p></div> <!-- Blank space between questions -->
       </div>
 
-      <div class="from-group comments">
+      <div class="from-group comments"> <!-- Comment box for each section -->
         <label for="{{evaluation.sectionName}}" class="comment-label">Other comments</label>
         <textarea ng-model="evaluation.comment" class="form-control" id="{{evaluation.sectionName}}"
                   ng-blur="writtenComment(evaluation.sectionName, evaluation.comment)"></textarea>

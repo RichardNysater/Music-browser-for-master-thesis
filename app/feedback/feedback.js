@@ -70,13 +70,6 @@ angular.module('myApp.feedback', ['ngRoute'])
             if (answer) {
               data[i].questions[j].selected = answer;
             }
-            else if (data[i].questions[j].type === "selectList") {
-              data[i].questions[j].selected = data[i].questions[j].options[0]; //Pre-select first option
-              FeedbackSubmitService.submitFeedback({
-                questionID: data[i].questions[j].id,
-                comment: data[i].questions[j].selected.text
-              });
-            }
           }
         }
         $scope.evaluations = data;
