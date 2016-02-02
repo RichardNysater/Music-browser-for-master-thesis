@@ -29,6 +29,11 @@
         "maxValue": 100
       },
       {
+        "feature": "Dynamics",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
         "feature": "Pitch",
         "minValue": 60,
         "maxValue": 100
@@ -83,6 +88,11 @@
         "feature": "Articulation",
         "minValue": 0,
         "maxValue": 40
+      },
+      {
+        "feature": "Dynamics",
+        "minValue": 0,
+        "maxValue": 100
       },
       {
         "feature": "Pitch",
@@ -141,6 +151,11 @@
         "maxValue": 60
       },
       {
+        "feature": "Dynamics",
+        "minValue": 0,
+        "maxValue": 80
+      },
+      {
         "feature": "Pitch",
         "minValue": 25,
         "maxValue": 75
@@ -195,6 +210,11 @@
         "feature": "Articulation",
         "minValue": 20,
         "maxValue": 80
+      },
+      {
+        "feature": "Dynamics",
+        "minValue": 85,
+        "maxValue": 100
       },
       {
         "feature": "Pitch",

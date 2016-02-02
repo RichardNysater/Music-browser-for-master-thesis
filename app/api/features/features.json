@@ -24,6 +24,12 @@
     "low": "Legato",
     "high": "Staccato"
   },
+
+  {
+    "feature": "Dynamics",
+    "low": "Soft",
+    "high": "Loud"
+  },
   {
     "feature": "Pitch",
     "low": "Low",
