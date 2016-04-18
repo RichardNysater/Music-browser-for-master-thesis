@@ -10,7 +10,7 @@ To start the application (instructions not yet complete):
 
 1. Set up a MySQL database with a schema following the rules in the create_song_table.sql and create_feedback_table.sql files.    
 1a. Populate the song table with data for your songs. Each song needs all the features, which should be a number from 0 to 100. 
-   If using the music set I used, you can import the following data: [TODO: add link to data].
+   If using the music set I used, you can import the following data: https://shaan.se/i/songdata.csv.
 
 2. Add your database details to a file called DATABASE_DETAILS.json following the DATABASE_DETAILS_TEMPLATE.json format.    
 2a. The songtable field is the name of the table with the songs' feature data.
