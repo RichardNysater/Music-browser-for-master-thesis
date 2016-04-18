@@ -6,4 +6,5 @@ tmp
 .DS_Store
 .idea
 DATABASE_DETAILS.json
-app/api/music/*
+app/api/music/*.mp3
+app/api/music/*.ogg
