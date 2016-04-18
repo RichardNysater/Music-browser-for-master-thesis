@@ -13,8 +13,8 @@ To start the application (instructions not yet complete):
    If using the music set I used, you can import the following data: https://shaan.se/i/songdata.json.
 
 2. Add your database details to a file called DATABASE_DETAILS.json following the DATABASE_DETAILS_TEMPLATE.json format.    
-2a. The songtable field is the name of the table with the songs' feature data.
+   songTable is the is the name of the table with the songs' feature data and feedbackTable is the name of the table with feedback data.
 
-3. Add your songs to the /app/api/music folder. The 100% supported formats are wav, mp4 and ogg. The mp3 format almost works, but seeking in songs is slightly bugged (seeks to the wrong location).
+3. Add your songs to the /app/api/music folder. The 100% supported formats are wav, mp4 and ogg. The mp3 format almost works, but seeking in songs is minorly bugged (seeks to slightly wrong location).
 
 4. Start the application by opening a command window at the root of the application and typing "npm start".
