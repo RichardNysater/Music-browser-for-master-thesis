@@ -17,4 +17,8 @@ To start the application (instructions not yet complete):
 
 3. Add your songs to the /app/api/music folder. The 100% supported formats are wav, mp4 and ogg. The mp3 format almost works, but seeking in songs is minorly bugged (seeks to slightly wrong location).
 
-4. Start the application by opening a command window at the root of the application and typing "npm start".
+4. Install nodejs and npm
+
+5. Open a terminal, navigate to the root of the application and enter "npm install".
+
+6. Start the application by entering "npm start" at the root of the application.
