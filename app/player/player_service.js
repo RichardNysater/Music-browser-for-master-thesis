@@ -32,11 +32,11 @@ PlayerService.service('PlayerService', ['$cookies', function ($cookies) {
    */
   this.getAutoPlay = function(){
     var autoPlay = $cookies.get('userAutoPlay');
-    if(autoPlay === 'true'){
-      return true;
+    if(autoPlay === 'false'){
+      return false;
     }
     else {
-      return false;
+      return true;
     }
   };
 
