@@ -190,7 +190,7 @@ router.post('/api/songrequest', function *(next) {
  */
 router.post('/api/feedbacksubmit', function *(next) {
   var feedback = this.request.body.feedback;
-  if (feedback.userID && feedback.questionID && (feedback.rating || feedback.comment)) {
+  if (feedback.userID && feedback.questionID && (typeof feedback.rating != 'undefined' || typeof feedback.comment != 'undefined')) {
     this.response.status = 200;
     try {
       var databaseDetails = getDatabaseDetails();
