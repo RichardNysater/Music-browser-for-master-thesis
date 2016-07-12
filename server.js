@@ -117,7 +117,7 @@ var createClosestQueryForSongs = function (con, features, databaseDetails) {
  */
 var getTimestamp = function () {
   var date = new Date();
-  date.setUTCHours(date.getUTCHours() + 1); // Stockholm is UTC +1.
+  date.setUTCHours(date.getUTCHours() - date.getTimezoneOffset()/60); // Adjust for timezone
   return date.toISOString().slice(0, 19).replace('T', ' '); // Gets a MySQL-formatted timestamp from current time;
 };
 
