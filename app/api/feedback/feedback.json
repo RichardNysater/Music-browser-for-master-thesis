@@ -1,6 +1,6 @@
 [
   {
-    "sectionName": "general",
+    "sectionName": "music",
     "sectionHeader": "General information",
     "questions": [
       {
@@ -213,6 +213,25 @@
     "sectionName": "website",
     "sectionHeader": "Website",
     "questions": [
+      {
+        "id": "websiteDevice",
+        "type": "selectList",
+        "text": "Which device did you use to try the website?",
+        "options": [
+          {
+            "text": "Desktop computer"
+          },
+          {
+            "text": "Laptop computer"
+          },
+          {
+            "text": "Tablet"
+          },
+          {
+            "text": "Mobile phone"
+          }
+        ]
+      },
       {
         "id": "websiteSimplicity",
         "type": "buttons",
