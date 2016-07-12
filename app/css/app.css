@@ -33,6 +33,7 @@
 
 .clickable {
     cursor: pointer;
+    z-index: 300;
 }
 
 #playlist {
