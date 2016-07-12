@@ -195,7 +195,11 @@ router.post('/api/feedbacksubmit', function *(next) {
     try {
       var databaseDetails = getDatabaseDetails();
       var con = yield connectToDatabase(databaseDetails);
-      var q = createSubmitFeedbackQuery(con, feedback, this.request.ip, databaseDetails);
+      var ip = this.request.headers['x-forwarded-for']; // To get request IP if behind a proxy
+      if(!ip){
+        ip = this.request.ip; // If not behind a proxy
+      }
+      var q = createSubmitFeedbackQuery(con, feedback, ip, databaseDetails);
       yield con.query(q);
       con.end();
       this.response.body = "Successfully submitted feedback, thank you!";
