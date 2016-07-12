@@ -4,7 +4,7 @@ var EmotionsService = angular.module('EmotionsService', []);
  * Serves as storage for values selected in the emotion plane.
  */
 EmotionsService.service('EmotionsService', function () {
-  var savedValues = {};
+  var savedValues = {playTimes:0};
   var lastRequestNumber;
 
   /**
@@ -42,6 +42,7 @@ EmotionsService.service('EmotionsService', function () {
     savedValues.featureList = featureList;
     savedValues.selectionImgXPercent = selectionImgXPercent;
     savedValues.selectionImgYPercent = selectionImgYPercent;
+    savedValues.playTimes += 1;
   };
 
   /**

@@ -4,7 +4,7 @@ var SlidersService = angular.module('SlidersService', []);
  * Serves as storage for values selected from the sliders.
  */
 SlidersService.service('SlidersService', function () {
-  var savedValues = {};
+  var savedValues = {playTimes:0};
   var transferredValues = [];
   var lastRequestNumber;
 
@@ -30,6 +30,7 @@ SlidersService.service('SlidersService', function () {
    */
   this.saveSliders = function (features) {
     savedValues.features = features;
+    savedValues.playTimes += 1;
   };
 
   /**

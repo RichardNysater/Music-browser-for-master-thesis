@@ -4,7 +4,7 @@ var PlaneService = angular.module('PlaneService', []);
  * Serves as storage for values selected in the plane.
  */
 PlaneService.service('PlaneService', function () {
-  var savedValues = {};
+  var savedValues = {playTimes:0};
   var lastRequestNumber;
 
   /**
@@ -49,6 +49,7 @@ PlaneService.service('PlaneService', function () {
     savedValues.selectionImgYPercent = selectionImgYPercent;
     savedValues.xPercent = xPercent;
     savedValues.yPercent = yPercent;
+    savedValues.playTimes += 1;
   };
 
   /**
