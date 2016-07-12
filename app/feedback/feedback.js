@@ -11,8 +11,8 @@ angular.module('myApp.feedback', ['ngRoute'])
    * The feedback page allows users to leave feedback on a number of questions regarding
    * the application's different pages as well as general user information.
    */
-  .controller('FeedbackController', ['$scope', 'ResourcesService', 'FeedbackSubmitService', 'FeedbackService',
-    function ($scope, ResourcesService, FeedbackSubmitService, FeedbackService) {
+  .controller('FeedbackController', ['$scope', 'ResourcesService', 'FeedbackSubmitService', 'FeedbackService', 'EmotionsService','PlaneService','SlidersService',
+    function ($scope, ResourcesService, FeedbackSubmitService, FeedbackService, EmotionsService, PlaneService, SlidersService) {
 
       /**
        * Whenever a user answers a question by clicking a button with a rating
@@ -32,10 +32,40 @@ angular.module('myApp.feedback', ['ngRoute'])
        * @param option The option selected
        */
       $scope.selectedOption = function (question, option) {
+        console.log("test1");
         question.selected = option;
-        var feedback = {questionID: question.id, comment: option.text};
+        console.log("test");
+        var feedback;
+        if(option !== null){
+          feedback = {questionID: question.id, comment: option.text};
+        }
+        else{
+          feedback = {questionID: question.id, comment: null};
+        }
+
         FeedbackService.saveFeedback(question.id, option);
         FeedbackSubmitService.submitFeedback(feedback);
+      };
+
+      /**
+       * Submits how many times the user has requested songs for each section
+       */
+      var submitPlayTimes = function(){
+        // Get and submit the amount of times songs have been requested for emotion section
+        var emotionsTimes = EmotionsService.getSavedValues().playTimes;
+        var emotionsFeedback = {questionID: "emotionsTimes", rating:emotionsTimes};
+        FeedbackSubmitService.submitFeedback(emotionsFeedback);
+
+        // Get and submit the amount of times songs have been requested for plane section
+        var planeTimes = PlaneService.getSavedValues().playTimes;
+        var planeFeedback = {questionID: "planeTimes", rating:planeTimes};
+        FeedbackSubmitService.submitFeedback(planeFeedback);
+
+        // Get and submit the amount of times songs have been requested for sliders section
+        var slidersTimes = SlidersService.getSavedValues().playTimes;
+        var slidersFeedback = {questionID: "slidersTimes", rating:slidersTimes};
+        FeedbackSubmitService.submitFeedback(slidersFeedback);
+
       };
 
       /**
@@ -73,6 +103,7 @@ angular.module('myApp.feedback', ['ngRoute'])
           }
         }
         $scope.evaluations = data;
+        submitPlayTimes(); // Update how many times user has requested songs from sections
       }, function (err) {
         throw "No feedback was returned by query: " + err;
       });
