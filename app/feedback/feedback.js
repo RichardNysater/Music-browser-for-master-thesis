@@ -32,9 +32,7 @@ angular.module('myApp.feedback', ['ngRoute'])
        * @param option The option selected
        */
       $scope.selectedOption = function (question, option) {
-        console.log("test1");
         question.selected = option;
-        console.log("test");
         var feedback;
         if(option !== null){
           feedback = {questionID: question.id, comment: option.text};
@@ -74,7 +72,10 @@ angular.module('myApp.feedback', ['ngRoute'])
        * @param text The comment
        */
       $scope.writtenComment = function (sectionName, text) {
-        if (text.length > 1500) { // Disregard text after 1500 characters (very likely spam or garbage input)
+        if(typeof text == 'undefined'){ // Do not submit comments if they are empty
+          return;
+        }
+        else if (text.length > 1500) { // Disregard text after 1500 characters (very likely spam or garbage input)
           text = text.substring(0, 1500);
         }
         var feedback = {questionID: sectionName, comment: text};
