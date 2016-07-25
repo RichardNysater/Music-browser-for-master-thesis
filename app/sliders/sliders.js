@@ -72,6 +72,9 @@ angular.module('myApp.sliders', ['ngRoute'])
           $scope.featureList[i].minValue = 0;
           $scope.featureList[i].maxValue = 100;
         }
+        SlidersService.saveSliders($scope.featureList);
+        SongRequestService.playMatchingSongs($scope.featureList,addedSongs,"Closest");
+        SlidersService.setLastRequestNumber(SongRequestService.getLastRequestNumber());
       };
 
       /**
