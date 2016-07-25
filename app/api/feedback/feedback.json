@@ -107,7 +107,7 @@
       {
         "id": "emotionsPerformance",
         "type": "buttons",
-        "text": "How well did the playlist generation work for the emotions?"
+        "text": "How well did the playlist generation work?"
       },
       {
         "id": "emotionsPotential",
@@ -140,7 +140,7 @@
       {
         "id": "planeSimplicity",
         "type": "buttons",
-        "text": "How easy was it to understand how to generate playlists when selecting two perceptual features?"
+        "text": "How easy was it to understand how to generate playlists when using the \"plane\" page?"
       },
       {
         "id": "planePerformance",
@@ -240,7 +240,7 @@
       {
         "id": "websitePerformance",
         "type": "buttons",
-        "text": "How well did the actual website work for you? (Everything except the music generation)"
+        "text": "How well did the website UI work for you? (Not the music generation)"
       },
       {
         "id": "websiteBeforefeatures",
