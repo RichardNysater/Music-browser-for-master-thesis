@@ -19,5 +19,9 @@
         </div>
       </div>
     </a>
+    <!-- Display clear playlist when playlist exists TODO: fix animation hack -->
+    <a ng-repeat="song in playlist" ng-if="playlist.length !== 0 && $last" class="list-group-item playlist-item clear-playlist-item clickable"
+       clear-playlist title="Clear playlist">Clear playlist</a>
+
   </div>
 </div>
