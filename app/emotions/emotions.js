@@ -14,8 +14,8 @@ angular.module('myApp.emotions', ['ngRoute'])
    * The emotion plane allows a user to click somewhere in a 2d-plane with four emotions in each corner,
    * the application will then create a playlist based on the distance to each emotion.
    */
-  .controller('EmotionsController', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', 'SlidersService', '$timeout',
-    function ($scope, ResourcesService, SongRequestService, EmotionsService, SlidersService, $timeout) {
+  .controller('EmotionsController', ['$scope', 'ResourcesService', 'SongRequestService', 'EmotionsService', 'SlidersService', '$timeout', '$location','IndexService',
+    function ($scope, ResourcesService, SongRequestService, EmotionsService, SlidersService, $timeout, $location, IndexService) {
       const ERROR_DURATION = 3000;
       var activeErrors = 0;
 
@@ -170,6 +170,8 @@ angular.module('myApp.emotions', ['ngRoute'])
        */
       $scope.transferToSliders = function(){
         SlidersService.transferFeatures($scope.featureList, EmotionsService.getLastRequestNumber());
+        $location.path('/sliders');
+        IndexService.setSelected(IndexService.getSectionFromId('Sliders'));
       };
 
       /**
