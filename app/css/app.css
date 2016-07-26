@@ -31,6 +31,10 @@
     left: -3px;
 }
 
+.clear-playlist-item{
+    text-align: center;
+}
+
 .clickable {
     cursor: pointer;
     z-index: 300;
@@ -41,9 +45,35 @@
     margin: 0;
 }
 
+/* Error box */
+.noSongsFoundError {
+    position: absolute;
+    text-align: center;
+    width: 20%;
+    max-width: 150px;
+    min-width: 120px;
+    padding: 0;
+    pointer-events: none;
+    z-index: 1001;
+}
+
 /* Animations */
 
 /* Playlist animation */
+
+.clear-playlist-item.ng-enter {
+    animation: 5s appear;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .playlist-item.ng-enter {
     /* standard transition code */
     transition: 0.5s linear all;
@@ -73,17 +103,6 @@
 
 .fade-in-out.ng-hide {
     opacity: 0;
-}
-
-/* Error box */
-.noSongsFoundError {
-    position: absolute;
-    text-align: center;
-    width: 20%;
-    max-width: 150px;
-    min-width: 120px;
-    padding: 0;
-    pointer-events: none;
 }
 
 /* Animations for the error box */
