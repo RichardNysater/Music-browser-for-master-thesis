@@ -31,7 +31,8 @@ var myApp = angular.module('myApp', [
   'FeedbackService',
   'EmotionsService',
   'PlaylistDirective',
-  'PlayerService'
+  'PlayerService',
+  'IndexService'
 ]).config(['$routeProvider', function ($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
