@@ -45,6 +45,9 @@ IndexService.service('IndexService', ['$cookies', function ($cookies) {
    * @returns section The section corresponding to the sectionId, or null if it does not exist
    */
   this.getSectionFromId = function (sectionId){
+    if(!sectionId){
+      return null;
+    }
     var section = null;
     for (var i = 0; i < this.sections.length; i++) { // Check if sectionId is in sections (left part of navbar)
       if (this.sections[i].id === sectionId) {
@@ -71,6 +74,9 @@ IndexService.service('IndexService', ['$cookies', function ($cookies) {
    * @returns section The section corresponding to the sectionLink, or null if it does not exist
    */
   this.getSectionFromLink = function (sectionLink){
+    if(!sectionLink){
+      return null;
+    }
     if(sectionLink.charAt(0) !== '#'){
       sectionLink = '#'+sectionLink;
     }
