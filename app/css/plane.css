@@ -106,8 +106,24 @@
 .plane-label {
     pointer-events: none;
     font-family: Nevis;
-    font-size: 24px;
+    font-size: 20px;
     height: 34.28px; /* Set the height to prevent pop-in effects */
+    margin: 0;
+}
+
+.plane-label-s {
+    pointer-events: none;
+    font-family: Nevis;
+    font-size: 14px;
+    height: 20.28px; /* Set the height to prevent pop-in effects */
+    margin: 0;
+}
+
+.plane-label-xs {
+    pointer-events: none;
+    font-family: Nevis;
+    font-size: 12px;
+    height: 20.28px; /* Set the height to prevent pop-in effects */
     margin: 0;
 }
 
